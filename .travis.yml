@@ -33,6 +33,6 @@ jdk:
   - oraclejdk8
 
 script:
-  - ./gradlew clean assembleDebug test
+  - ./gradlew clean assembleDebug check test
 
 sudo: false
