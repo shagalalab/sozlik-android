@@ -3,9 +3,7 @@ package com.shagalalab.sozlik.model;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
-import android.support.v4.net.ConnectivityManagerCompat;
 
-import java.sql.Date;
 
 /**
  * Created by QAREKEN on 3/4/2018.
@@ -26,7 +24,7 @@ public class SozlikEntity {
     private boolean isFavourite;
 
     @ColumnInfo(name = "last_accessed")
-    private Date lastAccessed;
+    private long lastAccessed;
 
     public void setId(int id) {
         this.id = id;
@@ -56,11 +54,15 @@ public class SozlikEntity {
         isFavourite = favourite;
     }
 
-    public Date getLastAccessed() {
+    public long getLastAccessed() {
         return lastAccessed;
     }
 
-    public void setLastAccessed(Date lastAccessed) {
+    public void setLastAccessed(long lastAccessed) {
         this.lastAccessed = lastAccessed;
+    }
+
+    public int getId() {
+        return id;
     }
 }
