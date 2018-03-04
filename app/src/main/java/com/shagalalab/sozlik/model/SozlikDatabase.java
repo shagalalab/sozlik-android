@@ -12,7 +12,7 @@ import android.content.Context;
  * Created by QAREKEN on 3/4/2018.
  */
 @Database(entities = {SozlikDbModel.class}, version = 1)
-public class SozlikDatabase extends RoomDatabase {
+public abstract class SozlikDatabase extends RoomDatabase {
 
     private static SozlikDatabase instance;
 
@@ -32,15 +32,4 @@ public class SozlikDatabase extends RoomDatabase {
         instance = null;
     }
 
-
-
-    @Override
-    protected SupportSQLiteOpenHelper createOpenHelper(DatabaseConfiguration config) {
-        return null;
-    }
-
-    @Override
-    protected InvalidationTracker createInvalidationTracker() {
-        return null;
-    }
 }

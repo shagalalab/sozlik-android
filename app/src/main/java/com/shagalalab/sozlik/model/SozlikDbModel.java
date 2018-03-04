@@ -4,7 +4,6 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-
 /**
  * Created by QAREKEN on 3/4/2018.
  */
@@ -65,6 +64,4 @@ public class SozlikDbModel {
     public void setLastAccessed(long lastAccessed) {
         this.lastAccessed = lastAccessed;
     }
-
-
 }
