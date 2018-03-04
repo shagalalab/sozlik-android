@@ -9,7 +9,7 @@ import android.arch.persistence.room.PrimaryKey;
  * Created by QAREKEN on 3/4/2018.
  */
 @Entity(tableName = "dictionary")
-public class SozlikEntity {
+public class SozlikDbModel {
 
     @PrimaryKey(autoGenerate = true)
     private int id;

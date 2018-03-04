@@ -11,25 +11,28 @@ import android.content.Context;
 /**
  * Created by QAREKEN on 3/4/2018.
  */
-@Database(entities = {SozlikEntity.class}, version=1)
-public class SozlikDataBase extends RoomDatabase {
+@Database(entities = {SozlikDbModel.class}, version = 1)
+public class SozlikDatabase extends RoomDatabase {
 
-    private static SozlikDataBase INSTANCE;
+    private static SozlikDatabase instance;
 
-    public SozlikDao sozlikDao;
+    private SozlikDao sozlikDao;
 
-    public static SozlikDataBase getSozlikDatabase(Context context){
-        if(INSTANCE == null){
-            INSTANCE = Room.databaseBuilder(context.getApplicationContext(), SozlikDataBase.class, "sozlik-database")
+    public static SozlikDatabase getSozlikDatabase(Context context) {
+        if (instance == null) {
+            instance = Room
+                    .databaseBuilder(context.getApplicationContext(), SozlikDatabase.class, "sozlik-database")
                     .allowMainThreadQueries()
                     .build();
         }
-        return INSTANCE;
+        return instance;
     }
 
-    public static void destroyInstance(){
-        INSTANCE = null;
+    public static void destroyInstance() {
+        instance = null;
     }
+
+
 
     @Override
     protected SupportSQLiteOpenHelper createOpenHelper(DatabaseConfiguration config) {
