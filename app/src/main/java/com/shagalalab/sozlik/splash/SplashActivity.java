@@ -12,10 +12,8 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         SplashPresenter presenter = new SplashPresenter(this);
         presenter.startSplash();
-
     }
 
     @Override

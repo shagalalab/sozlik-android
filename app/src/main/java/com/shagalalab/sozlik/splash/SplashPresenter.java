@@ -1,14 +1,14 @@
 package com.shagalalab.sozlik.splash;
 
-public class SplashPresenter {
+class SplashPresenter {
 
     private final SplashView view;
 
-    public SplashPresenter(SplashView view) {
+    SplashPresenter(SplashView view) {
         this.view = view;
     }
 
-    public void startSplash() {
+    void startSplash() {
         view.goToMainScreen();
     }
 }
