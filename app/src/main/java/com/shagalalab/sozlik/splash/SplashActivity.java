@@ -7,20 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.shagalalab.sozlik.MainActivity;
 
-/**
- * Created by Manas on 03.03.18.
- *
- */
-
 public class SplashActivity extends AppCompatActivity implements SplashView {
-
-    private SplashPresenter presenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        presenter = new SplashPresenter(this);
+        SplashPresenter presenter = new SplashPresenter(this);
         presenter.startSplash();
 
     }
