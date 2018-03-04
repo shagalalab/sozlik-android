@@ -9,9 +9,9 @@ import android.arch.persistence.room.Query;
 @Dao
 public interface SozlikDao {
 
-    @Query("SELECT * FROM SozlikEntity WHERE word LIKE :word")
+    @Query("SELECT * FROM dictionary WHERE word LIKE :word")
     SozlikEntity getTraslation(String word);
 
-    @Query("SELECT * FROM SozlikEntity WHERE id = :id")
+    @Query("SELECT * FROM dictionary WHERE id = :id")
     SozlikEntity getTranslationById(int id);
 }

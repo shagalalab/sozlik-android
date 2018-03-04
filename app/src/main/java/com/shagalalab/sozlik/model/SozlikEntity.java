@@ -26,6 +26,10 @@ public class SozlikEntity {
     @ColumnInfo(name = "last_accessed")
     private long lastAccessed;
 
+    public int getId() {
+        return id;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -62,7 +66,5 @@ public class SozlikEntity {
         this.lastAccessed = lastAccessed;
     }
 
-    public int getId() {
-        return id;
-    }
+
 }

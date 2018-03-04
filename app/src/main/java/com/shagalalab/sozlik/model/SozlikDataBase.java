@@ -40,7 +40,4 @@ public class SozlikDataBase extends RoomDatabase {
     protected InvalidationTracker createInvalidationTracker() {
         return null;
     }
-
-
-
 }
