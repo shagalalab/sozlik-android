@@ -6,13 +6,20 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.shagalalab.sozlik.MainActivity;
+import com.shagalalab.sozlik.model.GsonHelper;
+import com.shagalalab.sozlik.model.SharedPrefsHelper;
+import com.shagalalab.sozlik.model.SozlikDatabase;
 
 public class SplashActivity extends AppCompatActivity implements SplashView {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SplashPresenter presenter = new SplashPresenter(this);
+        GsonHelper gsonHelper = new GsonHelper(this, "sozlik.json");
+        SharedPrefsHelper prefsHelper = new SharedPrefsHelper(this);
+        SozlikDatabase database = SozlikDatabase.getSozlikDatabase(this);
+
+        SplashPresenter presenter = new SplashPresenter(this, gsonHelper, prefsHelper, database);
         presenter.startSplash();
     }
 
