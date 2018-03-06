@@ -12,17 +12,13 @@ import com.shagalalab.sozlik.model.SozlikDatabase;
 
 public class SplashActivity extends AppCompatActivity implements SplashView {
 
-    private GsonHelper gsonHelper;
-    private SharedPrefsHelper prefsHelper;
-    private SozlikDatabase database;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        gsonHelper = new GsonHelper(this, "sozlik.json");
-        prefsHelper = new SharedPrefsHelper(this);
-        database = SozlikDatabase.getSozlikDatabase(this);
-
         super.onCreate(savedInstanceState);
+        GsonHelper gsonHelper = new GsonHelper(this, "sozlik.json");
+        SharedPrefsHelper prefsHelper = new SharedPrefsHelper(this);
+        SozlikDatabase database = SozlikDatabase.getSozlikDatabase(this);
+
         SplashPresenter presenter = new SplashPresenter(this, gsonHelper, prefsHelper, database);
         presenter.startSplash();
     }
