@@ -6,3 +6,6 @@
 /build
 /captures
 .externalNativeBuild
+BuildConfig.java
+Manifest.java
+R.java

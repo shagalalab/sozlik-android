@@ -13,7 +13,7 @@ public abstract class SozlikDatabase extends RoomDatabase {
 
     private static SozlikDatabase instance;
 
-    private SozlikDao sozlikDao;
+    public abstract SozlikDao sozlikDao();
 
     public static SozlikDatabase getSozlikDatabase(Context context) {
         if (instance == null) {
