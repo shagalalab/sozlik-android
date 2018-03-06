@@ -46,7 +46,7 @@ public class GsonHelper {
         if (json == null) {
             return Collections.emptyList();
         }
-        Type listType = new TypeToken<List<SozlikDbModel>>() {}.getType();
+        Type listType = new TypeToken<List<SozlikDbModel>>() { }.getType();
         return new GsonBuilder().create().fromJson(json, listType);
     }
 }
