@@ -8,24 +8,27 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by manas on 05.03.18.
  */
 
-public class GSONHelper {
+public class GsonHelper {
 
     private final Context context;
+    private final String fileName;
 
-    public GSONHelper(Context context) {
+    public GsonHelper(Context context, String fileName) {
         this.context = context;
+        this.fileName = fileName;
     }
 
-    private String loadJSONFromAsset() {
-        String json = null;
+    private String loadJsonFromAsset() {
+        String json;
         try {
-            InputStream is = context.getAssets().open("sozlik.json");
+            InputStream is = context.getAssets().open(fileName);
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
@@ -38,14 +41,13 @@ public class GSONHelper {
         return json;
     }
 
-    public List<SozlikDbModel> modelList() {
-
+    public List<SozlikDbModel> getListFromLocalAssets() {
+        String json = loadJsonFromAsset();
+        if (json == null) {
+            return Collections.emptyList();
+        }
         Type listType = new TypeToken<List<SozlikDbModel>>() {
         }.getType();
-
-        return new GsonBuilder().create().fromJson(loadJSONFromAsset(), listType);
-
+        return new GsonBuilder().create().fromJson(json, listType);
     }
-
-
 }

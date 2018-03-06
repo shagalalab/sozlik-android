@@ -7,13 +7,13 @@ import android.content.SharedPreferences;
  * Created by manas on 05.03.18.
  */
 
-public class SharedPrefsManager {
+public class SharedPrefsHelper {
     private static final String FILE_NAME = "preferences";
     private static final String IS_FIRST_LAUNCH = "is_first_launch";
 
     private SharedPreferences preferences;
 
-    public SharedPrefsManager(Context context) {
+    public SharedPrefsHelper(Context context) {
         preferences = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
     }
 
@@ -21,8 +21,8 @@ public class SharedPrefsManager {
         return preferences.edit();
     }
 
-    public void setFirstLaunch(boolean b) {
-        getEditor().putBoolean(IS_FIRST_LAUNCH, b).commit();
+    public void setFirstLaunch(boolean firstLaunch) {
+        getEditor().putBoolean(IS_FIRST_LAUNCH, firstLaunch).commit();
     }
 
     public boolean isFirstLaunch() {
