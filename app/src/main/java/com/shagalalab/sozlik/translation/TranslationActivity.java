@@ -1,7 +1,10 @@
 package com.shagalalab.sozlik.translation;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.shagalalab.sozlik.R;
@@ -12,29 +15,39 @@ public class TranslationActivity extends AppCompatActivity implements Translatio
 
     private TranslationPresenter presenter;
     private SozlikDao sozlikDao;
-    private TextView tvWord;
-    private TextView tvTranslation;
+    private TextView word;
+    private TextView translation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_translation);
-        tvWord = findViewById(R.id.tv_word);
-        tvTranslation = findViewById(R.id.tv_translation);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+        word = findViewById(R.id.word);
+        translation = findViewById(R.id.translation);
         sozlikDao = SozlikDatabase.getSozlikDatabase(this).sozlikDao();
         presenter = new TranslationPresenter(this, sozlikDao);
-        int translationId = getIntent().getIntExtra("translationId", -1);
-        presenter.showWordById(translationId);
-        presenter.showTranslationById(translationId);
+        int translationId = getIntent().getIntExtra("translationId", 1);
+        presenter.getTranslationById(translationId);
     }
 
     @Override
-    public void showWord(String word) {
-        tvWord.setText(word);
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            this.finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public void showTranslation(String translation) {
-        tvTranslation.setText(translation);
+    public void showTranslation(String word, String translation) {
+        this.word.setText(word);
+        this.translation.setText(Html.fromHtml(translation));
     }
 }

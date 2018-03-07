@@ -7,7 +7,7 @@
     tools:context="com.shagalalab.sozlik.translation.TranslationActivity">
 
     <TextView
-        android:id="@+id/tv_word"
+        android:id="@+id/word"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -19,10 +19,11 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/colorPrimary" />
+        android:background="@color/colorPrimaryDark" />
 
     <TextView
-        android:id="@+id/tv_translation"
+        android:textSize="16sp"
+        android:id="@+id/translation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"

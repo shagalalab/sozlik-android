@@ -16,11 +16,11 @@ class TranslationPresenter {
         this.sozlikDao = sozlikDao;
     }
 
-    void showWordById(int id) {
-        translationView.showWord(sozlikDao.getTranslationById(id).getWord());
-    }
-
-    void showTranslationById(int id) {
-        translationView.showTranslation(sozlikDao.getTranslationById(id).getTranslation());
+    void getTranslationById(int id) {
+        String word = sozlikDao.getTranslationById(id).getWord();
+        String translation = sozlikDao.getTranslationById(id).getTranslation();
+        if (word != null && translation != null) {
+            translationView.showTranslation(word, translation);
+        }
     }
 }

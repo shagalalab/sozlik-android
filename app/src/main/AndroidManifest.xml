@@ -23,7 +23,9 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".translation.TranslationActivity"></activity>
+        <activity
+            android:name=".translation.TranslationActivity"
+            android:label="@string/translation" />
     </application>
 
 </manifest>
