@@ -11,12 +11,16 @@ import com.shagalalab.sozlik.R;
 import com.shagalalab.sozlik.model.SozlikDao;
 import com.shagalalab.sozlik.model.SozlikDatabase;
 
+import java.util.Random;
+
 public class TranslationActivity extends AppCompatActivity implements TranslationView {
 
     private TranslationPresenter presenter;
     private SozlikDao sozlikDao;
     private TextView word;
     private TextView translation;
+    private Random random;
+    private final int maxValue = 15182;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +35,9 @@ public class TranslationActivity extends AppCompatActivity implements Translatio
         translation = findViewById(R.id.translation);
         sozlikDao = SozlikDatabase.getSozlikDatabase(this).sozlikDao();
         presenter = new TranslationPresenter(this, sozlikDao);
-        int translationId = getIntent().getIntExtra("translationId", 1);
+        random = new Random();
+        int randomNumber = random.nextInt(maxValue) + 1;
+        int translationId = getIntent().getIntExtra("translationId", randomNumber);
         presenter.getTranslationById(translationId);
     }
 
@@ -46,8 +52,12 @@ public class TranslationActivity extends AppCompatActivity implements Translatio
     }
 
     @Override
-    public void showTranslation(String word, String translation) {
+    public void showWord(String word) {
         this.word.setText(word);
+    }
+
+    @Override
+    public void showTranslation(String translation) {
         this.translation.setText(Html.fromHtml(translation));
     }
 }

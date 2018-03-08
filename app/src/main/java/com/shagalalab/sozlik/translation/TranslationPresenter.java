@@ -1,6 +1,7 @@
 package com.shagalalab.sozlik.translation;
 
 import com.shagalalab.sozlik.model.SozlikDao;
+import com.shagalalab.sozlik.model.SozlikDbModel;
 
 /**
  * Created by manas on 06.03.18.
@@ -17,10 +18,10 @@ class TranslationPresenter {
     }
 
     void getTranslationById(int id) {
-        String word = sozlikDao.getTranslationById(id).getWord();
-        String translation = sozlikDao.getTranslationById(id).getTranslation();
-        if (word != null && translation != null) {
-            translationView.showTranslation(word, translation);
+        SozlikDbModel model = sozlikDao.getTranslationById(id);
+        if (model != null) {
+            this.translationView.showWord(model.getWord());
+            this.translationView.showTranslation(model.getTranslation());
         }
     }
 }

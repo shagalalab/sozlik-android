@@ -5,5 +5,6 @@ package com.shagalalab.sozlik.translation;
  */
 
 public interface TranslationView {
-    void showTranslation(String word, String translation);
+    void showWord(String word);
+    void showTranslation(String translation);
 }
