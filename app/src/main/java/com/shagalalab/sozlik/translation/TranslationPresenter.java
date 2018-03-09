@@ -35,7 +35,7 @@ class TranslationPresenter {
         }
     }
 
-    void isFavorite(int id) {
+    void setFavoriteStatus(int id) {
         SozlikDbModel dbModel = sozlikDao.getTranslationById(id);
         if (dbModel != null) {
             translationView.showFavorite(dbModel.isFavourite());

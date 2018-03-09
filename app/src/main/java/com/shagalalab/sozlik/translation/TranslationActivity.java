@@ -21,7 +21,7 @@ public class TranslationActivity extends AppCompatActivity implements Translatio
     private TextView word;
     private TextView translation;
     private int translationId;
-    private Menu menu;
+    private MenuItem menuItem;
     private Random random;
     private final int maxValue = 15182;
 
@@ -47,8 +47,8 @@ public class TranslationActivity extends AppCompatActivity implements Translatio
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.translate, menu);
-        this.menu = menu;
-        presenter.isFavorite(translationId);
+        menuItem = menu.findItem(R.id.menu_favourite);
+        presenter.setFavoriteStatus(translationId);
         return true;
     }
 
@@ -59,7 +59,7 @@ public class TranslationActivity extends AppCompatActivity implements Translatio
             case android.R.id.home:
                 this.finish();
                 break;
-            case R.id.favourite:
+            case R.id.menu_favourite:
                 presenter.toggleFavorite(translationId);
                 break;
             default:
@@ -80,11 +80,10 @@ public class TranslationActivity extends AppCompatActivity implements Translatio
 
     @Override
     public void showFavorite(Boolean favourite) {
-        MenuItem item = menu.findItem(R.id.favourite);
         if (favourite) {
-            item.setIcon(R.drawable.ic_bookmark_ribbon);
+            menuItem.setIcon(R.drawable.ic_bookmark_ribbon);
         } else {
-            item.setIcon(R.drawable.ic_bookmark_outline);
+            menuItem.setIcon(R.drawable.ic_bookmark_outline);
         }
     }
 }
