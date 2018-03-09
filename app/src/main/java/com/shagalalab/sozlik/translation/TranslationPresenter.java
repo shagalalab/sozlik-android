@@ -20,8 +20,25 @@ class TranslationPresenter {
     void getTranslationById(int id) {
         SozlikDbModel model = sozlikDao.getTranslationById(id);
         if (model != null) {
-            this.translationView.showWord(model.getWord());
-            this.translationView.showTranslation(model.getTranslation());
+            translationView.showWord(model.getWord());
+            translationView.showTranslation(model.getTranslation());
+        }
+    }
+
+    void toggleFavorite(int id) {
+        SozlikDbModel dbModel = sozlikDao.getTranslationById(id);
+        if (dbModel != null) {
+            boolean isFavourite = !dbModel.isFavourite();
+            dbModel.setFavourite(isFavourite);
+            sozlikDao.updateFavorites(dbModel);
+            translationView.showFavorite(isFavourite);
+        }
+    }
+
+    void isFavorite(int id) {
+        SozlikDbModel dbModel = sozlikDao.getTranslationById(id);
+        if (dbModel != null) {
+            translationView.showFavorite(dbModel.isFavourite());
         }
     }
 }
