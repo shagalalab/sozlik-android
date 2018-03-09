@@ -4,6 +4,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -19,6 +20,8 @@ public class TranslationActivity extends AppCompatActivity implements Translatio
     private SozlikDao sozlikDao;
     private TextView word;
     private TextView translation;
+    private int translationId;
+    private MenuItem menuItem;
     private Random random;
     private final int maxValue = 15182;
 
@@ -37,16 +40,30 @@ public class TranslationActivity extends AppCompatActivity implements Translatio
         presenter = new TranslationPresenter(this, sozlikDao);
         random = new Random();
         int randomNumber = random.nextInt(maxValue) + 1;
-        int translationId = getIntent().getIntExtra("translationId", randomNumber);
+        translationId = getIntent().getIntExtra("translationId", randomNumber);
         presenter.getTranslationById(translationId);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.translate, menu);
+        menuItem = menu.findItem(R.id.menu_favourite);
+        presenter.setFavoriteStatus(translationId);
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == android.R.id.home) {
-            this.finish();
-            return true;
+        switch (id) {
+            case android.R.id.home:
+                this.finish();
+                break;
+            case R.id.menu_favourite:
+                presenter.toggleFavorite(translationId);
+                break;
+            default:
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -59,5 +76,14 @@ public class TranslationActivity extends AppCompatActivity implements Translatio
     @Override
     public void showTranslation(String translation) {
         this.translation.setText(Html.fromHtml(translation));
+    }
+
+    @Override
+    public void showFavorite(Boolean favourite) {
+        if (favourite) {
+            menuItem.setIcon(R.drawable.ic_bookmark_ribbon);
+        } else {
+            menuItem.setIcon(R.drawable.ic_bookmark_outline);
+        }
     }
 }

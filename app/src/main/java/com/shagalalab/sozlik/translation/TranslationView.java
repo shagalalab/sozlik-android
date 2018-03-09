@@ -7,4 +7,5 @@ package com.shagalalab.sozlik.translation;
 public interface TranslationView {
     void showWord(String word);
     void showTranslation(String translation);
+    void showFavorite(Boolean favourite);
 }
