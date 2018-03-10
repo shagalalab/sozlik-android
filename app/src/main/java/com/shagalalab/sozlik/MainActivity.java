@@ -1,5 +1,7 @@
 package com.shagalalab.sozlik;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -11,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.shagalalab.sozlik.dictionary.DictionaryFragment;
 import com.shagalalab.sozlik.translation.TranslationActivity;
 
 public class MainActivity extends AppCompatActivity
@@ -30,6 +33,12 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        DictionaryFragment dictionaryFragment = new DictionaryFragment();
+        FragmentManager manager = getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.add(R.id.main_container, dictionaryFragment, "fragment");
+        transaction.commit();
     }
 
     @Override
