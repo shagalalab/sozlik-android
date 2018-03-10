@@ -12,4 +12,5 @@ public interface DictionaryView {
     void showResults(ArrayList<SozlikDbModel> listOfResults);
     void showTranslation(int translation);
     void showMessage(String message);
+    void showError(String message);
 }

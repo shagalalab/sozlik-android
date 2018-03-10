@@ -94,4 +94,9 @@ public class DictionaryFragment extends Fragment implements DictionaryView {
         String text = "\"" + searchText.getText() + "\"" + message;
         this.message.setText(text);
     }
+
+    @Override
+    public void showError(String message) {
+        this.message.setText(message);
+    }
 }

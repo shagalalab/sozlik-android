@@ -28,7 +28,9 @@ class DictionaryPresenter {
 
     void search(String word) {
         if (Objects.equals(word, "")) {
-            dictionaryView.showMessage(WORD_IS_EMPTY);
+            dictionaryView.showError(WORD_IS_EMPTY);
+            listOfResults = new ArrayList<>();
+            dictionaryView.showResults((ArrayList<SozlikDbModel>) listOfResults);
             return;
         }
         word = word.toLowerCase(Locale.ROOT);
