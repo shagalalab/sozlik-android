@@ -24,6 +24,7 @@ class DictionaryPresenter {
     }
 
     void search(String word) {
+        word = word.toLowerCase();
         result = sozlikDao.getTranslation(word);
         if (result != null) {
             dictionaryView.showTranslation(result.getId());
