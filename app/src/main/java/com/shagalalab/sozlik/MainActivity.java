@@ -34,11 +34,14 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        DictionaryFragment dictionaryFragment = new DictionaryFragment();
-        FragmentManager manager = getFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.add(R.id.main_container, dictionaryFragment, "fragment");
-        transaction.commit();
+        if (savedInstanceState == null) {
+            DictionaryFragment dictionaryFragment = new DictionaryFragment();
+            FragmentManager manager = getFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.add(R.id.main_container, dictionaryFragment, "fragment");
+            transaction.commit();
+        }
+
     }
 
     @Override

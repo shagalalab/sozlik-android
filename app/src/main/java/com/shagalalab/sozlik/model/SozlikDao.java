@@ -15,6 +15,9 @@ import java.util.List;
 public interface SozlikDao {
 
     @Query("SELECT * FROM dictionary WHERE word LIKE :word")
+    List<SozlikDbModel> getSuggestions(String word);
+
+    @Query("SELECT * FROM dictionary WHERE word = :word")
     SozlikDbModel getTranslation(String word);
 
     @Query("SELECT * FROM dictionary WHERE id = :id")
