@@ -5,6 +5,8 @@ import com.shagalalab.sozlik.model.SozlikDbModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 
 /**
  * Created by QAREKEN on 3/8/2018.
@@ -13,6 +15,7 @@ import java.util.List;
 class DictionaryPresenter {
     private static final String FOUND = " tabılmadı, bálkim tómendegilerdi izlegen shıǵarsız.";
     private static final String NOT_FOUND = " boyınsha nátiyjeler tabılmadı";
+    private static final String WORD_IS_EMPTY = "Hesh qanday sóz kiritpedińiz";
     private DictionaryView dictionaryView;
     private SozlikDao sozlikDao;
     private SozlikDbModel result;
@@ -24,14 +27,18 @@ class DictionaryPresenter {
     }
 
     void search(String word) {
-        word = word.toLowerCase();
+        if (Objects.equals(word, "")) {
+            dictionaryView.showMessage(WORD_IS_EMPTY);
+            return;
+        }
+        word = word.toLowerCase(Locale.ROOT);
         result = sozlikDao.getTranslation(word);
         if (result != null) {
             dictionaryView.showTranslation(result.getId());
         } else {
             listOfResults = sozlikDao.getSuggestions('%' + word + '%');
             dictionaryView.showMessage(listOfResults.isEmpty() ? NOT_FOUND : FOUND);
-                dictionaryView.showResults((ArrayList<SozlikDbModel>) listOfResults);
+            dictionaryView.showResults((ArrayList<SozlikDbModel>) listOfResults);
         }
     }
 
