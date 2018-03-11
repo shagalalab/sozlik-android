@@ -1,5 +1,6 @@
 package com.shagalalab.sozlik;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -14,10 +15,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.shagalalab.sozlik.dictionary.DictionaryFragment;
+import com.shagalalab.sozlik.favorites.FavoritesFragment;
 import com.shagalalab.sozlik.translation.TranslationActivity;
 
 public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
+
+    private FavoritesFragment favoritesFragment;
+    private DictionaryFragment dictionaryFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +40,13 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         if (savedInstanceState == null) {
-            DictionaryFragment dictionaryFragment = new DictionaryFragment();
+            favoritesFragment = new FavoritesFragment();
+            dictionaryFragment = new DictionaryFragment();
             FragmentManager manager = getFragmentManager();
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.add(R.id.main_container, dictionaryFragment, "fragment");
             transaction.commit();
         }
-
     }
 
     @Override
@@ -82,14 +87,34 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-//        int id = item.getItemId();
-//
-//        if (id == R.id.nav_gallery) {
-//             Handle the camera action
-//        }
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.nav_favorites:
+                if (favoritesFragment != null) {
+                    changeFragment(favoritesFragment);
+                } else {
+                    changeFragment(new FavoritesFragment());
+                }
+                break;
+            case R.id.nav_dictionary:
+                if (dictionaryFragment != null) {
+                    changeFragment(dictionaryFragment);
+                } else {
+                    changeFragment(new DictionaryFragment());
+                }
+                break;
+            default:
+                break;
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private void changeFragment(Fragment fragment) {
+        getFragmentManager().beginTransaction().replace(R.id.main_container, fragment).commit();
+    }
+
 }

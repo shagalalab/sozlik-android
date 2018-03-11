@@ -20,7 +20,6 @@ import com.shagalalab.sozlik.model.SozlikDatabase;
 import com.shagalalab.sozlik.model.SozlikDbModel;
 import com.shagalalab.sozlik.translation.TranslationActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -78,7 +77,7 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
 
     @Override
     public void showResults(List<SozlikDbModel> listOfResults) {
-        suggestionResultsAdapter.updateItems((ArrayList<SozlikDbModel>) listOfResults);
+        suggestionResultsAdapter.updateItems(listOfResults);
     }
 
     @Override
