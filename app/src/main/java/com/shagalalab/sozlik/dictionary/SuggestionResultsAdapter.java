@@ -4,7 +4,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.shagalalab.sozlik.R;
@@ -19,28 +18,31 @@ import java.util.ArrayList;
 public class SuggestionResultsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private ArrayList<SozlikDbModel> data;
-    private DictionaryView dictionaryView;
+    private SuggestionListener suggestionListener;
 
-    public SuggestionResultsAdapter(ArrayList<SozlikDbModel> data, DictionaryView dictionaryView) {
+    public SuggestionResultsAdapter(SuggestionListener suggestionListener) {
+        this.suggestionListener = suggestionListener;
+    }
+
+    void updateItems(ArrayList<SozlikDbModel> data) {
         this.data = data;
-        this.dictionaryView = dictionaryView;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_of_words_item, parent, false);
-        return new Holder(view);
+        return new SuggestionHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         final int pos = position;
-        ((Holder) holder).word.setText(data.get(pos).getWord());
-        ((Holder) holder).container.setOnClickListener(new View.OnClickListener() {
+        ((SuggestionHolder) holder).word.setText(data.get(pos).getWord());
+        ((SuggestionHolder) holder).word.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dictionaryView.showTranslation(data.get(pos).getId());
+                suggestionListener.showSuggestionTranslate(data.get(pos).getId());
             }
         });
     }
@@ -50,13 +52,12 @@ public class SuggestionResultsAdapter extends RecyclerView.Adapter<RecyclerView.
         return data.size();
     }
 
-    static class Holder extends RecyclerView.ViewHolder {
+    static class SuggestionHolder extends RecyclerView.ViewHolder {
         private TextView word;
-        private LinearLayout container;
-        Holder(View itemView) {
+
+        SuggestionHolder(View itemView) {
             super(itemView);
             word = itemView.findViewById(R.id.list_item_word);
-            container = itemView.findViewById(R.id.list_of_words_item);
         }
     }
 }

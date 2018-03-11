@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/list_of_words_item"
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list_item_word"
     android:layout_width="match_parent"
     android:layout_height="@dimen/list_item_height"
     android:clickable="true"
+    android:drawableEnd="@drawable/ic_keyboard_arrow_right_black_24dp"
     android:focusable="true"
-    android:orientation="horizontal"
     android:paddingBottom="@dimen/list_item_vertical_padding"
     android:paddingEnd="@dimen/list_item_horizontal_padding"
     android:paddingStart="@dimen/list_item_horizontal_padding"
-    android:paddingTop="@dimen/list_item_vertical_padding">
-
-    <TextView
-        android:id="@+id/list_item_word"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textSize="@dimen/list_item_word_text_size"
-        android:drawableEnd="@drawable/ic_keyboard_arrow_right_black_24dp"/>
-
-</LinearLayout>
+    android:paddingTop="@dimen/list_item_vertical_padding"
+    android:textSize="@dimen/list_item_word_text_size" />
