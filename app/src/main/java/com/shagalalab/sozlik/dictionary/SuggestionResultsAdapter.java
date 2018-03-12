@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.shagalalab.sozlik.R;
 import com.shagalalab.sozlik.model.SozlikDbModel;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by QAREKEN on 3/10/2018.
@@ -17,39 +17,40 @@ import java.util.ArrayList;
 
 public class SuggestionResultsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private ArrayList<SozlikDbModel> data;
+    private List<SozlikDbModel> data;
     private SuggestionListener suggestionListener;
 
-    public SuggestionResultsAdapter(SuggestionListener suggestionListener) {
+    SuggestionResultsAdapter(SuggestionListener suggestionListener) {
         this.suggestionListener = suggestionListener;
     }
 
-    void updateItems(ArrayList<SozlikDbModel> data) {
+    void updateItems(List<SozlikDbModel> data) {
         this.data = data;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view;
-        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_of_words_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_suggestion, parent, false);
         return new SuggestionHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
-        final int pos = position;
-        ((SuggestionHolder) holder).word.setText(data.get(pos).getWord());
+        final SozlikDbModel item = data.get(position);
+        ((SuggestionHolder) holder).word.setText(item.getWord());
         ((SuggestionHolder) holder).word.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                suggestionListener.showSuggestionTranslate(data.get(pos).getId());
+                if (suggestionListener != null) {
+                    suggestionListener.onSuggestionClicked(item.getId());
+                }
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return data == null ? 0 : data.size();
     }
 
     static class SuggestionHolder extends RecyclerView.ViewHolder {
@@ -57,7 +58,7 @@ public class SuggestionResultsAdapter extends RecyclerView.Adapter<RecyclerView.
 
         SuggestionHolder(View itemView) {
             super(itemView);
-            word = itemView.findViewById(R.id.list_item_word);
+            word = itemView.findViewById(R.id.item_suggestion_word);
         }
     }
 }

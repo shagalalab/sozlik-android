@@ -1,6 +1,5 @@
 package com.shagalalab.sozlik.dictionary;
 
-import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,16 +32,13 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
     private EditText searchText;
     private Button searchButton;
     private TextView message;
-    private RecyclerView list;
-    private SozlikDao sozlikDao;
-    private Intent intent;
     private RecyclerView.LayoutManager layoutManager;
     private SuggestionResultsAdapter suggestionResultsAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sozlikDao = SozlikDatabase.getSozlikDatabase(getActivity()).sozlikDao();
+        SozlikDao sozlikDao = SozlikDatabase.getSozlikDatabase(getActivity()).sozlikDao();
         dictionaryPresenter = new DictionaryPresenter(this, sozlikDao);
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         suggestionResultsAdapter = new SuggestionResultsAdapter(this);
@@ -56,7 +52,9 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
         searchButton.setOnClickListener(onClickListener);
         searchText.setOnKeyListener(onKeyListener);
         message = v.findViewById(R.id.text_view_result);
-        list = v.findViewById(R.id.list_of_words);
+        RecyclerView suggestionList = v.findViewById(R.id.suggestion_list);
+        suggestionList.setLayoutManager(layoutManager);
+        suggestionList.setAdapter(suggestionResultsAdapter);
         return v;
     }
 
@@ -81,26 +79,23 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
     @Override
     public void showResults(List<SozlikDbModel> listOfResults) {
         suggestionResultsAdapter.updateItems((ArrayList<SozlikDbModel>) listOfResults);
-        list.setLayoutManager(layoutManager);
-        list.setAdapter(suggestionResultsAdapter);
     }
 
     @Override
     public void showTranslation(int wordId) {
-        intent = new Intent(getActivity(), TranslationActivity.class);
+        Intent intent = new Intent(getActivity(), TranslationActivity.class);
         intent.putExtra("translationId", wordId);
         startActivity(intent);
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
     public void showMessage(int res) {
-        String text = "\"" + searchText.getText() + "\"" + getString(res);
+        String text = getString(res, searchText.getText());
         this.message.setText(text);
     }
 
     @Override
-    public void showSuggestionTranslate(int wordId) {
+    public void onSuggestionClicked(int wordId) {
         this.showTranslation(wordId);
     }
 }

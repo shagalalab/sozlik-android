@@ -5,5 +5,5 @@ package com.shagalalab.sozlik.dictionary;
  */
 
 public interface SuggestionListener {
-    void showSuggestionTranslate(int wordId);
+    void onSuggestionClicked(int wordId);
 }
