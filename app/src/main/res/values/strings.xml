@@ -14,4 +14,6 @@
     <string name="settings">Sazlawlar</string>
     <string name="about">Haqqımızda</string>
     <string name="search_hint">izlegen sózińizdi kiritiń</string>
+    <string name="translation_found">\"%1$s\" tabılmadı, bálkim tómendegilerdi izlegen shıǵarsız.</string>
+    <string name="translation_not_found">\"%1$s\" boyınsha nátiyjeler tabılmadı.</string>
 </resources>

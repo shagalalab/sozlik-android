@@ -1,31 +1,47 @@
 package com.shagalalab.sozlik.dictionary;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.shagalalab.sozlik.R;
+import com.shagalalab.sozlik.model.SozlikDao;
+import com.shagalalab.sozlik.model.SozlikDatabase;
+import com.shagalalab.sozlik.model.SozlikDbModel;
+import com.shagalalab.sozlik.translation.TranslationActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by QAREKEN on 3/6/2018.
  */
 
-public class DictionaryFragment extends Fragment implements DictionaryView {
+public class DictionaryFragment extends Fragment implements DictionaryView, SuggestionListener {
     private DictionaryPresenter dictionaryPresenter;
     private EditText searchText;
     private Button searchButton;
+    private TextView message;
+    private RecyclerView.LayoutManager layoutManager;
+    private SuggestionResultsAdapter suggestionResultsAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dictionaryPresenter = new DictionaryPresenter(this);
+        SozlikDao sozlikDao = SozlikDatabase.getSozlikDatabase(getActivity()).sozlikDao();
+        dictionaryPresenter = new DictionaryPresenter(this, sozlikDao);
+        layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        suggestionResultsAdapter = new SuggestionResultsAdapter(this);
     }
 
     @Override
@@ -35,13 +51,17 @@ public class DictionaryFragment extends Fragment implements DictionaryView {
         searchButton = v.findViewById(R.id.search_button);
         searchButton.setOnClickListener(onClickListener);
         searchText.setOnKeyListener(onKeyListener);
+        message = v.findViewById(R.id.text_view_result);
+        RecyclerView suggestionList = v.findViewById(R.id.suggestion_list);
+        suggestionList.setLayoutManager(layoutManager);
+        suggestionList.setAdapter(suggestionResultsAdapter);
         return v;
     }
 
     private View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            dictionaryPresenter.searchView(searchText.getText().toString());
+            dictionaryPresenter.search(searchText.getText().toString());
         }
     };
 
@@ -57,7 +77,25 @@ public class DictionaryFragment extends Fragment implements DictionaryView {
     };
 
     @Override
-    public void showMessage(String message) {
-        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+    public void showResults(List<SozlikDbModel> listOfResults) {
+        suggestionResultsAdapter.updateItems((ArrayList<SozlikDbModel>) listOfResults);
+    }
+
+    @Override
+    public void showTranslation(int wordId) {
+        Intent intent = new Intent(getActivity(), TranslationActivity.class);
+        intent.putExtra("translationId", wordId);
+        startActivity(intent);
+    }
+
+    @Override
+    public void showMessage(int res) {
+        String text = getString(res, searchText.getText());
+        this.message.setText(text);
+    }
+
+    @Override
+    public void onSuggestionClicked(int wordId) {
+        this.showTranslation(wordId);
     }
 }
