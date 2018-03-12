@@ -45,7 +45,6 @@ class FavoritesViewHolder extends RecyclerView.ViewHolder {
         word.setText(model.getWord());
     }
 
-
     private void onFavoritesItemClicked() {
         if (callback != null && model != null) {
             callback.onFavoriteItemClicked(model.getId());

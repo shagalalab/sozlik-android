@@ -40,6 +40,8 @@ public class TranslationActivity extends AppCompatActivity implements Translatio
         presenter = new TranslationPresenter(this, sozlikDao);
         translationId = getIntent().getIntExtra(TRANSLATION_ID, defaultValue);
         presenter.getTranslationById(translationId);
+        long time = System.currentTimeMillis();
+        presenter.setLastAccessed(translationId, time);
     }
 
     @Override

@@ -29,7 +29,7 @@ class FavoritesPresenter {
     void deleteFavorite(SozlikDbModel dbModel) {
         if (dbModel != null) {
             dbModel.setFavourite(false);
-            sozlikDao.updateFavorites(dbModel);
+            sozlikDao.update(dbModel);
         }
     }
 }
