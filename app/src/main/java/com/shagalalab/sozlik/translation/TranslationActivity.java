@@ -16,6 +16,8 @@ import java.util.Random;
 
 public class TranslationActivity extends AppCompatActivity implements TranslationView {
 
+    public static final String TRANSLATION_ID = "translationId";
+
     private TranslationPresenter presenter;
     private SozlikDao sozlikDao;
     private TextView word;
@@ -40,7 +42,7 @@ public class TranslationActivity extends AppCompatActivity implements Translatio
         presenter = new TranslationPresenter(this, sozlikDao);
         random = new Random();
         int randomNumber = random.nextInt(maxValue) + 1;
-        translationId = getIntent().getIntExtra("translationId", randomNumber);
+        translationId = getIntent().getIntExtra(TRANSLATION_ID, randomNumber);
         presenter.getTranslationById(translationId);
     }
 

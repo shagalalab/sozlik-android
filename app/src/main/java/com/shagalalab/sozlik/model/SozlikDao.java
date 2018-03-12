@@ -23,6 +23,9 @@ public interface SozlikDao {
     @Query("SELECT * FROM dictionary WHERE id = :id")
     SozlikDbModel getTranslationById(int id);
 
+    @Query("SELECT * FROM dictionary WHERE is_favourite = 1")
+    List<SozlikDbModel> getAllFavorites();
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertToDB(List<SozlikDbModel> models);
 

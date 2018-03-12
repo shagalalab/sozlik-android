@@ -9,7 +9,7 @@
             android:icon="@drawable/ic_menu_dictionary"
             android:title="@string/dictionary"/>
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_favorites"
             android:icon="@drawable/ic_menu_favourites"
             android:title="@string/favourites"/>
         <item
