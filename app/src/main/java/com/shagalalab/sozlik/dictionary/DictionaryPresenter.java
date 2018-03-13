@@ -32,7 +32,7 @@ class DictionaryPresenter {
             dictionaryView.showTranslation(result.getId());
         } else {
             listOfResults = sozlikDao.getSuggestions('%' + word + '%');
-            dictionaryView.showMessage(listOfResults.isEmpty() ? R.string.translation_not_found : R.string.translation_found);
+            dictionaryView.showMessage(listOfResults.isEmpty() ? R.string.suggestion_not_found : R.string.suggestion_found);
             dictionaryView.showResults(listOfResults);
         }
     }

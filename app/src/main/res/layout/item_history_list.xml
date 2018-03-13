@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/item_history_list"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/list_item_height"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/history_list_word"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:paddingEnd="@dimen/list_item_horizontal_padding"
+        android:paddingStart="@dimen/list_item_horizontal_padding"
+        android:textSize="@dimen/list_item_word_text_size"
+        tools:text="word"/>
+
+    <TextView
+        android:id="@+id/history_list_date"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:paddingEnd="@dimen/list_item_horizontal_padding"
+        android:paddingStart="@dimen/list_item_horizontal_padding"
+        android:textSize="@dimen/list_item_word_text_size"
+        tools:text="@tools:sample/date/mmddyy"/>
+
+</LinearLayout>

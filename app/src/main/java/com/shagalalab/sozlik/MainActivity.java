@@ -14,12 +14,14 @@ import android.view.MenuItem;
 
 import com.shagalalab.sozlik.dictionary.DictionaryFragment;
 import com.shagalalab.sozlik.favorites.FavoritesFragment;
+import com.shagalalab.sozlik.history.HistoryFragment;
 
 public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
 
     private FavoritesFragment favoritesFragment;
     private DictionaryFragment dictionaryFragment;
+    private HistoryFragment historyFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +77,13 @@ public class MainActivity extends AppCompatActivity
                     changeFragment(dictionaryFragment);
                 } else {
                     changeFragment(new DictionaryFragment());
+                }
+                break;
+            case R.id.nav_history:
+                if (historyFragment != null) {
+                    changeFragment(historyFragment);
+                } else {
+                    changeFragment(new HistoryFragment());
                 }
                 break;
             default:

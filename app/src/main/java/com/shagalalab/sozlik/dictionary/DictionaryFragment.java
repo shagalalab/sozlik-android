@@ -33,6 +33,7 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
     private TextView message;
     private RecyclerView.LayoutManager layoutManager;
     private SuggestionResultsAdapter suggestionResultsAdapter;
+    private RecyclerView suggestionList;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,7 +52,7 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
         searchButton.setOnClickListener(onClickListener);
         searchText.setOnKeyListener(onKeyListener);
         message = v.findViewById(R.id.text_view_result);
-        RecyclerView suggestionList = v.findViewById(R.id.suggestion_list);
+        suggestionList = v.findViewById(R.id.suggestion_list);
         suggestionList.setLayoutManager(layoutManager);
         suggestionList.setAdapter(suggestionResultsAdapter);
         return v;
@@ -77,13 +78,14 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
 
     @Override
     public void showResults(List<SozlikDbModel> listOfResults) {
+        suggestionList.scrollToPosition(0);
         suggestionResultsAdapter.updateItems(listOfResults);
     }
 
     @Override
     public void showTranslation(int wordId) {
         Intent intent = new Intent(getActivity(), TranslationActivity.class);
-        intent.putExtra("translationId", wordId);
+        intent.putExtra(TranslationActivity.TRANSLATION_ID, wordId);
         startActivity(intent);
     }
 

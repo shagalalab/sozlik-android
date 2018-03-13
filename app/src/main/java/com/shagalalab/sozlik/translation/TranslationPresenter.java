@@ -30,7 +30,7 @@ class TranslationPresenter {
         if (model != null) {
             boolean isFavourite = !model.isFavourite();
             model.setFavourite(isFavourite);
-            sozlikDao.updateFavorites(model);
+            sozlikDao.update(model);
             translationView.showFavorite(isFavourite);
         }
     }
@@ -44,6 +44,14 @@ class TranslationPresenter {
     void shareTranslation() {
         if (model != null) {
             translationView.goToShare(model.getWord(), model.getMessageForShare());
+        }
+    }
+
+    void setLastAccessed(int id, long time) {
+        SozlikDbModel dbModel = sozlikDao.getTranslationById(id);
+        if (dbModel != null) {
+            dbModel.setLastAccessed(time);
+            sozlikDao.update(dbModel);
         }
     }
 }
