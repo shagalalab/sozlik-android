@@ -65,7 +65,7 @@ public class SozlikDbModel {
         this.lastAccessed = lastAccessed;
     }
 
-    public String getMessageForShare(){
+    public String getMessageForShare() {
         return String.format("%s%n%s", word, translation.replaceAll("\\<.*?>", ""));
     }
 }
