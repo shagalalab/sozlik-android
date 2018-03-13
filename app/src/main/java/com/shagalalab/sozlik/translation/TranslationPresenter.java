@@ -43,7 +43,7 @@ class TranslationPresenter {
 
     void shareTranslation() {
         if (model != null) {
-            translationView.goToShare(model.getWord(), model.getTranslation());
+            translationView.goToShare(model.getWord(), model.getMessageForShare());
         }
     }
 }

@@ -11,6 +11,6 @@
         android:id="@+id/menu_share"
         android:icon="@drawable/ic_sharethis_logo"
         android:orderInCategory="101"
-        android:title="@string/favourites"
+        android:title="@string/share"
         app:showAsAction="ifRoom" />
 </menu>

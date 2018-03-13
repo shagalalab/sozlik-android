@@ -15,5 +15,6 @@
     <string name="search_hint">izlegen sózińizdi kiritiń</string>
     <string name="translation_found">\"%1$s\" tabılmadı, bálkim tómendegilerdi izlegen shıǵarsız.</string>
     <string name="translation_not_found">\"%1$s\" boyınsha nátiyjeler tabılmadı.</string>
-    <string name="share_translation">"Sozdi bolisiw"</string>
+    <string name="share_translation">Sózdi bólisiw</string>
+    <string name="share">Bólisiw</string>
 </resources>

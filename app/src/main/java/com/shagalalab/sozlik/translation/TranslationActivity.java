@@ -92,9 +92,8 @@ public class TranslationActivity extends AppCompatActivity implements Translatio
     public void goToShare(String word, String translation) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        String message = String.format("%s%n%s", word, translation.replaceAll("<.*?>", ""));
         intent.putExtra(Intent.EXTRA_SUBJECT, word);
-        intent.putExtra(Intent.EXTRA_TEXT, message);
+        intent.putExtra(Intent.EXTRA_TEXT, translation);
         startActivity(Intent.createChooser(intent, getResources().getString(R.string.share_translation)));
     }
 }
