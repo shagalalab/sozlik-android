@@ -4,7 +4,6 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
     <string name="android_studio">Android Studio</string>
     <string name="android_studio_android_com">android.studio@android.com</string>
     <string name="dictionary">Sózlik</string>
@@ -16,4 +15,6 @@
     <string name="search_hint">izlegen sózińizdi kiritiń</string>
     <string name="translation_found">\"%1$s\" tabılmadı, bálkim tómendegilerdi izlegen shıǵarsız.</string>
     <string name="translation_not_found">\"%1$s\" boyınsha nátiyjeler tabılmadı.</string>
+    <string name="share_translation">Sózdi bólisiw</string>
+    <string name="share">Bólisiw</string>
 </resources>

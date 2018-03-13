@@ -11,6 +11,7 @@ class TranslationPresenter {
 
     private TranslationView translationView;
     private SozlikDao sozlikDao;
+    private SozlikDbModel model;
 
     TranslationPresenter(TranslationView translationView, SozlikDao sozlikDao) {
         this.translationView = translationView;
@@ -18,27 +19,32 @@ class TranslationPresenter {
     }
 
     void getTranslationById(int id) {
-        SozlikDbModel model = sozlikDao.getTranslationById(id);
+        model = sozlikDao.getTranslationById(id);
         if (model != null) {
             translationView.showWord(model.getWord());
             translationView.showTranslation(model.getTranslation());
         }
     }
 
-    void toggleFavorite(int id) {
-        SozlikDbModel dbModel = sozlikDao.getTranslationById(id);
-        if (dbModel != null) {
-            boolean isFavourite = !dbModel.isFavourite();
-            dbModel.setFavourite(isFavourite);
-            sozlikDao.updateFavorites(dbModel);
+    void toggleFavorite() {
+        if (model != null) {
+            boolean isFavourite = !model.isFavourite();
+            model.setFavourite(isFavourite);
+            sozlikDao.updateFavorites(model);
             translationView.showFavorite(isFavourite);
         }
     }
 
-    void setFavoriteStatus(int id) {
-        SozlikDbModel dbModel = sozlikDao.getTranslationById(id);
-        if (dbModel != null) {
-            translationView.showFavorite(dbModel.isFavourite());
+    void setFavoriteStatus() {
+        if (model != null) {
+            translationView.showFavorite(model.isFavourite());
+        }
+    }
+
+    void shareTranslation() {
+        if (model != null) {
+            translationView.goToShare(model.getWord(), model.getMessageForShare());
         }
     }
 }
+
