@@ -31,7 +31,7 @@ class DictionaryPresenter {
         result = sozlikDao.getTranslation(word);
         if (result != null) {
             dictionaryView.showTranslation(result.getId());
-        } else if (word.length() >= this.WORD_MIN_LENGTH) {
+        } else if (word.length() >= WORD_MIN_LENGTH) {
             listOfResults = sozlikDao.getSuggestions('%' + word + '%');
             dictionaryView.showMessage(listOfResults.isEmpty() ? R.string.suggestion_not_found : R.string.suggestion_found);
             dictionaryView.showResults(listOfResults);
