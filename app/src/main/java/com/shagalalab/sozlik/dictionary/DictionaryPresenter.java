@@ -35,6 +35,8 @@ class DictionaryPresenter {
             listOfResults = sozlikDao.getSuggestions('%' + word + '%');
             dictionaryView.showMessage(listOfResults.isEmpty() ? R.string.suggestion_not_found : R.string.suggestion_found);
             dictionaryView.showResults(listOfResults);
+        } else {
+            dictionaryView.showMessage(R.string.suggestion_not_found);
         }
     }
 
