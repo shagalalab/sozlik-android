@@ -12,6 +12,7 @@ import java.util.Locale;
  */
 
 class DictionaryPresenter {
+    private static final int WORD_MIN_LENGTH = 3;
     private DictionaryView dictionaryView;
     private SozlikDao sozlikDao;
     private SozlikDbModel result;
@@ -30,10 +31,12 @@ class DictionaryPresenter {
         result = sozlikDao.getTranslation(word);
         if (result != null) {
             dictionaryView.showTranslation(result.getId());
-        } else {
+        } else if (word.length() >= WORD_MIN_LENGTH) {
             listOfResults = sozlikDao.getSuggestions('%' + word + '%');
             dictionaryView.showMessage(listOfResults.isEmpty() ? R.string.suggestion_not_found : R.string.suggestion_found);
             dictionaryView.showResults(listOfResults);
+        } else {
+            dictionaryView.showMessage(R.string.suggestion_not_found);
         }
     }
 
