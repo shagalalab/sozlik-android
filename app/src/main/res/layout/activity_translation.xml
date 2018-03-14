@@ -20,13 +20,16 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/colorPrimaryDark" />
-
-    <TextView
-        android:textSize="16sp"
-        android:id="@+id/translation"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:text="@string/android_studio_android_com" />
+        android:layout_height="match_parent">
+        <TextView
+            android:textSize="16sp"
+            android:id="@+id/translation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="@string/android_studio_android_com" />
+    </ScrollView>
 
 </LinearLayout>
