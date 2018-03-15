@@ -23,13 +23,19 @@ public class HistoryFragment extends Fragment implements HistoryListener {
     public static final String TAG = HistoryFragment.class.getName();
 
     private HistoryAdapter historyAdapter;
+    private SozlikDao sozlikDao;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SozlikDao sozlikDao = SozlikDatabase.getSozlikDatabase(getActivity()).sozlikDao();
+        sozlikDao = SozlikDatabase.getSozlikDatabase(getActivity()).sozlikDao();
         historyAdapter = new HistoryAdapter(this);
+    }
+
+    @Override
+    public void onResume() {
         historyAdapter.updateItems(sozlikDao.getHistoryList20());
+        super.onResume();
     }
 
     @Nullable
