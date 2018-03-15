@@ -14,34 +14,33 @@ import com.shagalalab.sozlik.model.SozlikDao;
 import com.shagalalab.sozlik.model.SozlikDatabase;
 
 public class TranslationActivity extends AppCompatActivity implements TranslationView {
-
     public static final String TRANSLATION_ID = "translationId";
 
     private TranslationPresenter presenter;
-    private SozlikDao sozlikDao;
     private TextView word;
     private TextView translation;
-    private int translationId;
     private MenuItem menuItem;
-    private final int defaultValue = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_translation);
+
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setHomeButtonEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+
         word = findViewById(R.id.word);
         translation = findViewById(R.id.translation);
-        sozlikDao = SozlikDatabase.getSozlikDatabase(this).sozlikDao();
+
+        SozlikDao sozlikDao = SozlikDatabase.getSozlikDatabase(this).sozlikDao();
+        int translationId = getIntent().getIntExtra(TRANSLATION_ID, 1);
+
         presenter = new TranslationPresenter(this, sozlikDao);
-        translationId = getIntent().getIntExtra(TRANSLATION_ID, defaultValue);
         presenter.getTranslationById(translationId);
-        long time = System.currentTimeMillis();
-        presenter.setLastAccessed(translationId, time);
+        presenter.setLastAccessed(translationId, System.currentTimeMillis());
     }
 
     @Override
@@ -57,18 +56,17 @@ public class TranslationActivity extends AppCompatActivity implements Translatio
         int id = item.getItemId();
         switch (id) {
             case android.R.id.home:
-                this.finish();
-                break;
+                finish();
+                return true;
             case R.id.menu_favourite:
                 presenter.toggleFavorite();
-                break;
+                return true;
             case R.id.menu_share:
                 presenter.shareTranslation();
-                break;
-            default:
                 return true;
+            default:
+                return false;
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override

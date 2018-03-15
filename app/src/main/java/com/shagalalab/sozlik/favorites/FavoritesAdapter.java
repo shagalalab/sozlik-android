@@ -25,8 +25,8 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesViewHolder> 
 
     public void setData(List<SozlikDbModel> list) {
         if (list != null) {
-            this.data.clear();
-            this.data.addAll(list);
+            data.clear();
+            data.addAll(list);
             notifyDataSetChanged();
         }
     }

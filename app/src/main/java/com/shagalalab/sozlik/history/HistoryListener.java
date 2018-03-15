@@ -5,5 +5,5 @@ package com.shagalalab.sozlik.history;
  */
 
 public interface HistoryListener {
-    void onHistoryClicked(int wordId);
+    void onHistoryItemClicked(int wordId);
 }

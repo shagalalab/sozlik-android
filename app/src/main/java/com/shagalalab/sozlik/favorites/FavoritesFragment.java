@@ -1,10 +1,9 @@
 package com.shagalalab.sozlik.favorites;
 
-
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,11 +22,11 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class FavoritesFragment extends Fragment implements FavoritesView, FavoritesViewHolder.FavoriteAdapterCallback {
+    public static final String TAG = FavoritesFragment.class.getName();
+
     private FavoritesPresenter presenter;
     private FavoritesAdapter adapter;
-    private RecyclerView recyclerView;
     private SozlikDao sozlikDao;
-    private RecyclerView.LayoutManager layoutManager;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,12 +40,10 @@ public class FavoritesFragment extends Fragment implements FavoritesView, Favori
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorites, container, false);
 
-        layoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false);
-
         adapter = new FavoritesAdapter(sozlikDao.getAllFavorites(), this);
 
-        recyclerView = view.findViewById(R.id.recycler_favorites);
-        recyclerView.setLayoutManager(layoutManager);
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_favorites);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
 
         return view;

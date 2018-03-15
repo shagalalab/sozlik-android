@@ -8,9 +8,9 @@
         android:id="@+id/search_view"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/margin_vertical"
+        android:layout_marginLeft="@dimen/standard_margin"
+        android:layout_marginRight="@dimen/standard_margin"
+        android:layout_marginTop="@dimen/standard_margin"
         android:background="@drawable/customborder"
         android:orientation="horizontal">
 
@@ -41,14 +41,14 @@
         android:id="@+id/text_view_result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/standard_margin"
+        android:layout_marginStart="@dimen/standard_margin"
+        android:layout_marginTop="@dimen/standard_margin"
         android:textSize="@dimen/list_item_word_text_size" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/suggestion_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin" />
+        android:layout_marginTop="@dimen/standard_margin" />
 </LinearLayout>

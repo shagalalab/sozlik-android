@@ -12,7 +12,6 @@ import java.util.List;
 class FavoritesPresenter {
     private FavoritesView view;
     private SozlikDao sozlikDao;
-    private List<SozlikDbModel> list;
 
     FavoritesPresenter(FavoritesView view, SozlikDao sozlikDao) {
         this.view = view;
@@ -20,7 +19,7 @@ class FavoritesPresenter {
     }
 
     void showFavoritesList() {
-        list = sozlikDao.getAllFavorites();
+        List<SozlikDbModel> list = sozlikDao.getAllFavorites();
         if (list != null) {
             view.showFavorites(list);
         }

@@ -13,10 +13,9 @@ import java.util.Locale;
 
 class DictionaryPresenter {
     private static final int WORD_MIN_LENGTH = 3;
+
     private DictionaryView dictionaryView;
     private SozlikDao sozlikDao;
-    private SozlikDbModel result;
-    private List<SozlikDbModel> listOfResults;
 
     DictionaryPresenter(DictionaryView dictionaryView, SozlikDao sozlikDao) {
         this.dictionaryView = dictionaryView;
@@ -27,17 +26,18 @@ class DictionaryPresenter {
         if (word.isEmpty()) {
             return;
         }
+
         word = word.toLowerCase(Locale.ROOT);
-        result = sozlikDao.getTranslation(word);
+        SozlikDbModel result = sozlikDao.getTranslation(word);
+
         if (result != null) {
             dictionaryView.showTranslation(result.getId());
         } else if (word.length() >= WORD_MIN_LENGTH) {
-            listOfResults = sozlikDao.getSuggestions('%' + word + '%');
+            List<SozlikDbModel> listOfResults = sozlikDao.getSuggestions('%' + word + '%');
             dictionaryView.showMessage(listOfResults.isEmpty() ? R.string.suggestion_not_found : R.string.suggestion_found);
             dictionaryView.showResults(listOfResults);
         } else {
             dictionaryView.showMessage(R.string.suggestion_not_found);
         }
     }
-
 }

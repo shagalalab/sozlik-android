@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.shagalalab.sozlik.translation.TranslationActivity">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/word"
@@ -20,16 +18,19 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/colorPrimaryDark" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <TextView
-            android:textSize="16sp"
             android:id="@+id/translation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:text="@string/android_studio_android_com" />
+            android:text="@string/android_studio_android_com"
+            android:textSize="16sp" />
+
     </ScrollView>
 
 </LinearLayout>

@@ -1,9 +1,9 @@
 package com.shagalalab.sozlik.dictionary;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
@@ -27,20 +27,20 @@ import java.util.List;
  */
 
 public class DictionaryFragment extends Fragment implements DictionaryView, SuggestionListener {
+    public static final String TAG = DictionaryFragment.class.getName();
+
     private DictionaryPresenter dictionaryPresenter;
     private EditText searchText;
     private Button searchButton;
     private TextView message;
-    private RecyclerView.LayoutManager layoutManager;
-    private SuggestionResultsAdapter suggestionResultsAdapter;
     private RecyclerView suggestionList;
+    private SuggestionResultsAdapter suggestionResultsAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SozlikDao sozlikDao = SozlikDatabase.getSozlikDatabase(getActivity()).sozlikDao();
         dictionaryPresenter = new DictionaryPresenter(this, sozlikDao);
-        layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         suggestionResultsAdapter = new SuggestionResultsAdapter(this);
     }
 
@@ -48,12 +48,15 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_dictionary, container, false);
         searchText = v.findViewById(R.id.search_text_edit);
+        searchText.setOnKeyListener(onKeyListener);
+
         searchButton = v.findViewById(R.id.search_button);
         searchButton.setOnClickListener(onClickListener);
-        searchText.setOnKeyListener(onKeyListener);
+
         message = v.findViewById(R.id.text_view_result);
+
         suggestionList = v.findViewById(R.id.suggestion_list);
-        suggestionList.setLayoutManager(layoutManager);
+        suggestionList.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         suggestionList.setAdapter(suggestionResultsAdapter);
         return v;
     }
@@ -92,11 +95,11 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
     @Override
     public void showMessage(int res) {
         String text = getString(res, searchText.getText());
-        this.message.setText(text);
+        message.setText(text);
     }
 
     @Override
     public void onSuggestionClicked(int wordId) {
-        this.showTranslation(wordId);
+        showTranslation(wordId);
     }
 }

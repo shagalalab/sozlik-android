@@ -14,9 +14,7 @@ import com.shagalalab.sozlik.model.SozlikDbModel;
 
 class FavoritesViewHolder extends RecyclerView.ViewHolder {
     private TextView word;
-    private ImageButton favoriteButton;
     private SozlikDbModel model;
-    private View favoritesItem;
     private FavoriteAdapterCallback callback;
 
 
@@ -24,14 +22,16 @@ class FavoritesViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         this.callback = callback;
         word = itemView.findViewById(R.id.favourite_word);
-        favoriteButton = itemView.findViewById(R.id.favourite_button);
-        favoritesItem = itemView.findViewById(R.id.favorites_item);
+
+        ImageButton favoriteButton = itemView.findViewById(R.id.favourite_button);
         favoriteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onFavoritesIconClicked();
             }
         });
+
+        View favoritesItem = itemView.findViewById(R.id.favorites_item);
         favoritesItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,7 +59,6 @@ class FavoritesViewHolder extends RecyclerView.ViewHolder {
 
     interface FavoriteAdapterCallback {
         void onFavoriteItemClicked(int translationId);
-
         void onFavoriteIconClicked(SozlikDbModel model);
     }
 }

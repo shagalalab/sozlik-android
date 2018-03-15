@@ -21,11 +21,13 @@ class HistoryViewHolder extends RecyclerView.ViewHolder {
     private TextView historyDate;
     private SozlikDbModel model;
     private HistoryListener historyListener;
+
     HistoryViewHolder(final View itemView, HistoryListener historyListener) {
         super(itemView);
         this.historyListener = historyListener;
         historyWord = itemView.findViewById(R.id.history_list_word);
         historyDate = itemView.findViewById(R.id.history_list_date);
+
         LinearLayout itemContainer = itemView.findViewById(R.id.item_history_list);
         itemContainer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,14 +40,13 @@ class HistoryViewHolder extends RecyclerView.ViewHolder {
     void populateModel(SozlikDbModel model) {
         this.model = model;
         historyWord.setText(model.getWord());
-        long time = model.getLastAccessed();
-        String dateString = new SimpleDateFormat("dd/MM/yyyy", Locale.ROOT).format(new Date(time));
+        String dateString = new SimpleDateFormat("dd/MM/yyyy", Locale.ROOT).format(new Date(model.getLastAccessed()));
         historyDate.setText(dateString);
     }
 
     private void onHistoryItemClicked() {
         if (historyListener != null && model != null) {
-            historyListener.onHistoryClicked(model.getId());
+            historyListener.onHistoryItemClicked(model.getId());
         }
     }
 }
