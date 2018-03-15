@@ -29,7 +29,12 @@ public class HistoryFragment extends Fragment implements HistoryListener {
         super.onCreate(savedInstanceState);
         SozlikDao sozlikDao = SozlikDatabase.getSozlikDatabase(getActivity()).sozlikDao();
         historyAdapter = new HistoryAdapter(this);
+    }
+
+    @Override
+    public void onResume() {
         historyAdapter.updateItems(sozlikDao.getHistoryList20());
+        super.onResume();
     }
 
     @Nullable
