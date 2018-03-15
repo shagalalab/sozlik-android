@@ -1,5 +1,6 @@
 package com.shagalalab.sozlik;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -11,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.shagalalab.sozlik.about.AboutActivity;
 import com.shagalalab.sozlik.dictionary.DictionaryFragment;
 import com.shagalalab.sozlik.favorites.FavoritesFragment;
 import com.shagalalab.sozlik.history.HistoryFragment;
@@ -68,6 +70,9 @@ public class MainActivity extends AppCompatActivity
                 if (fragment == null) {
                     changeFragment(new HistoryFragment(), HistoryFragment.TAG);
                 }
+                break;
+            case R.id.nav_about:
+                startActivity(new Intent(this, AboutActivity.class));
                 break;
             default:
                 break;
