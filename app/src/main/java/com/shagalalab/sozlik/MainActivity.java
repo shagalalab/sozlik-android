@@ -16,6 +16,7 @@ import com.shagalalab.sozlik.about.AboutActivity;
 import com.shagalalab.sozlik.dictionary.DictionaryFragment;
 import com.shagalalab.sozlik.favorites.FavoritesFragment;
 import com.shagalalab.sozlik.history.HistoryFragment;
+import com.shagalalab.sozlik.settings.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
@@ -73,6 +74,9 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_about:
                 startActivity(new Intent(this, AboutActivity.class));
+                break;
+            case R.id.nav_settings:
+                startActivity(new Intent(this, SettingsActivity.class));
                 break;
             default:
                 break;
