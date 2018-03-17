@@ -14,7 +14,7 @@
         android:background="@drawable/customborder"
         android:orientation="horizontal">
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/search_text_edit"
             android:layout_width="0dp"
             android:layout_height="match_parent"

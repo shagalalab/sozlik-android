@@ -10,8 +10,8 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.shagalalab.sozlik.R;
@@ -28,13 +28,15 @@ import java.util.List;
 
 public class DictionaryFragment extends Fragment implements DictionaryView, SuggestionListener {
     public static final String TAG = DictionaryFragment.class.getName();
+    private static final int THRESHOLD_NUMBER = 3;
 
     private DictionaryPresenter dictionaryPresenter;
-    private EditText searchText;
+    private AutoCompleteTextView searchText;
     private Button searchButton;
     private TextView message;
     private RecyclerView suggestionList;
     private SuggestionResultsAdapter suggestionResultsAdapter;
+    private WordAutoCompleteAdapter wordAutoCompleteAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
         SozlikDao sozlikDao = SozlikDatabase.getSozlikDatabase(getActivity()).sozlikDao();
         dictionaryPresenter = new DictionaryPresenter(this, sozlikDao);
         suggestionResultsAdapter = new SuggestionResultsAdapter(this);
+        wordAutoCompleteAdapter = new WordAutoCompleteAdapter(getContext(), sozlikDao.getAllWords(), this);
     }
 
     @Override
@@ -49,6 +52,8 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
         View v = inflater.inflate(R.layout.fragment_dictionary, container, false);
         searchText = v.findViewById(R.id.search_text_edit);
         searchText.setOnKeyListener(onKeyListener);
+        searchText.setThreshold(THRESHOLD_NUMBER);
+        searchText.setAdapter(wordAutoCompleteAdapter);
 
         searchButton = v.findViewById(R.id.search_button);
         searchButton.setOnClickListener(onClickListener);
