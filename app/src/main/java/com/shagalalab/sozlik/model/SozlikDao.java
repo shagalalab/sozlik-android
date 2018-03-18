@@ -23,6 +23,9 @@ public interface SozlikDao {
     @Query("SELECT * FROM dictionary WHERE word LIKE :word")
     List<SozlikDbModel> getSuggestions(String word);
 
+    @Query("SELECT * FROM dictionary")
+    List<SozlikDbModel> getAllWords();
+
     @Query("SELECT * FROM dictionary WHERE is_favourite = 1")
     List<SozlikDbModel> getAllFavorites();
 
