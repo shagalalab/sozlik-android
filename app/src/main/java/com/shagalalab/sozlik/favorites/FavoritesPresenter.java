@@ -21,7 +21,11 @@ class FavoritesPresenter {
     void showFavoritesList() {
         List<SozlikDbModel> list = sozlikDao.getAllFavorites();
         if (list != null) {
-            view.showFavorites(list);
+            if (list.isEmpty()) {
+                view.showEmptyScreen();
+            } else {
+                view.showFavorites(list);
+            }
         }
     }
 

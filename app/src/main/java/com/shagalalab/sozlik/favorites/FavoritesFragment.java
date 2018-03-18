@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.shagalalab.sozlik.R;
 import com.shagalalab.sozlik.model.SozlikDao;
@@ -27,6 +28,8 @@ public class FavoritesFragment extends Fragment implements FavoritesView, Favori
     private FavoritesPresenter presenter;
     private FavoritesAdapter adapter;
     private SozlikDao sozlikDao;
+    private RecyclerView recyclerView;
+    private TextView emtyeText;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,7 +45,8 @@ public class FavoritesFragment extends Fragment implements FavoritesView, Favori
 
         adapter = new FavoritesAdapter(sozlikDao.getAllFavorites(), this);
 
-        RecyclerView recyclerView = view.findViewById(R.id.recycler_favorites);
+        recyclerView = view.findViewById(R.id.recycler_favorites);
+        emtyeText = view.findViewById(R.id.empty_favorites);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
 
@@ -57,7 +61,15 @@ public class FavoritesFragment extends Fragment implements FavoritesView, Favori
 
     @Override
     public void showFavorites(List<SozlikDbModel> list) {
+        emtyeText.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
         adapter.setData(list);
+    }
+
+    @Override
+    public void showEmptyScreen() {
+        recyclerView.setVisibility(View.GONE);
+        emtyeText.setVisibility(View.VISIBLE);
     }
 
     @Override

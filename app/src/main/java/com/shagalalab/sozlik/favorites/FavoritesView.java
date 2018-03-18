@@ -10,4 +10,5 @@ import java.util.List;
 
 public interface FavoritesView {
     void showFavorites(List<SozlikDbModel> list);
+    void showEmptyScreen();
 }
