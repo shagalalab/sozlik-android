@@ -35,7 +35,7 @@ public class WordFilter extends Filter {
         } else {
             final String filterPattern = constraint.toString().toLowerCase(Locale.ROOT).trim();
             for (final SozlikDbModel dbModel : originalList) {
-                if (dbModel.getWord().toLowerCase(Locale.ROOT).contains(filterPattern)) {
+                if (dbModel.getWord().toLowerCase(Locale.ROOT).startsWith(filterPattern)) {
                     filteredList.add(dbModel);
                 }
             }
