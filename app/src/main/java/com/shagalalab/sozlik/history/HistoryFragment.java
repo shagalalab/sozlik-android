@@ -42,11 +42,11 @@ public class HistoryFragment extends Fragment implements HistoryListener {
     @Override
     public void onResume() {
         list = sozlikDao.getHistoryList20();
-        historyAdapter.updateItems(list);
         if (list.isEmpty()) {
             historyList.setVisibility(View.GONE);
             emptyHistory.setVisibility(View.VISIBLE);
         } else {
+            historyAdapter.updateItems(list);
             emptyHistory.setVisibility(View.GONE);
             historyList.setVisibility(View.VISIBLE);
         }

@@ -61,15 +61,27 @@ public class FavoritesFragment extends Fragment implements FavoritesView, Favori
 
     @Override
     public void showFavorites(List<SozlikDbModel> list) {
-        emptyText.setVisibility(View.GONE);
-        recyclerView.setVisibility(View.VISIBLE);
         adapter.setData(list);
     }
 
     @Override
     public void showEmptyScreen() {
-        recyclerView.setVisibility(View.GONE);
         emptyText.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideEmptyScreen() {
+        emptyText.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showList() {
+        recyclerView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideList() {
+        recyclerView.setVisibility(View.GONE);
     }
 
     @Override
