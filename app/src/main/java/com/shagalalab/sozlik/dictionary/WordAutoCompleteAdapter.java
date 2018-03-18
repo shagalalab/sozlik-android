@@ -20,23 +20,19 @@ import java.util.List;
  * Created by manas on 16.03.18.
  */
 
-public class WordAutoCompleteAdapter extends ArrayAdapter<SozlikDbModel> implements Filterable {
+public class WordAutoCompleteAdapter extends ArrayAdapter<SozlikDbModel> implements Filterable, OnChangeWordListener {
 
     private final List<SozlikDbModel> models;
     private List<SozlikDbModel> wordResults = new ArrayList<>();
     private TextView word;
     private SuggestionListener listener;
+    private LayoutInflater inflater;
 
     WordAutoCompleteAdapter(Context context, List<SozlikDbModel> words, SuggestionListener listener) {
         super(context, 0, words);
         this.models = words;
         this.listener = listener;
-    }
-
-    void changeWordResults(List<SozlikDbModel> list) {
-        wordResults.clear();
-        wordResults.addAll(list);
-        notifyDataSetChanged();
+        this.inflater = LayoutInflater.from(getContext());
     }
 
     @Override
@@ -54,7 +50,7 @@ public class WordAutoCompleteAdapter extends ArrayAdapter<SozlikDbModel> impleme
         return position;
     }
 
-    private void populateMode(final SozlikDbModel item, final SuggestionListener listener) {
+    private void populateModel(final SozlikDbModel item, final SuggestionListener listener) {
         word.setText(item.getWord());
         if (listener != null) {
             word.setOnClickListener(new View.OnClickListener() {
@@ -71,11 +67,11 @@ public class WordAutoCompleteAdapter extends ArrayAdapter<SozlikDbModel> impleme
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         SozlikDbModel dbModel = getItem(position);
         if (convertView == null) {
-            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_suggestion, parent, false);
+            convertView = inflater.inflate(R.layout.item_suggestion, parent, false);
         }
         word = convertView.findViewById(R.id.item_suggestion_word);
         if (dbModel != null) {
-            populateMode(dbModel, listener);
+            populateModel(dbModel, listener);
         }
         return convertView;
     }
@@ -84,5 +80,12 @@ public class WordAutoCompleteAdapter extends ArrayAdapter<SozlikDbModel> impleme
     @Override
     public Filter getFilter() {
         return new WordFilter(this, models);
+    }
+
+    @Override
+    public void onChangeWordResults(List<SozlikDbModel> list) {
+        wordResults.clear();
+        wordResults.addAll(list);
+        notifyDataSetChanged();
     }
 }

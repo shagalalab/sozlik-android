@@ -14,13 +14,13 @@ import java.util.Locale;
 
 public class WordFilter extends Filter {
 
-    private WordAutoCompleteAdapter adapter;
+    private OnChangeWordListener listener;
     private List<SozlikDbModel> originalList;
     private List<SozlikDbModel> filteredList;
 
-    WordFilter(WordAutoCompleteAdapter adapter, List<SozlikDbModel> originalList) {
+    WordFilter(OnChangeWordListener listener, List<SozlikDbModel> originalList) {
         super();
-        this.adapter = adapter;
+        this.listener = listener;
         this.originalList = originalList;
         this.filteredList = new ArrayList<>();
     }
@@ -47,8 +47,8 @@ public class WordFilter extends Filter {
 
     @Override
     protected void publishResults(CharSequence constraint, FilterResults results) {
-        if (adapter != null) {
-            adapter.changeWordResults((List) results.values);
+        if (listener != null) {
+            listener.onChangeWordResults((List) results.values);
         }
     }
 }
