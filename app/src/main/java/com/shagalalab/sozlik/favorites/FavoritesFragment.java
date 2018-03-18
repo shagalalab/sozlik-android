@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.shagalalab.sozlik.R;
 import com.shagalalab.sozlik.model.SozlikDao;
@@ -27,6 +28,8 @@ public class FavoritesFragment extends Fragment implements FavoritesView, Favori
     private FavoritesPresenter presenter;
     private FavoritesAdapter adapter;
     private SozlikDao sozlikDao;
+    private RecyclerView recyclerView;
+    private TextView emptyText;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,7 +45,8 @@ public class FavoritesFragment extends Fragment implements FavoritesView, Favori
 
         adapter = new FavoritesAdapter(sozlikDao.getAllFavorites(), this);
 
-        RecyclerView recyclerView = view.findViewById(R.id.recycler_favorites);
+        recyclerView = view.findViewById(R.id.recycler_favorites);
+        emptyText = view.findViewById(R.id.empty_favorites);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
 
@@ -58,6 +62,26 @@ public class FavoritesFragment extends Fragment implements FavoritesView, Favori
     @Override
     public void showFavorites(List<SozlikDbModel> list) {
         adapter.setData(list);
+    }
+
+    @Override
+    public void showEmptyScreen() {
+        emptyText.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideEmptyScreen() {
+        emptyText.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showList() {
+        recyclerView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideList() {
+        recyclerView.setVisibility(View.GONE);
     }
 
     @Override
