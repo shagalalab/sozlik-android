@@ -29,7 +29,7 @@ public class FavoritesFragment extends Fragment implements FavoritesView, Favori
     private FavoritesAdapter adapter;
     private SozlikDao sozlikDao;
     private RecyclerView recyclerView;
-    private TextView emtyeText;
+    private TextView emptyText;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,7 +46,7 @@ public class FavoritesFragment extends Fragment implements FavoritesView, Favori
         adapter = new FavoritesAdapter(sozlikDao.getAllFavorites(), this);
 
         recyclerView = view.findViewById(R.id.recycler_favorites);
-        emtyeText = view.findViewById(R.id.empty_favorites);
+        emptyText = view.findViewById(R.id.empty_favorites);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
 
@@ -61,7 +61,7 @@ public class FavoritesFragment extends Fragment implements FavoritesView, Favori
 
     @Override
     public void showFavorites(List<SozlikDbModel> list) {
-        emtyeText.setVisibility(View.GONE);
+        emptyText.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
         adapter.setData(list);
     }
@@ -69,7 +69,7 @@ public class FavoritesFragment extends Fragment implements FavoritesView, Favori
     @Override
     public void showEmptyScreen() {
         recyclerView.setVisibility(View.GONE);
-        emtyeText.setVisibility(View.VISIBLE);
+        emptyText.setVisibility(View.VISIBLE);
     }
 
     @Override
