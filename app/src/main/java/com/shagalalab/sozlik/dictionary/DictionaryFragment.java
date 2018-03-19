@@ -1,6 +1,8 @@
 package com.shagalalab.sozlik.dictionary;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -34,6 +36,7 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
     private AutoCompleteTextView searchText;
     private Button searchButton;
     private TextView message;
+    private TextView keyboardText;
     private RecyclerView suggestionList;
     private SuggestionResultsAdapter suggestionResultsAdapter;
     private WordAutoCompleteAdapter wordAutoCompleteAdapter;
@@ -59,11 +62,24 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
         searchButton.setOnClickListener(onClickListener);
 
         message = v.findViewById(R.id.text_view_result);
+        keyboardText = v.findViewById(R.id.install_keyboard);
+        keyboardText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickKeyboardMessage();
+            }
+        });
 
         suggestionList = v.findViewById(R.id.suggestion_list);
         suggestionList.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         suggestionList.setAdapter(suggestionResultsAdapter);
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        dictionaryPresenter.ifKeyboardInstalled(appInstalledOrNot());
     }
 
     private View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -104,7 +120,33 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
     }
 
     @Override
+    public void showKeyboardMessage() {
+        keyboardText.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideKeyboardMessage() {
+        keyboardText.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onClickKeyboardMessage() {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.shagalalab.qqkeyboard"));
+        startActivity(intent);
+    }
+
+    @Override
     public void onSuggestionClicked(int wordId) {
         showTranslation(wordId);
+    }
+
+    private boolean appInstalledOrNot() {
+        PackageManager pm = getActivity().getPackageManager();
+        try {
+            pm.getPackageInfo("com.shagalalab.qqkeyboard", PackageManager.GET_ACTIVITIES);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+        }
+        return false;
     }
 }

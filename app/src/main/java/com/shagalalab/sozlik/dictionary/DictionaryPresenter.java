@@ -40,4 +40,12 @@ class DictionaryPresenter {
             dictionaryView.showMessage(R.string.suggestion_not_found);
         }
     }
+
+    void ifKeyboardInstalled(boolean installed) {
+        if (installed) {
+            dictionaryView.hideKeyboardMessage();
+        } else {
+            dictionaryView.showKeyboardMessage();
+        }
+    }
 }
