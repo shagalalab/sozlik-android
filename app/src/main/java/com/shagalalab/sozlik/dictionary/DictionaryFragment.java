@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.shagalalab.sozlik.R;
+import com.shagalalab.sozlik.helper.PackageHelper;
 import com.shagalalab.sozlik.model.SozlikDao;
 import com.shagalalab.sozlik.model.SozlikDatabase;
 import com.shagalalab.sozlik.model.SozlikDbModel;
@@ -40,12 +41,14 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
     private RecyclerView suggestionList;
     private SuggestionResultsAdapter suggestionResultsAdapter;
     private WordAutoCompleteAdapter wordAutoCompleteAdapter;
+    private PackageHelper packageHelper;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SozlikDao sozlikDao = SozlikDatabase.getSozlikDatabase(getActivity()).sozlikDao();
-        dictionaryPresenter = new DictionaryPresenter(this, sozlikDao);
+        packageHelper = new PackageHelper(getContext());
+        dictionaryPresenter = new DictionaryPresenter(this, sozlikDao, packageHelper);
         suggestionResultsAdapter = new SuggestionResultsAdapter(this);
         wordAutoCompleteAdapter = new WordAutoCompleteAdapter(getContext(), sozlikDao.getAllWords(), this);
     }
@@ -70,17 +73,14 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
             }
         });
 
+        dictionaryPresenter.ifKeyboardInstalled();
+
         suggestionList = v.findViewById(R.id.suggestion_list);
         suggestionList.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         suggestionList.setAdapter(suggestionResultsAdapter);
         return v;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        dictionaryPresenter.ifKeyboardInstalled(appInstalledOrNot());
-    }
 
     private View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
@@ -131,22 +131,12 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
 
     @Override
     public void onClickKeyboardMessage() {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.shagalalab.qqkeyboard"));
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.qqkeyboard_address)));
         startActivity(intent);
     }
 
     @Override
     public void onSuggestionClicked(int wordId) {
         showTranslation(wordId);
-    }
-
-    private boolean appInstalledOrNot() {
-        PackageManager pm = getActivity().getPackageManager();
-        try {
-            pm.getPackageInfo("com.shagalalab.qqkeyboard", PackageManager.GET_ACTIVITIES);
-            return true;
-        } catch (PackageManager.NameNotFoundException e) {
-        }
-        return false;
     }
 }

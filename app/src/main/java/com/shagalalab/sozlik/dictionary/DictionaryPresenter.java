@@ -1,6 +1,7 @@
 package com.shagalalab.sozlik.dictionary;
 
 import com.shagalalab.sozlik.R;
+import com.shagalalab.sozlik.helper.PackageHelper;
 import com.shagalalab.sozlik.model.SozlikDao;
 import com.shagalalab.sozlik.model.SozlikDbModel;
 
@@ -16,10 +17,12 @@ class DictionaryPresenter {
 
     private DictionaryView dictionaryView;
     private SozlikDao sozlikDao;
+    private PackageHelper packageHelper;
 
-    DictionaryPresenter(DictionaryView dictionaryView, SozlikDao sozlikDao) {
+    DictionaryPresenter(DictionaryView dictionaryView, SozlikDao sozlikDao, PackageHelper packageHelper) {
         this.dictionaryView = dictionaryView;
         this.sozlikDao = sozlikDao;
+        this.packageHelper = packageHelper;
     }
 
     void search(String word) {
@@ -41,8 +44,8 @@ class DictionaryPresenter {
         }
     }
 
-    void ifKeyboardInstalled(boolean installed) {
-        if (installed) {
+    void ifKeyboardInstalled() {
+        if (packageHelper.isAppInstalled()) {
             dictionaryView.hideKeyboardMessage();
         } else {
             dictionaryView.showKeyboardMessage();
