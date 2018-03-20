@@ -16,6 +16,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.shagalalab.sozlik.R;
+import com.shagalalab.sozlik.dictionary.autocomplete.WordAutoCompleteAdapter;
+import com.shagalalab.sozlik.dictionary.suggestion.SuggestionListener;
+import com.shagalalab.sozlik.dictionary.suggestion.SuggestionResultsAdapter;
 import com.shagalalab.sozlik.helper.PackageHelper;
 import com.shagalalab.sozlik.model.SozlikDao;
 import com.shagalalab.sozlik.model.SozlikDatabase;
@@ -40,13 +43,12 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
     private RecyclerView suggestionList;
     private SuggestionResultsAdapter suggestionResultsAdapter;
     private WordAutoCompleteAdapter wordAutoCompleteAdapter;
-    private PackageHelper packageHelper;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SozlikDao sozlikDao = SozlikDatabase.getSozlikDatabase(getActivity()).sozlikDao();
-        packageHelper = new PackageHelper(getContext());
+        PackageHelper packageHelper = new PackageHelper(getContext());
         dictionaryPresenter = new DictionaryPresenter(this, sozlikDao, packageHelper);
         suggestionResultsAdapter = new SuggestionResultsAdapter(this);
         wordAutoCompleteAdapter = new WordAutoCompleteAdapter(getContext(), sozlikDao.getAllWords(), this);
@@ -55,6 +57,7 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_dictionary, container, false);
+
         searchText = v.findViewById(R.id.search_text_edit);
         searchText.setOnKeyListener(onKeyListener);
         searchText.setThreshold(THRESHOLD_NUMBER);
@@ -68,18 +71,18 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
         keyboardText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickKeyboardMessage();
+                goToQqKeyboardInstallation();
             }
         });
-
-        dictionaryPresenter.ifKeyboardInstalled();
 
         suggestionList = v.findViewById(R.id.suggestion_list);
         suggestionList.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         suggestionList.setAdapter(suggestionResultsAdapter);
+
+        dictionaryPresenter.setKeyboardMessageVisibility();
+
         return v;
     }
-
 
     private View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
@@ -129,7 +132,7 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
     }
 
     @Override
-    public void onClickKeyboardMessage() {
+    public void goToQqKeyboardInstallation() {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.qqkeyboard_address)));
         startActivity(intent);
     }

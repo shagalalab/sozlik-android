@@ -44,7 +44,7 @@ class DictionaryPresenter {
         }
     }
 
-    void ifKeyboardInstalled() {
+    void setKeyboardMessageVisibility() {
         if (packageHelper.isAppInstalled()) {
             dictionaryView.hideKeyboardMessage();
         } else {

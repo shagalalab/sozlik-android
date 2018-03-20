@@ -14,5 +14,5 @@ public interface DictionaryView {
     void showMessage(int res);
     void showKeyboardMessage();
     void hideKeyboardMessage();
-    void onClickKeyboardMessage();
+    void goToQqKeyboardInstallation();
 }

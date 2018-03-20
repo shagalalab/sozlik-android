@@ -10,20 +10,18 @@ import com.shagalalab.sozlik.R;
  */
 
 public class PackageHelper {
-    private PackageManager packageManager;
     private Context context;
 
     public PackageHelper(Context context) {
         this.context = context;
-        packageManager = context.getPackageManager();
     }
 
     public boolean isAppInstalled() {
         try {
-            packageManager.getPackageInfo(context.getString(R.string.qqkeyboard_package), PackageManager.GET_ACTIVITIES);
+            context.getPackageManager().getPackageInfo(context.getString(R.string.qqkeyboard_package), PackageManager.GET_ACTIVITIES);
             return true;
         } catch (PackageManager.NameNotFoundException e) {
+            return false;
         }
-        return false;
     }
 }

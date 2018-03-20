@@ -1,4 +1,4 @@
-package com.shagalalab.sozlik.dictionary;
+package com.shagalalab.sozlik.dictionary.suggestion;
 
 /**
  * Created by QAREKEN on 3/11/2018.

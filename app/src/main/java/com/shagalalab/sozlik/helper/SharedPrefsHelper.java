@@ -1,4 +1,4 @@
-package com.shagalalab.sozlik.model;
+package com.shagalalab.sozlik.helper;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -17,12 +17,8 @@ public class SharedPrefsHelper {
         preferences = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
     }
 
-    private SharedPreferences.Editor getEditor() {
-        return preferences.edit();
-    }
-
-    public void setFirstLaunch(boolean firstLaunch) {
-        getEditor().putBoolean(IS_FIRST_LAUNCH, firstLaunch).commit();
+    public void setFirstLaunch() {
+        preferences.edit().putBoolean(IS_FIRST_LAUNCH, false).apply();
     }
 
     public boolean isFirstLaunch() {

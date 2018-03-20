@@ -1,7 +1,7 @@
 package com.shagalalab.sozlik.splash;
 
-import com.shagalalab.sozlik.model.GsonHelper;
-import com.shagalalab.sozlik.model.SharedPrefsHelper;
+import com.shagalalab.sozlik.helper.GsonHelper;
+import com.shagalalab.sozlik.helper.SharedPrefsHelper;
 import com.shagalalab.sozlik.model.SozlikDao;
 import com.shagalalab.sozlik.model.SozlikDatabase;
 
@@ -23,7 +23,7 @@ class SplashPresenter {
         if (prefsManager.isFirstLaunch()) {
             SozlikDao dao = database.sozlikDao();
             dao.insertToDB(gsonHelper.getListFromLocalAssets());
-            prefsManager.setFirstLaunch(false);
+            prefsManager.setFirstLaunch();
         }
         view.goToMainScreen();
     }

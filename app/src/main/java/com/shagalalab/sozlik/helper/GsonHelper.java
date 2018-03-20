@@ -1,9 +1,10 @@
-package com.shagalalab.sozlik.model;
+package com.shagalalab.sozlik.helper;
 
 import android.content.Context;
 
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.shagalalab.sozlik.model.SozlikDbModel;
 
 import java.io.IOException;
 import java.io.InputStream;
