@@ -1,4 +1,4 @@
-package com.shagalalab.sozlik.dictionary;
+package com.shagalalab.sozlik.dictionary.suggestion;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

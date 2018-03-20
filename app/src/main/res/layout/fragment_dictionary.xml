@@ -38,6 +38,17 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/install_keyboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/standard_margin"
+        android:layout_marginStart="@dimen/standard_margin"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:text="@string/keyboard_not_installed"
+        android:textAlignment="center"
+        android:textSize="@dimen/list_item_word_text_size" />
+
+    <TextView
         android:id="@+id/text_view_result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

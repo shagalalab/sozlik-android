@@ -1,4 +1,4 @@
-package com.shagalalab.sozlik.dictionary;
+package com.shagalalab.sozlik.dictionary.autocomplete;
 
 import android.widget.Filter;
 

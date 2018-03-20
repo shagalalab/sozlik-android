@@ -6,8 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.shagalalab.sozlik.MainActivity;
-import com.shagalalab.sozlik.model.GsonHelper;
-import com.shagalalab.sozlik.model.SharedPrefsHelper;
+import com.shagalalab.sozlik.helper.GsonHelper;
+import com.shagalalab.sozlik.helper.SharedPrefsHelper;
 import com.shagalalab.sozlik.model.SozlikDatabase;
 
 public class SplashActivity extends AppCompatActivity implements SplashView {

@@ -1,4 +1,4 @@
-package com.shagalalab.sozlik.dictionary;
+package com.shagalalab.sozlik.dictionary.suggestion;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,11 +19,11 @@ public class SuggestionResultsAdapter extends RecyclerView.Adapter<SuggestionVie
     private List<SozlikDbModel> data;
     private SuggestionListener suggestionListener;
 
-    SuggestionResultsAdapter(SuggestionListener suggestionListener) {
+    public SuggestionResultsAdapter(SuggestionListener suggestionListener) {
         this.suggestionListener = suggestionListener;
     }
 
-    void updateItems(List<SozlikDbModel> data) {
+    public void updateItems(List<SozlikDbModel> data) {
         this.data = data;
     }
 

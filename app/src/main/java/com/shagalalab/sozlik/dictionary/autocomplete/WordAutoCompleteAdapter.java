@@ -1,4 +1,4 @@
-package com.shagalalab.sozlik.dictionary;
+package com.shagalalab.sozlik.dictionary.autocomplete;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -11,6 +11,7 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.shagalalab.sozlik.R;
+import com.shagalalab.sozlik.dictionary.suggestion.SuggestionListener;
 import com.shagalalab.sozlik.model.SozlikDbModel;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class WordAutoCompleteAdapter extends ArrayAdapter<SozlikDbModel> impleme
     private SuggestionListener listener;
     private LayoutInflater inflater;
 
-    WordAutoCompleteAdapter(Context context, List<SozlikDbModel> words, SuggestionListener listener) {
+    public WordAutoCompleteAdapter(Context context, List<SozlikDbModel> words, SuggestionListener listener) {
         super(context, 0, words);
         this.models = words;
         this.listener = listener;
