@@ -1,5 +1,6 @@
 package com.shagalalab.sozlik;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,6 +12,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import com.shagalalab.sozlik.about.AboutActivity;
 import com.shagalalab.sozlik.dictionary.DictionaryFragment;
@@ -19,7 +22,10 @@ import com.shagalalab.sozlik.history.HistoryFragment;
 import com.shagalalab.sozlik.settings.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity
-    implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener {
+
+    private DrawerLayout drawer;
+    private InputMethodManager inputMethodManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +33,9 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-            this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -37,6 +43,18 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         changeFragment(new DictionaryFragment(), DictionaryFragment.TAG);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        drawer.addDrawerListener(drawerListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        drawer.removeDrawerListener(drawerListener);
     }
 
     @Override
@@ -91,4 +109,18 @@ public class MainActivity extends AppCompatActivity
         getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragment, tag).commit();
     }
 
+    private DrawerLayout.DrawerListener drawerListener = new DrawerLayout.SimpleDrawerListener() {
+        @Override
+        public void onDrawerSlide(View drawerView, float slideOffset) {
+            super.onDrawerSlide(drawerView, slideOffset);
+            getInputMethodManager().hideSoftInputFromWindow(drawerView.getWindowToken(), 0);
+        }
+    };
+
+    private InputMethodManager getInputMethodManager() {
+        if (inputMethodManager == null) {
+            inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        }
+        return inputMethodManager;
+    }
 }

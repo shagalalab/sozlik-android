@@ -1,5 +1,6 @@
 package com.shagalalab.sozlik.dictionary;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,7 +11,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
@@ -31,7 +34,7 @@ import java.util.List;
  * Created by QAREKEN on 3/6/2018.
  */
 
-public class DictionaryFragment extends Fragment implements DictionaryView, SuggestionListener {
+public class DictionaryFragment extends Fragment implements DictionaryView, SuggestionListener, OnFocusChangeListener {
     public static final String TAG = DictionaryFragment.class.getName();
     private static final int THRESHOLD_NUMBER = 3;
 
@@ -43,6 +46,7 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
     private RecyclerView suggestionList;
     private SuggestionResultsAdapter suggestionResultsAdapter;
     private WordAutoCompleteAdapter wordAutoCompleteAdapter;
+    private InputMethodManager inputMethodManager;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,6 +66,7 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
         searchText.setOnKeyListener(onKeyListener);
         searchText.setThreshold(THRESHOLD_NUMBER);
         searchText.setAdapter(wordAutoCompleteAdapter);
+        searchText.setOnFocusChangeListener(this);
 
         searchButton = v.findViewById(R.id.search_button);
         searchButton.setOnClickListener(onClickListener);
@@ -80,7 +85,6 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
         suggestionList.setAdapter(suggestionResultsAdapter);
 
         dictionaryPresenter.setKeyboardMessageVisibility();
-
         return v;
     }
 
@@ -140,5 +144,19 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
     @Override
     public void onSuggestionClicked(int wordId) {
         showTranslation(wordId);
+    }
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        if (v.getId() == R.id.search_text_edit && !hasFocus) {
+            getInputMethodManager().hideSoftInputFromWindow(v.getWindowToken(), 0);
+        }
+    }
+
+    private InputMethodManager getInputMethodManager() {
+        if (inputMethodManager == null) {
+            inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        }
+        return inputMethodManager;
     }
 }
