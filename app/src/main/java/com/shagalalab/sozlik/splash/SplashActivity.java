@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.shagalalab.sozlik.MainActivity;
 import com.shagalalab.sozlik.helper.GsonHelper;
 import com.shagalalab.sozlik.helper.SharedPrefsHelper;
+import com.shagalalab.sozlik.helper.thread.AppExecutors;
 import com.shagalalab.sozlik.model.SozlikDatabase;
 
 public class SplashActivity extends AppCompatActivity implements SplashView {
@@ -19,7 +20,7 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
         SharedPrefsHelper prefsHelper = new SharedPrefsHelper(this);
         SozlikDatabase database = SozlikDatabase.getSozlikDatabase(this);
 
-        SplashPresenter presenter = new SplashPresenter(this, gsonHelper, prefsHelper, database);
+        SplashPresenter presenter = new SplashPresenter(this, gsonHelper, prefsHelper, database.sozlikDao(), new AppExecutors());
         presenter.startSplash();
     }
 
