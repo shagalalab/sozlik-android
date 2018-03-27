@@ -2,29 +2,42 @@ package com.shagalalab.sozlik.splash;
 
 import com.shagalalab.sozlik.helper.GsonHelper;
 import com.shagalalab.sozlik.helper.SharedPrefsHelper;
+import com.shagalalab.sozlik.helper.thread.AppExecutors;
 import com.shagalalab.sozlik.model.SozlikDao;
-import com.shagalalab.sozlik.model.SozlikDatabase;
 
 class SplashPresenter {
 
     private final SplashView view;
     private final GsonHelper gsonHelper;
     private final SharedPrefsHelper prefsManager;
-    private final SozlikDatabase database;
+    private final SozlikDao sozlikDao;
+    private AppExecutors appExecutors;
 
-    SplashPresenter(SplashView view, GsonHelper gsonHelper, SharedPrefsHelper prefsManager, SozlikDatabase database) {
+    SplashPresenter(SplashView view, GsonHelper gsonHelper, SharedPrefsHelper prefsManager, SozlikDao sozlikDao,
+                    AppExecutors appExecutors) {
         this.view = view;
         this.gsonHelper = gsonHelper;
         this.prefsManager = prefsManager;
-        this.database = database;
+        this.sozlikDao = sozlikDao;
+        this.appExecutors = appExecutors;
     }
 
     void startSplash() {
-        if (prefsManager.isFirstLaunch()) {
-            SozlikDao dao = database.sozlikDao();
-            dao.insertToDB(gsonHelper.getListFromLocalAssets());
-            prefsManager.setFirstLaunch();
-        }
-        view.goToMainScreen();
+        appExecutors.getDiskIo().execute(new Runnable() {
+            @Override
+            public void run() {
+                if (prefsManager.isFirstLaunch()) {
+                    sozlikDao.insertToDB(gsonHelper.getListFromLocalAssets());
+                    prefsManager.setFirstLaunch();
+                }
+
+                appExecutors.getMainThread().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        view.goToMainScreen();
+                    }
+                });
+            }
+        });
     }
 }
