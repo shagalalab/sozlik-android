@@ -15,11 +15,10 @@ public class WordHolder {
 
     private static List<SozlikDbModel> wordList;
 
-    List<SozlikDbModel> getInstanse(Context context) {
+    List<SozlikDbModel> getWordList(Context context) {
         if (wordList == null) {
             wordList = SozlikDatabase.getSozlikDatabase(context).sozlikDao().getAllWords();
         }
         return wordList;
     }
-
 }
