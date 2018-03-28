@@ -1,8 +1,5 @@
 package com.shagalalab.sozlik.dictionary.autocomplete;
 
-import android.content.Context;
-
-import com.shagalalab.sozlik.model.SozlikDatabase;
 import com.shagalalab.sozlik.model.SozlikDbModel;
 
 import java.util.List;
@@ -13,12 +10,24 @@ import java.util.List;
 
 public class WordHolder {
 
-    private static List<SozlikDbModel> wordList;
+    private static WordHolder instance;
+    private List<SozlikDbModel> wordList;
 
-    List<SozlikDbModel> getWordList(Context context) {
-        if (wordList == null) {
-            wordList = SozlikDatabase.getSozlikDatabase(context).sozlikDao().getAllWords();
+    public WordHolder() {
+    }
+
+    public static WordHolder getInstance() {
+        if (instance == null) {
+            instance = new WordHolder();
         }
+        return instance;
+    }
+
+    List<SozlikDbModel> getWordList() {
         return wordList;
+    }
+
+    public void setWordList(List<SozlikDbModel> wordList) {
+        this.wordList = wordList;
     }
 }

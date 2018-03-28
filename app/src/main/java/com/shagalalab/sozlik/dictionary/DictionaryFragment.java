@@ -54,10 +54,10 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
         super.onCreate(savedInstanceState);
         SozlikDao sozlikDao = SozlikDatabase.getSozlikDatabase(getActivity()).sozlikDao();
         PackageHelper packageHelper = new PackageHelper(getContext());
-        WordHolder wordList = new WordHolder();
+        WordHolder wordHolder = WordHolder.getInstance();
         dictionaryPresenter = new DictionaryPresenter(this, sozlikDao, packageHelper);
         suggestionResultsAdapter = new SuggestionResultsAdapter(this);
-        wordAutoCompleteAdapter = new WordAutoCompleteAdapter(getContext(), wordList, this);
+        wordAutoCompleteAdapter = new WordAutoCompleteAdapter(getContext(), wordHolder, this);
     }
 
     @Override
