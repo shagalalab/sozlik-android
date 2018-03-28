@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.shagalalab.sozlik.R;
 import com.shagalalab.sozlik.dictionary.autocomplete.WordAutoCompleteAdapter;
+import com.shagalalab.sozlik.dictionary.autocomplete.WordHolder;
 import com.shagalalab.sozlik.dictionary.suggestion.SuggestionListener;
 import com.shagalalab.sozlik.dictionary.suggestion.SuggestionResultsAdapter;
 import com.shagalalab.sozlik.helper.PackageHelper;
@@ -53,9 +54,10 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
         super.onCreate(savedInstanceState);
         SozlikDao sozlikDao = SozlikDatabase.getSozlikDatabase(getActivity()).sozlikDao();
         PackageHelper packageHelper = new PackageHelper(getContext());
+        WordHolder wordList = new WordHolder();
         dictionaryPresenter = new DictionaryPresenter(this, sozlikDao, packageHelper);
         suggestionResultsAdapter = new SuggestionResultsAdapter(this);
-        wordAutoCompleteAdapter = new WordAutoCompleteAdapter(getContext(), sozlikDao.getAllWords(), this);
+        wordAutoCompleteAdapter = new WordAutoCompleteAdapter(getContext(), wordList, this);
     }
 
     @Override

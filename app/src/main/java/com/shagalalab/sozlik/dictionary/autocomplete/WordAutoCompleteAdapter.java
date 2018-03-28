@@ -29,9 +29,9 @@ public class WordAutoCompleteAdapter extends ArrayAdapter<SozlikDbModel> impleme
     private SuggestionListener listener;
     private LayoutInflater inflater;
 
-    public WordAutoCompleteAdapter(Context context, List<SozlikDbModel> words, SuggestionListener listener) {
-        super(context, 0, words);
-        this.models = words;
+    public WordAutoCompleteAdapter(Context context, WordHolder words, SuggestionListener listener) {
+        super(context, 0, words.getInstanse(context));
+        this.models = words.getInstanse(context);
         this.listener = listener;
         this.inflater = LayoutInflater.from(getContext());
     }
