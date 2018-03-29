@@ -8,12 +8,12 @@ import java.util.List;
  * Created by manas on 28.03.18.
  */
 
-public class WordHolder {
+public final class WordHolder {
 
     private static WordHolder instance;
     private List<SozlikDbModel> wordList;
 
-    public WordHolder() {
+    private WordHolder() {
     }
 
     public static WordHolder getInstance() {
@@ -23,7 +23,7 @@ public class WordHolder {
         return instance;
     }
 
-    List<SozlikDbModel> getWordList() {
+    public List<SozlikDbModel> getWordList() {
         return wordList;
     }
 
