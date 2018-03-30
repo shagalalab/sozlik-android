@@ -1,5 +1,6 @@
 package com.shagalalab.sozlik.splash;
 
+import com.shagalalab.sozlik.dictionary.autocomplete.WordHolder;
 import com.shagalalab.sozlik.helper.GsonHelper;
 import com.shagalalab.sozlik.helper.SharedPrefsHelper;
 import com.shagalalab.sozlik.helper.thread.AppExecutors;
@@ -30,7 +31,7 @@ class SplashPresenter {
                     sozlikDao.insertToDB(gsonHelper.getListFromLocalAssets());
                     prefsManager.setFirstLaunch();
                 }
-
+                WordHolder.getInstance().setWordList(sozlikDao.getAllWords());
                 appExecutors.getMainThread().execute(new Runnable() {
                     @Override
                     public void run() {
