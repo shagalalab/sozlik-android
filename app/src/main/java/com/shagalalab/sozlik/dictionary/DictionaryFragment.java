@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
@@ -15,7 +16,6 @@ import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.shagalalab.sozlik.R;
@@ -41,7 +41,6 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
 
     private DictionaryPresenter dictionaryPresenter;
     private AutoCompleteTextView searchText;
-    private Button searchButton;
     private TextView message;
     private TextView keyboardText;
     private RecyclerView suggestionList;
@@ -69,9 +68,6 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
         searchText.setAdapter(wordAutoCompleteAdapter);
         searchText.setOnFocusChangeListener(this);
 
-        searchButton = v.findViewById(R.id.search_button);
-        searchButton.setOnClickListener(onClickListener);
-
         message = v.findViewById(R.id.text_view_result);
         keyboardText = v.findViewById(R.id.install_keyboard);
         keyboardText.setOnClickListener(new View.OnClickListener() {
@@ -83,24 +79,20 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
 
         suggestionList = v.findViewById(R.id.suggestion_list);
         suggestionList.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        suggestionList.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         suggestionList.setAdapter(suggestionResultsAdapter);
 
         dictionaryPresenter.setKeyboardMessageVisibility();
         return v;
     }
 
-    private View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            dictionaryPresenter.search(searchText.getText().toString());
-        }
-    };
-
     private View.OnKeyListener onKeyListener = new View.OnKeyListener() {
         @Override
         public boolean onKey(View view, int i, KeyEvent keyEvent) {
             if (keyEvent.getAction() == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
-                searchButton.callOnClick();
+                dictionaryPresenter.search(searchText.getText().toString());
+                searchText.dismissDropDown();
+                hideSoftKeyboard();
                 return true;
             }
             return false;
@@ -127,6 +119,11 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
     }
 
     @Override
+    public void setMessageVisible() {
+        message.setVisibility(View.VISIBLE);
+    }
+
+    @Override
     public void showKeyboardMessage() {
         keyboardText.setVisibility(View.VISIBLE);
     }
@@ -150,8 +147,12 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
         if (v.getId() == R.id.search_text_edit && !hasFocus) {
-            getInputMethodManager().hideSoftInputFromWindow(v.getWindowToken(), 0);
+            hideSoftKeyboard();
         }
+    }
+
+    private void hideSoftKeyboard() {
+        getInputMethodManager().hideSoftInputFromWindow(searchText.getWindowToken(), 0);
     }
 
     private InputMethodManager getInputMethodManager() {

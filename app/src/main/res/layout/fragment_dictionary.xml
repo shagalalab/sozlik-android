@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
@@ -10,59 +11,55 @@
     <LinearLayout
         android:id="@+id/search_view"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="@dimen/standard_margin"
-        android:layout_marginRight="@dimen/standard_margin"
-        android:layout_marginTop="@dimen/standard_margin"
-        android:background="@drawable/customborder"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:background="@color/color_primary"
+        android:orientation="horizontal"
+        android:padding="@dimen/standard_margin_half">
 
         <AutoCompleteTextView
             android:id="@+id/search_text_edit"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/search_box_background"
+            android:drawablePadding="@dimen/standard_margin"
+            android:drawableStart="@drawable/ic_search_white_24dp"
             android:hint="@string/search_hint"
+            android:imeOptions="actionSearch"
             android:inputType="text"
             android:maxLines="1"
-            android:paddingEnd="8dp"
-            android:paddingStart="8dp"
-            android:textSize="16sp" />
-
-        <Button
-            android:id="@+id/search_button"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:background="@drawable/ic_search_black_24dp" />
+            android:paddingEnd="@dimen/standard_margin"
+            android:paddingStart="@dimen/standard_margin"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:textSize="16sp"/>
     </LinearLayout>
 
     <TextView
         android:id="@+id/install_keyboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/standard_margin"
-        android:layout_marginStart="@dimen/standard_margin"
-        android:layout_marginTop="@dimen/standard_margin"
+        android:background="@color/color_accent"
+        android:drawablePadding="@dimen/standard_margin_half"
+        android:drawableStart="@drawable/ic_info_outline_white_24dp"
+        android:padding="@dimen/standard_margin"
         android:text="@string/keyboard_not_installed"
         android:textAlignment="center"
-        android:textSize="@dimen/list_item_word_text_size" />
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/keyboard_info_text_size"/>
 
     <TextView
         android:id="@+id/text_view_result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/standard_margin"
-        android:layout_marginStart="@dimen/standard_margin"
-        android:layout_marginTop="@dimen/standard_margin"
-        android:textSize="@dimen/list_item_word_text_size" />
+        android:background="@color/grey3"
+        android:padding="@dimen/standard_margin"
+        android:textSize="@dimen/list_item_word_text_size"
+        android:visibility="gone"
+        tools:text="@string/suggestion_found"
+        tools:visibility="visible"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/suggestion_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/standard_margin" />
+        android:layout_height="wrap_content"/>
 </LinearLayout>

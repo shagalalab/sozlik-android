@@ -33,7 +33,7 @@
     <string name="pref_alphabet_default" translatable="false">@string/pref_alphabet_latin</string>
     <string name="empty_favorites_text">Saylandılar bos</string>
     <string name="empty_histories_text">Siz ele hesh bir sózdiń awdarmasın kórmedińiz</string>
-    <string name="keyboard_not_installed">Sózlerdi tolıq izlew ushın QqKeyboard baǵdarlamasın ornatıwıńızdı másláhát etemiz</string>
+    <string name="keyboard_not_installed">Sózlerdi tolıq izlew ushın <b>QqKeyboard</b> baǵdarlamasın ornatıwıńızdı másláhát etemiz</string>
     <string name="qqkeyboard_address">https://play.google.com/store/apps/details?id=com.shagalalab.qqkeyboard</string>
     <string name="qqkeyboard_package">com.shagalalab.qqkeyboard</string>
 </resources>
