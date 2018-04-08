@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -102,7 +103,7 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
     @Override
     public void showResults(List<SozlikDbModel> listOfResults) {
         suggestionList.scrollToPosition(0);
-        suggestionResultsAdapter.updateItems(listOfResults);
+        suggestionResultsAdapter.updateItems(searchText.getText().toString(), listOfResults);
     }
 
     @Override
@@ -114,8 +115,8 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
 
     @Override
     public void showMessage(int res) {
-        String text = getString(res, searchText.getText());
-        message.setText(text);
+        String text = getString(res, String.format("<b>%s</b>", searchText.getText()));
+        message.setText(Html.fromHtml(text));
     }
 
     @Override

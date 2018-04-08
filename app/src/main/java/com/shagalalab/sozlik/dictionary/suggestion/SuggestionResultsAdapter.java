@@ -18,13 +18,10 @@ public class SuggestionResultsAdapter extends RecyclerView.Adapter<SuggestionVie
 
     private List<SozlikDbModel> data;
     private SuggestionListener suggestionListener;
+    private String originalWord = "";
 
     public SuggestionResultsAdapter(SuggestionListener suggestionListener) {
         this.suggestionListener = suggestionListener;
-    }
-
-    public void updateItems(List<SozlikDbModel> data) {
-        this.data = data;
     }
 
     @Override
@@ -37,7 +34,7 @@ public class SuggestionResultsAdapter extends RecyclerView.Adapter<SuggestionVie
     public void onBindViewHolder(final SuggestionViewHolder holder, int position) {
         SozlikDbModel item = data.get(position);
         if (item != null) {
-            holder.populateModel(item, suggestionListener);
+            holder.populateModel(originalWord, item, suggestionListener);
         }
     }
 
@@ -46,4 +43,9 @@ public class SuggestionResultsAdapter extends RecyclerView.Adapter<SuggestionVie
         return data == null ? 0 : data.size();
     }
 
+    public void updateItems(String originalWord, List<SozlikDbModel> data) {
+        this.originalWord = originalWord;
+        this.data = data;
+        notifyDataSetChanged();
+    }
 }

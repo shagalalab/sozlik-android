@@ -1,23 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/word"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/app_name"
-        android:textAlignment="center"
-        android:textSize="24sp" />
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/color_primary_dark" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/translation_toolbar_height">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/translation_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+            <TextView
+                android:id="@+id/word"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_below="@id/translation_toolbar"
+                android:layout_marginBottom="@dimen/standard_margin"
+                android:layout_marginTop="@dimen/standard_margin"
+                android:layout_marginStart="52dp"
+                android:layout_marginEnd="52dp"
+                android:textSize="28sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@android:color/white"
+                tools:text="@string/dictionary"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="@dimen/standard_margin"
+                android:src="@drawable/ic_book"/>
+
+        </RelativeLayout>
+
+    </android.support.design.widget.AppBarLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -27,9 +57,10 @@
             android:id="@+id/translation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:padding="@dimen/standard_margin"
             android:text="@string/android_studio_android_com"
-            android:textSize="16sp" />
+            android:textSize="@dimen/standard_text_size"
+            android:textColor="@color/color_primary_dark"/>
 
     </ScrollView>
 

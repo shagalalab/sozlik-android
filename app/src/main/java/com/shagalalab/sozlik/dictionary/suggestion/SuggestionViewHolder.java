@@ -1,6 +1,7 @@
 package com.shagalalab.sozlik.dictionary.suggestion;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
 
@@ -19,8 +20,8 @@ class SuggestionViewHolder extends RecyclerView.ViewHolder {
         word = itemView.findViewById(R.id.item_suggestion_word);
     }
 
-    void populateModel(final SozlikDbModel item, final SuggestionListener suggestionListener) {
-        word.setText(item.getWord());
+    void populateModel(String originalWord, final SozlikDbModel item, final SuggestionListener suggestionListener) {
+        word.setText(Html.fromHtml(item.getWord().replace(originalWord, String.format("<b>%s</b>", originalWord))));
         word.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

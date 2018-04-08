@@ -2,6 +2,7 @@ package com.shagalalab.sozlik.dictionary.autocomplete;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ public class WordAutoCompleteAdapter extends ArrayAdapter<SozlikDbModel> impleme
     private TextView word;
     private SuggestionListener listener;
     private LayoutInflater inflater;
+    private String originalWord = "";
 
     public WordAutoCompleteAdapter(Context context, List<SozlikDbModel> models, SuggestionListener listener) {
         super(context, 0, models);
@@ -51,18 +53,6 @@ public class WordAutoCompleteAdapter extends ArrayAdapter<SozlikDbModel> impleme
         return position;
     }
 
-    private void populateModel(final SozlikDbModel item, final SuggestionListener listener) {
-        word.setText(item.getWord());
-        if (listener != null) {
-            word.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onSuggestionClicked(item.getId());
-                }
-            });
-        }
-    }
-
     @NonNull
     @Override
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
@@ -84,9 +74,22 @@ public class WordAutoCompleteAdapter extends ArrayAdapter<SozlikDbModel> impleme
     }
 
     @Override
-    public void onChangeWordResults(List<SozlikDbModel> list) {
+    public void onChangeWordResults(String originalWord, List<SozlikDbModel> list) {
+        this.originalWord = originalWord;
         wordResults.clear();
         wordResults.addAll(list);
         notifyDataSetChanged();
+    }
+
+    private void populateModel(final SozlikDbModel item, final SuggestionListener listener) {
+        word.setText(Html.fromHtml(item.getWord().replace(originalWord, String.format("<b>%s</b>", originalWord))));
+        if (listener != null) {
+            word.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onSuggestionClicked(item.getId());
+                }
+            });
+        }
     }
 }
