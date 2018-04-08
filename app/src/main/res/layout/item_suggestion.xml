@@ -8,5 +8,6 @@
     android:drawableEnd="@drawable/ic_keyboard_arrow_right_black_24dp"
     android:focusable="true"
     android:padding="@dimen/list_item_horizontal_padding"
-    android:textSize="@dimen/list_item_word_text_size"
+    android:textSize="@dimen/standard_text_size"
+    android:textColor="@color/color_primary_dark"
     tools:text="Adam"/>

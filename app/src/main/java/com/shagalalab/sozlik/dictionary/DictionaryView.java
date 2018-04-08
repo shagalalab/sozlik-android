@@ -12,6 +12,7 @@ public interface DictionaryView {
     void showResults(List<SozlikDbModel> listOfResults);
     void showTranslation(int wordId);
     void showMessage(int res);
+    void setMessageVisible();
     void showKeyboardMessage();
     void hideKeyboardMessage();
     void goToQqKeyboardInstallation();

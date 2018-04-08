@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/favorites_item"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingBottom="8dp"
-    android:paddingTop="8dp">
+    android:layout_height="@dimen/list_item_height">
 
     <TextView
         android:id="@+id/favourite_word"
         android:layout_toStartOf="@+id/favourite_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="16dp"
-        android:textSize="16sp" />
+        android:gravity="center_vertical"
+        android:layout_marginStart="@dimen/standard_margin"
+        android:textColor="@color/color_primary_dark"
+        android:textSize="@dimen/standard_text_size"
+        tools:text="@string/dictionary"/>
 
     <ImageButton
         android:id="@+id/favourite_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="16dp"
+        android:layout_centerVertical="true"
+        android:padding="@dimen/standard_margin"
+        android:layout_marginEnd="@dimen/standard_margin"
         android:background="@drawable/ic_turned_in_black_24dp" />
 
 </RelativeLayout>

@@ -38,9 +38,11 @@ class DictionaryPresenter {
         } else if (word.length() >= WORD_MIN_LENGTH) {
             List<SozlikDbModel> listOfResults = sozlikDao.getSuggestions('%' + word + '%');
             dictionaryView.showMessage(listOfResults.isEmpty() ? R.string.suggestion_not_found : R.string.suggestion_found);
+            dictionaryView.setMessageVisible();
             dictionaryView.showResults(listOfResults);
         } else {
             dictionaryView.showMessage(R.string.suggestion_not_found);
+            dictionaryView.setMessageVisible();
         }
     }
 

@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_favourite"
-        android:icon="@drawable/ic_bookmark_outline"
+        android:icon="@drawable/ic_bookmark_border_white_24dp"
         android:orderInCategory="100"
         android:title="@string/favourites"
         app:showAsAction="always" />
     <item
         android:id="@+id/menu_share"
-        android:icon="@drawable/ic_sharethis_logo"
+        android:icon="@drawable/ic_share_white_24dp"
         android:orderInCategory="101"
         android:title="@string/share"
         app:showAsAction="ifRoom" />

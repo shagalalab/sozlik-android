@@ -14,7 +14,8 @@
         android:gravity="center_vertical"
         android:paddingEnd="@dimen/list_item_horizontal_padding"
         android:paddingStart="@dimen/list_item_horizontal_padding"
-        android:textSize="@dimen/list_item_word_text_size"
+        android:textColor="@color/color_primary_dark"
+        android:textSize="@dimen/standard_text_size"
         tools:text="word"/>
 
     <TextView
@@ -24,7 +25,8 @@
         android:gravity="center_vertical"
         android:paddingEnd="@dimen/list_item_horizontal_padding"
         android:paddingStart="@dimen/list_item_horizontal_padding"
-        android:textSize="@dimen/list_item_word_text_size"
+        android:textColor="@color/color_primary_dark"
+        android:textSize="@dimen/standard_text_size"
         tools:text="@tools:sample/date/mmddyy"/>
 
 </LinearLayout>

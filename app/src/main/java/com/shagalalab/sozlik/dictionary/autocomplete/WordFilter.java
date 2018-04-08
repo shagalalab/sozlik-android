@@ -47,8 +47,8 @@ public class WordFilter extends Filter {
 
     @Override
     protected void publishResults(CharSequence constraint, FilterResults results) {
-        if (listener != null) {
-            listener.onChangeWordResults((List) results.values);
+        if (listener != null && constraint != null) {
+            listener.onChangeWordResults(constraint.toString(), (List) results.values);
         }
     }
 }

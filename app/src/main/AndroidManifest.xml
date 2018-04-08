@@ -25,7 +25,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".translation.TranslationActivity"
-            android:label="@string/translation" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".about.AboutActivity"
             android:label="@string/about" />

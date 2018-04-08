@@ -9,5 +9,5 @@ import java.util.List;
  */
 
 public interface OnChangeWordListener {
-    void onChangeWordResults(List<SozlikDbModel> list);
+    void onChangeWordResults(String originalWord, List<SozlikDbModel> list);
 }
