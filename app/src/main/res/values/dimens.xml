@@ -2,12 +2,9 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="standard_margin">16dp</dimen>
     <dimen name="standard_margin_half">8dp</dimen>
-    <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">126dp</dimen>
     <dimen name="list_item_height">52dp</dimen>
     <dimen name="list_item_horizontal_padding">16dp</dimen>
-    <dimen name="list_item_vertical_padding">12dp</dimen>
-    <dimen name="list_item_image_side">24dp</dimen>
     <dimen name="standard_text_size">16sp</dimen>
     <dimen name="keyboard_info_text_size">14sp</dimen>
     <dimen name="translation_toolbar_height">186dp</dimen>

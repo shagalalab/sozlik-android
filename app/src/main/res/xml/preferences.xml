@@ -2,7 +2,7 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <ListPreference
-        android:defaultValue="@string/pref_alphabet_latin"
+        android:defaultValue="@string/pref_alphabet_default"
         android:entries="@array/pref_alphabet_options"
         android:entryValues="@array/pref_alphabet_values"
         android:key="@string/pref_alphabet_key"
