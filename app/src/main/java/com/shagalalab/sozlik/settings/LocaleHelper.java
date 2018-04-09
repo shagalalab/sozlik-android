@@ -14,11 +14,18 @@ import java.util.Locale;
  * Created by QAREKEN on 4/8/2018.
  */
 
-public class LocaleHelper {
+public final class LocaleHelper {
     private static final String SELECTED_LANGUAGE = "Locale.Helper.Selected.Language";
-
+    private static LocaleHelper instance;
     private LocaleHelper() {
         //not called
+    }
+
+    public static LocaleHelper getInstance() {
+        if (instance == null) {
+            instance = new LocaleHelper();
+        }
+        return instance;
     }
 
     public static Context onAttach(Context context) {
