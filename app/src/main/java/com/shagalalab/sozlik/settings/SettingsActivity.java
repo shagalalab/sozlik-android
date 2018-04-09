@@ -2,10 +2,11 @@ package com.shagalalab.sozlik.settings;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-public class SettingsActivity extends AppCompatActivity {
+import com.shagalalab.sozlik.BaseActivity;
+
+public class SettingsActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +21,6 @@ public class SettingsActivity extends AppCompatActivity {
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new SettingsFragment())
                 .commit();
-
     }
 
     @Override
@@ -34,5 +34,6 @@ public class SettingsActivity extends AppCompatActivity {
                 return false;
         }
     }
+
 
 }
