@@ -1,8 +1,23 @@
 <resources>
-    <string name="app_name">Sozlik</string>
-
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="app_name" translatable="false">Sózlik</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="android_studio" translatable="false">Android Studio</string>
+    <string name="android_studio_android_com" translatable="false">android.studio@android.com</string>
+    <string name="pref_alphabet_latin" translatable="false">qq</string>
+    <string name="pref_alphabet_cyrillic" translatable="false">be</string>
+    <string name="pref_alphabet_key" translatable="false">alphabet_key</string>
+    <string name="pref_alphabet_default" translatable="false">@string/pref_alphabet_latin</string>
+    <string name="qqkeyboard_address" translatable="false">https://play.google.com/store/apps/details?id=com.shagalalab.qqkeyboard</string>
+    <string name="qqkeyboard_package" translatable="false">com.shagalalab.qqkeyboard</string>
+    <string-array name="pref_alphabet_options" translatable="false">
+        <item>Latın</item>
+        <item>Кирилл</item>
+    </string-array>
+    <string-array name="pref_alphabet_values" translatable="false">
+        <item>@string/pref_alphabet_latin</item>
+        <item>@string/pref_alphabet_cyrillic</item>
+    </string-array>
 
     <string name="dictionary">Sózlik</string>
     <string name="qaraqalpaq_dictionaries">Qaraqalpaqsha\nsózlikler</string>
@@ -16,22 +31,9 @@
     <string name="share_translation">Sózdi bólisiw</string>
     <string name="share">Bólisiw</string>
     <string name="about_text">Bul baǵdarlama <b>Shaǵala Lab</b> toparı hám onıń aǵzaları <a href="mailto:manasbazarbayev@gmail.com">Manas Bazarbaev</a> hám <a href="mailto:kalabaevshj@gmail.com">Sharapat Qalabaev</a> tárepinen islep shıǵıldı. Baǵdarlama boyınsha pikir yaki usınıs bildiriw ushın <a href="mailto:info@shagalalab.com">info@shagalalab.com</a> elektron pochtasına xat jazıń yamasa <a href="http://www.shagalalab.com" rel="nofollow">www.shagalalab.com</a> saytında "Baylanıs" betinde jaylasqan formanı toltırıń.\n\n<b>Shaǵala Lab</b> - Qaraqalpaq tilindegi baǵdarlamalar laboratoriyası\n\nBizlerdiń jumıslarımız benen <a href="https://play.google.com/store/apps/developer?id=Shag%27ala+Lab" rel="nofollow">Google Play</a> yaki <a href="http://www.shagalalab.com/" rel="nofollow">saytımızda</a> tanısıw imkániyatına iyesiz.</string>
-    <string-array name="pref_alphabet_options">
-        <item>Latın</item>
-        <item>Кирилл</item>
-    </string-array>
-    <string-array name="pref_alphabet_values">
-        <item>@string/pref_alphabet_latin</item>
-        <item>@string/pref_alphabet_cyrillic</item>
-    </string-array>
-    <string name="pref_alphabet_latin">latin</string>
-    <string name="pref_alphabet_cyrillic">cyrillic</string>
     <string name="pref_alphabet_label">Álipbeni saylań</string>
-    <string name="pref_alphabet_key" translatable="false">alphabet_key</string>
-    <string name="pref_alphabet_default" translatable="false">@string/pref_alphabet_latin</string>
     <string name="empty_favorites_text">Saylandılar bos</string>
     <string name="empty_histories_text">Siz ele hesh bir sózdiń awdarmasın kórmedińiz</string>
-    <string name="keyboard_not_installed">Sózlerdi tolıq izlew ushın <b>QqKeyboard</b> baǵdarlamasın ornatıwıńızdı másláhát etemiz</string>
-    <string name="qqkeyboard_address">https://play.google.com/store/apps/details?id=com.shagalalab.qqkeyboard</string>
-    <string name="qqkeyboard_package">com.shagalalab.qqkeyboard</string>
+    <string name="keyboard_not_installed">Sózlerdi tolıq izlew ushın QqKeyboard baǵdarlamasın ornatıwıńızdı másláhát etemiz</string>
+
 </resources>

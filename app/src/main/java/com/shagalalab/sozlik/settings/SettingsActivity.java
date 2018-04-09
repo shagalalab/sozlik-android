@@ -1,11 +1,17 @@
 package com.shagalalab.sozlik.settings;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-public class SettingsActivity extends AppCompatActivity {
+import com.shagalalab.sozlik.BaseActivity;
+import com.shagalalab.sozlik.MainActivity;
+import com.shagalalab.sozlik.R;
+
+public class SettingsActivity extends BaseActivity {
+
+    public static final String RECREATE_ACTIVITY = "recreateActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,12 +21,20 @@ public class SettingsActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setHomeButtonEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle(R.string.settings);
         }
 
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new SettingsFragment())
                 .commit();
+    }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra(RECREATE_ACTIVITY, true);
+        startActivity(intent);
     }
 
     @Override
@@ -28,11 +42,13 @@ public class SettingsActivity extends AppCompatActivity {
         int id = item.getItemId();
         switch (id) {
             case android.R.id.home:
+                onBackPressed();
                 finish();
                 return true;
             default:
                 return false;
         }
     }
+
 
 }

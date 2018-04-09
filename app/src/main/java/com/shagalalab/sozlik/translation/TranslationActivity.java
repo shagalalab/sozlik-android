@@ -2,7 +2,6 @@ package com.shagalalab.sozlik.translation;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -10,11 +9,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.shagalalab.sozlik.BaseActivity;
 import com.shagalalab.sozlik.R;
 import com.shagalalab.sozlik.model.SozlikDao;
 import com.shagalalab.sozlik.model.SozlikDatabase;
 
-public class TranslationActivity extends AppCompatActivity implements TranslationView {
+public class TranslationActivity extends BaseActivity implements TranslationView {
     public static final String TRANSLATION_ID = "translationId";
 
     private TranslationPresenter presenter;
@@ -34,6 +34,7 @@ public class TranslationActivity extends AppCompatActivity implements Translatio
             actionBar.setTitle("");
             actionBar.setHomeButtonEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle(R.string.translation);
         }
 
         word = findViewById(R.id.word);

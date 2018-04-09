@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +20,7 @@ import com.shagalalab.sozlik.favorites.FavoritesFragment;
 import com.shagalalab.sozlik.history.HistoryFragment;
 import com.shagalalab.sozlik.settings.SettingsActivity;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
@@ -32,6 +31,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.main_toolbar);
+        toolbar.setTitle(R.string.dictionary);
         setSupportActionBar(toolbar);
         drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -44,6 +44,14 @@ public class MainActivity extends AppCompatActivity
         navigationView.setCheckedItem(R.id.nav_dictionary);
 
         changeFragment(new DictionaryFragment(), DictionaryFragment.TAG);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (intent.getBooleanExtra(SettingsActivity.RECREATE_ACTIVITY, false)) {
+            this.recreate();
+        }
     }
 
     @Override
