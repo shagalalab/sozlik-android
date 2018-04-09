@@ -2,14 +2,15 @@ package com.shagalalab.sozlik;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,14 +20,15 @@ import com.shagalalab.sozlik.about.AboutActivity;
 import com.shagalalab.sozlik.dictionary.DictionaryFragment;
 import com.shagalalab.sozlik.favorites.FavoritesFragment;
 import com.shagalalab.sozlik.history.HistoryFragment;
+import com.shagalalab.sozlik.settings.LocaleHelper;
 import com.shagalalab.sozlik.settings.SettingsActivity;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
     private InputMethodManager inputMethodManager;
-
+    private SharedPreferences preferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +45,13 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.nav_dictionary);
 
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        preferences.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+                LocaleHelper.persist(getApplicationContext(), s);
+            }
+        });
         changeFragment(new DictionaryFragment(), DictionaryFragment.TAG);
     }
 
