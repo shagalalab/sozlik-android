@@ -34,7 +34,6 @@ public class TranslationActivity extends BaseActivity implements TranslationView
             actionBar.setTitle("");
             actionBar.setHomeButtonEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle(R.string.translation);
         }
 
         word = findViewById(R.id.word);

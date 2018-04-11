@@ -2,8 +2,6 @@
     <string name="app_name" translatable="false">Sózlik</string>
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
-    <string name="android_studio" translatable="false">Android Studio</string>
-    <string name="android_studio_android_com" translatable="false">android.studio@android.com</string>
     <string name="pref_alphabet_latin" translatable="false">qq</string>
     <string name="pref_alphabet_cyrillic" translatable="false">be</string>
     <string name="pref_alphabet_key" translatable="false">alphabet_key</string>
@@ -34,6 +32,6 @@
     <string name="pref_alphabet_label">Álipbeni saylań</string>
     <string name="empty_favorites_text">Saylandılar bos</string>
     <string name="empty_histories_text">Siz ele hesh bir sózdiń awdarmasın kórmedińiz</string>
-    <string name="keyboard_not_installed">Sózlerdi tolıq izlew ushın QqKeyboard baǵdarlamasın ornatıwıńızdı másláhát etemiz</string>
+    <string name="keyboard_not_installed">Sózlerdi tolıq izlew ushın <b>QqKeyboard</b> baǵdarlamasın ornatıwıńızdı másláhát etemiz</string>
 
 </resources>

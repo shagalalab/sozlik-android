@@ -1,4 +1,4 @@
-package com.shagalalab.sozlik.settings;
+package com.shagalalab.sozlik.helper;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -17,16 +17,15 @@ import java.util.Locale;
  */
 
 public final class LocaleHelper {
+
     private LocaleHelper() {
-        //not called
-        //buni private qilip jazbasam checkstyle dan o'tpey atir
     }
 
     public static Context onAttach(Context context) {
         return setLocale(context, getLanguage(context));
     }
 
-    public static String getLanguage(Context context) {
+    private static String getLanguage(Context context) {
         return getPersistedData(context, context.getString(R.string.pref_alphabet_default));
     }
 

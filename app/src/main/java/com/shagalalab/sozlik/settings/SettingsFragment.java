@@ -6,6 +6,7 @@ import android.preference.PreferenceFragment;
 import android.support.annotation.Nullable;
 
 import com.shagalalab.sozlik.R;
+import com.shagalalab.sozlik.helper.LocaleHelper;
 
 /**
  * Created by QAREKEN on 3/17/2018.
