@@ -21,17 +21,15 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleInstance"/>
         <activity
             android:name=".translation.TranslationActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".about.AboutActivity"
-            android:label="@string/about" />
+            android:name=".about.AboutActivity"/>
         <activity
-            android:name=".settings.SettingsActivity"
-            android:label="@string/settings" />
+            android:name=".settings.SettingsActivity"/>
     </application>
 
 </manifest>
