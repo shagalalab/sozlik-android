@@ -2,6 +2,7 @@
 <resources>
     <string name="dictionary">Сөзлик</string>
     <string name="favourites">Сайландылар</string>
+    <string name="qaraqalpaq_dictionaries">Қарақалпақша\nсөзликлер</string>
     <string name="history">Тарийх</string>
     <string name="settings">Сазлаўлар</string>
     <string name="about">Ҳаққымызда</string>
