@@ -5,6 +5,9 @@ import com.shagalalab.sozlik.helper.GsonHelper;
 import com.shagalalab.sozlik.helper.SharedPrefsHelper;
 import com.shagalalab.sozlik.helper.thread.AppExecutors;
 import com.shagalalab.sozlik.model.SozlikDao;
+import com.shagalalab.sozlik.model.SozlikDbModel;
+
+import java.util.List;
 
 class SplashPresenter {
 
@@ -31,7 +34,9 @@ class SplashPresenter {
                     sozlikDao.insertToDB(gsonHelper.getListFromLocalAssets());
                     prefsManager.setFirstLaunch();
                 }
-                WordHolder.getInstance().setWordList(sozlikDao.getAllWords());
+                List<SozlikDbModel> models = sozlikDao.getAllWords();
+                WordHolder.getInstance().setWordList(models);
+                WordHolder.getInstance().setWordMap(models);
                 appExecutors.getMainThread().execute(new Runnable() {
                     @Override
                     public void run() {

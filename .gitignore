@@ -9,3 +9,4 @@
 BuildConfig.java
 Manifest.java
 R.java
+*.log
