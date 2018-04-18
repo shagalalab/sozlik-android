@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.shagalalab.sozlik.MainActivity;
+import com.shagalalab.sozlik.dictionary.autocomplete.WordHolder;
 import com.shagalalab.sozlik.helper.GsonHelper;
 import com.shagalalab.sozlik.helper.SharedPrefsHelper;
 import com.shagalalab.sozlik.helper.thread.AppExecutors;
@@ -20,7 +21,8 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
         SharedPrefsHelper prefsHelper = new SharedPrefsHelper(this);
         SozlikDatabase database = SozlikDatabase.getSozlikDatabase(this);
 
-        SplashPresenter presenter = new SplashPresenter(this, gsonHelper, prefsHelper, database.sozlikDao(), new AppExecutors());
+        SplashPresenter presenter = new SplashPresenter(this, gsonHelper, prefsHelper,
+                database.sozlikDao(), new AppExecutors(), WordHolder.getInstance());
         presenter.startSplash();
     }
 
