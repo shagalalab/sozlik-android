@@ -42,9 +42,9 @@ public class TranslationActivity extends BaseActivity implements TranslationView
         SozlikDao sozlikDao = SozlikDatabase.getSozlikDatabase(this).sozlikDao();
         int translationId = getIntent().getIntExtra(TRANSLATION_ID, 1);
 
-        presenter = new TranslationPresenter(this, sozlikDao);
-        presenter.getTranslationById(translationId);
-        presenter.setLastAccessed(translationId, System.currentTimeMillis());
+        presenter = new TranslationPresenter(this, sozlikDao, sozlikDao.getTranslationById(translationId));
+        presenter.getTranslation();
+        presenter.setLastAccessed(System.currentTimeMillis());
     }
 
     @Override
