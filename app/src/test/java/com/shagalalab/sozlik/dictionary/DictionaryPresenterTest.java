@@ -1,6 +1,7 @@
 package com.shagalalab.sozlik.dictionary;
 
 import com.shagalalab.sozlik.R;
+import com.shagalalab.sozlik.dictionary.spellchecker.SpellChecker;
 import com.shagalalab.sozlik.helper.PackageHelper;
 import com.shagalalab.sozlik.model.SozlikDao;
 import com.shagalalab.sozlik.model.SozlikDbModel;
@@ -27,6 +28,7 @@ public class DictionaryPresenterTest {
     private DictionaryView dictionaryViewMock;
     private SozlikDao sozlikDaoMock;
     private PackageHelper packageHelperMock;
+    private SpellChecker spellCheckerMock;
     private DictionaryPresenter dictionaryPresenter;
 
     @Before
@@ -34,7 +36,8 @@ public class DictionaryPresenterTest {
         dictionaryViewMock = mock(DictionaryView.class);
         sozlikDaoMock = mock(SozlikDao.class);
         packageHelperMock = mock(PackageHelper.class);
-        dictionaryPresenter = new DictionaryPresenter(dictionaryViewMock, sozlikDaoMock, packageHelperMock);
+        spellCheckerMock = mock(SpellChecker.class);
+        dictionaryPresenter = new DictionaryPresenter(dictionaryViewMock, sozlikDaoMock, packageHelperMock, spellCheckerMock);
     }
 
     @Test
@@ -59,7 +62,7 @@ public class DictionaryPresenterTest {
         List<SozlikDbModel> list = new ArrayList<>();
         list.add(new SozlikDbModel());
         when(sozlikDaoMock.getTranslation(SOME_WORD)).thenReturn(null);
-        when(sozlikDaoMock.getSuggestions('%' + SOME_WORD + '%')).thenReturn(list);
+        when(spellCheckerMock.check(SOME_WORD)).thenReturn(list);
         dictionaryPresenter.search(SOME_WORD);
         verify(dictionaryViewMock, times(1)).showMessage(R.string.suggestion_found);
         verify(dictionaryViewMock, times(1)).setMessageVisible();
