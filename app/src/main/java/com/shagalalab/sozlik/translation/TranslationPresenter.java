@@ -13,13 +13,13 @@ class TranslationPresenter {
     private SozlikDao sozlikDao;
     private SozlikDbModel model;
 
-    TranslationPresenter(TranslationView translationView, SozlikDao sozlikDao) {
+    TranslationPresenter(TranslationView translationView, SozlikDao sozlikDao, SozlikDbModel model) {
         this.translationView = translationView;
         this.sozlikDao = sozlikDao;
+        this.model = model;
     }
 
-    void getTranslationById(int id) {
-        model = sozlikDao.getTranslationById(id);
+    void getTranslation() {
         if (model != null) {
             translationView.showWord(model.getWord());
             translationView.showTranslation(model.getTranslation());
@@ -47,11 +47,10 @@ class TranslationPresenter {
         }
     }
 
-    void setLastAccessed(int id, long time) {
-        SozlikDbModel dbModel = sozlikDao.getTranslationById(id);
-        if (dbModel != null) {
-            dbModel.setLastAccessed(time);
-            sozlikDao.update(dbModel);
+    void setLastAccessed(long time) {
+        if (model != null) {
+            model.setLastAccessed(time);
+            sozlikDao.update(model);
         }
     }
 }
