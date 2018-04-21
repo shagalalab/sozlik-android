@@ -4,7 +4,7 @@
     <item android:drawable="@color/color_primary" />
 
     <item
-        android:drawable="@mipmap/ic_launcher"
+        android:drawable="@drawable/ic_splash_book"
         android:gravity="center" />
 
 </layer-list>
