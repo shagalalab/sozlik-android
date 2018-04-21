@@ -29,17 +29,29 @@ class DictionaryPresenter {
     }
 
     void search(String word) {
+        boolean isLatinAlphabet;
+
         if (word.isEmpty()) {
             return;
         }
 
         word = word.toLowerCase(Locale.ROOT);
+
+        if (SpellChecker.ALPHABET_LATIN.indexOf(word.charAt(0)) >= 0) {
+            isLatinAlphabet = true;
+        } else if (SpellChecker.ALPHABET_CYRILLIC.indexOf(word.charAt(0)) >= 0) {
+            isLatinAlphabet = false;
+        } else {
+            dictionaryView.showMessage(R.string.invalid_input);
+            dictionaryView.setMessageVisible();
+            return;
+        }
         SozlikDbModel result = sozlikDao.getTranslation(word);
 
         if (result != null) {
             dictionaryView.showTranslation(result.getId());
         } else if (word.length() >= WORD_MIN_LENGTH) {
-            List<SozlikDbModel> listOfResults = spellChecker.check(word);
+            List<SozlikDbModel> listOfResults = spellChecker.check(word, isLatinAlphabet);
             dictionaryView.showMessage(listOfResults.isEmpty() ? R.string.suggestion_not_found : R.string.suggestion_found);
             dictionaryView.setMessageVisible();
             dictionaryView.showResults(listOfResults);
