@@ -62,7 +62,7 @@ public class DictionaryPresenterTest {
         List<SozlikDbModel> list = new ArrayList<>();
         list.add(new SozlikDbModel());
         when(sozlikDaoMock.getTranslation(SOME_WORD)).thenReturn(null);
-        when(spellCheckerMock.check(SOME_WORD)).thenReturn(list);
+        when(spellCheckerMock.check(SOME_WORD, true)).thenReturn(list);
         dictionaryPresenter.search(SOME_WORD);
         verify(dictionaryViewMock, times(1)).showMessage(R.string.suggestion_found);
         verify(dictionaryViewMock, times(1)).setMessageVisible();
