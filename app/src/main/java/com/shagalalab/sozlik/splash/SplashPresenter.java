@@ -16,27 +16,23 @@ class SplashPresenter {
     private final SharedPrefsHelper prefsManager;
     private final SozlikDao sozlikDao;
     private AppExecutors appExecutors;
+    private WordHolder wordHolder;
 
     SplashPresenter(SplashView view, GsonHelper gsonHelper, SharedPrefsHelper prefsManager, SozlikDao sozlikDao,
-                    AppExecutors appExecutors) {
+                    AppExecutors appExecutors, WordHolder wordHolder) {
         this.view = view;
         this.gsonHelper = gsonHelper;
         this.prefsManager = prefsManager;
         this.sozlikDao = sozlikDao;
         this.appExecutors = appExecutors;
+        this.wordHolder = wordHolder;
     }
 
     void startSplash() {
         appExecutors.getDiskIo().execute(new Runnable() {
             @Override
             public void run() {
-                if (prefsManager.isFirstLaunch()) {
-                    sozlikDao.insertToDB(gsonHelper.getListFromLocalAssets());
-                    prefsManager.setFirstLaunch();
-                }
-                List<SozlikDbModel> models = sozlikDao.getAllWords();
-                WordHolder.getInstance().setWordList(models);
-                WordHolder.getInstance().setWordMap(models);
+                initSozlikData();
                 appExecutors.getMainThread().execute(new Runnable() {
                     @Override
                     public void run() {
@@ -45,5 +41,15 @@ class SplashPresenter {
                 });
             }
         });
+    }
+
+        void initSozlikData() {
+        if (prefsManager.isFirstLaunch()) {
+            sozlikDao.insertToDB(gsonHelper.getListFromLocalAssets());
+            prefsManager.setFirstLaunch();
+        }
+        List<SozlikDbModel> models = sozlikDao.getAllWords();
+        wordHolder.setWordList(models);
+        wordHolder.setWordMap(models);
     }
 }
