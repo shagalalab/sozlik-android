@@ -11,7 +11,14 @@
     <string name="suggestion_not_found">\"%1$s\" сөзи бойынша нәтийжелер табылмады.</string>
     <string name="share_translation">Сөзди бөлисиў</string>
     <string name="share">Бөлисиў</string>
-    <string name="about_text">Бул бағдарлама <b>Shaǵala Lab</b> топары ҳәм оның ағзалары <a href="mailto:manasbazarbayev@gmail.com">Манас Базарбаев</a> ҳәм <a href="mailto:kalabaevshj@gmail.com">Шарапат Қалабаев</a> тәрепинен ислеп шығылды. Бағдарлама бойынша пикир яки усыныс билдириу ушын <a href="mailto:info@shagalalab.com">info@shagalalab.com</a> электрон почтасына хат жазың ямаса <a href="http://www.shagalalab.com" rel="nofollow">www.shagalalab.com</a> сайтында "байланыс" бетинде жайласқан форманы толтырың.\n\n<b>Shaǵala Lab</b> - Қарақалпақ тилиндеги бағдарламалар лабораториясы\n\nБизлердиң жумысларымыз бенен <a href="https://play.google.com/store/apps/developer?id=Shag%27ala+Lab" rel="nofollow">Google Play</a> яки <a href="http://www.shagalalab.com/" rel="nofollow">сайтымызда</a> танысыу имкәниятына ийесиз.</string>
+    <string name="about_text">Бул бағдарлама <b>Shaǵala Lab</b> топары ҳәм оның ағзалары <a href="mailto:manasbazarbayev@gmail.com">Манас
+        Базарбаев</a> ҳәм <a href="mailto:kalabaevshj@gmail.com">Шарапат Қалабаев</a> тәрепинен ислеп шығылды. Бағдарлама бойынша пикир
+        яки усыныс билдириу ушын <a href="mailto:info@shagalalab.com">info@shagalalab.com</a> электрон почтасына хат жазың ямаса
+        <a href="http://www.shagalalab.com" rel="nofollow">www.shagalalab.com</a> сайтында "байланыс" бетинде жайласқан форманы
+        толтырың.\n\n<b>Shaǵala Lab</b> - Қарақалпақ тилиндеги бағдарламалар лабораториясы\n\nБизлердиң жумысларымыз бенен
+        <a href="https://play.google.com/store/apps/developer?id=Shag%27ala+Lab" rel="nofollow">Google Play</a> яки
+        <a href="http://www.shagalalab.com/" rel="nofollow">сайтымызда</a> танысыў имкәниятына ийесиз.\n\nБағдарлама 1970-жылы
+        В.Д.Аракин редакторлығында "Қарақалпақстан" баспасынан шыққан "қарақалпақша-англичанша сөзлик" китабына тийкарланған</string>
     <string name="pref_alphabet_label">Әлипбени сайлаң</string>
     <string name="empty_favorites_text">Сайландылар бос</string>
     <string name="empty_histories_text">Сиз еле ҳеш бир сөздиң аўдармасын көрмедиңиз</string>
