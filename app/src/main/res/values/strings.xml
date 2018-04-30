@@ -28,7 +28,14 @@
     <string name="suggestion_not_found">\"%1$s\" sózi boyınsha nátiyjeler tabılmadı.</string>
     <string name="share_translation">Sózdi bólisiw</string>
     <string name="share">Bólisiw</string>
-    <string name="about_text">Bul baǵdarlama <b>Shaǵala Lab</b> toparı hám onıń aǵzaları <a href="mailto:manasbazarbayev@gmail.com">Manas Bazarbaev</a> hám <a href="mailto:kalabaevshj@gmail.com">Sharapat Qalabaev</a> tárepinen islep shıǵıldı. Baǵdarlama boyınsha pikir yaki usınıs bildiriw ushın <a href="mailto:info@shagalalab.com">info@shagalalab.com</a> elektron pochtasına xat jazıń yamasa <a href="http://www.shagalalab.com" rel="nofollow">www.shagalalab.com</a> saytında "Baylanıs" betinde jaylasqan formanı toltırıń.\n\n<b>Shaǵala Lab</b> - Qaraqalpaq tilindegi baǵdarlamalar laboratoriyası\n\nBizlerdiń jumıslarımız benen <a href="https://play.google.com/store/apps/developer?id=Shag%27ala+Lab" rel="nofollow">Google Play</a> yaki <a href="http://www.shagalalab.com/" rel="nofollow">saytımızda</a> tanısıw imkániyatına iyesiz.</string>
+    <string name="about_text">Bul baǵdarlama <b>Shaǵala Lab</b> toparı hám onıń aǵzaları <a href="mailto:manasbazarbayev@gmail.com">Manas
+        Bazarbaev</a> hám <a href="mailto:kalabaevshj@gmail.com">Sharapat Qalabaev</a> tárepinen islep shıǵıldı. Baǵdarlama boyınsha
+        pikir yaki usınıs bildiriw ushın <a href="mailto:info@shagalalab.com">info@shagalalab.com</a> elektron pochtasına xat jazıń
+        yamasa <a href="http://www.shagalalab.com" rel="nofollow">www.shagalalab.com</a> saytında "Baylanıs" betinde jaylasqan formanı
+        toltırıń.\n\n<b>Shaǵala Lab</b> - Qaraqalpaq tilindegi baǵdarlamalar laboratoriyası\n\nBizlerdiń jumıslarımız benen
+        <a href="https://play.google.com/store/apps/developer?id=Shag%27ala+Lab" rel="nofollow">Google Play</a> yaki
+        <a href="http://www.shagalalab.com/" rel="nofollow">saytımızda</a> tanısıw imkániyatına iyesiz.\n\nBaǵdarlama 1970-jılı
+        V.D.Arakin redaktorlıǵında \"Qaraqalpaqstan\" baspasınan shıqqan \"qaraqalpaqsha-inglisshe sózlik\" kitabına tiykarlanǵan.</string>
     <string name="pref_alphabet_label">Álipbeni saylań</string>
     <string name="empty_favorites_text">Saylandılar bos</string>
     <string name="empty_histories_text">Siz ele hesh bir sózdiń awdarmasın kórmedińiz</string>
