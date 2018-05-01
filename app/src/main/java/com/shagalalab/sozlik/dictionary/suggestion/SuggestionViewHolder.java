@@ -26,7 +26,7 @@ class SuggestionViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View view) {
                 if (suggestionListener != null) {
-                    suggestionListener.onSuggestionClicked(item.getId());
+                    suggestionListener.onSuggestionClicked(item);
                 }
             }
         });

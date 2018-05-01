@@ -20,6 +20,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
 import com.shagalalab.sozlik.R;
+import com.shagalalab.sozlik.dictionary.autocomplete.AutoCompleteListener;
 import com.shagalalab.sozlik.dictionary.autocomplete.WordAutoCompleteAdapter;
 import com.shagalalab.sozlik.dictionary.autocomplete.WordHolder;
 import com.shagalalab.sozlik.dictionary.spellchecker.SpellChecker;
@@ -37,7 +38,8 @@ import java.util.List;
  * Created by QAREKEN on 3/6/2018.
  */
 
-public class DictionaryFragment extends Fragment implements DictionaryView, SuggestionListener, OnFocusChangeListener {
+public class DictionaryFragment extends Fragment implements DictionaryView, SuggestionListener, AutoCompleteListener,
+    OnFocusChangeListener {
     public static final String TAG = DictionaryFragment.class.getName();
     private static final int THRESHOLD_NUMBER = 3;
 
@@ -55,8 +57,7 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
         super.onCreate(savedInstanceState);
         SozlikDao sozlikDao = SozlikDatabase.getSozlikDatabase(getActivity()).sozlikDao();
         SpellChecker spellChecker = new SpellChecker(WordHolder.getInstance().getWordMap(), sozlikDao);
-        PackageHelper packageHelper = new PackageHelper(getContext());
-        dictionaryPresenter = new DictionaryPresenter(this, sozlikDao, packageHelper, spellChecker);
+        dictionaryPresenter = new DictionaryPresenter(this, sozlikDao, new PackageHelper(getContext()), spellChecker);
         suggestionResultsAdapter = new SuggestionResultsAdapter(this);
         wordAutoCompleteAdapter = new WordAutoCompleteAdapter(getContext(), WordHolder.getInstance().getWordList(), this);
     }
@@ -143,8 +144,13 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
     }
 
     @Override
-    public void onSuggestionClicked(int wordId) {
-        showTranslation(wordId);
+    public void onSuggestionClicked(SozlikDbModel word) {
+        showTranslation(word.getId());
+    }
+
+    @Override
+    public void onAutoCompleteClicked(SozlikDbModel word) {
+        showTranslation(word.getId());
     }
 
     @Override

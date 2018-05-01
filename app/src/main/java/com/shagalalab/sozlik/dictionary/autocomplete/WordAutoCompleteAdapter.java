@@ -12,7 +12,6 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.shagalalab.sozlik.R;
-import com.shagalalab.sozlik.dictionary.suggestion.SuggestionListener;
 import com.shagalalab.sozlik.model.SozlikDbModel;
 
 import java.util.ArrayList;
@@ -27,11 +26,11 @@ public class WordAutoCompleteAdapter extends ArrayAdapter<SozlikDbModel> impleme
     private final List<SozlikDbModel> models;
     private List<SozlikDbModel> wordResults = new ArrayList<>();
     private TextView word;
-    private SuggestionListener listener;
+    private AutoCompleteListener listener;
     private LayoutInflater inflater;
     private String originalWord = "";
 
-    public WordAutoCompleteAdapter(Context context, List<SozlikDbModel> models, SuggestionListener listener) {
+    public WordAutoCompleteAdapter(Context context, List<SozlikDbModel> models, AutoCompleteListener listener) {
         super(context, 0, models);
         this.models = models;
         this.listener = listener;
@@ -81,13 +80,13 @@ public class WordAutoCompleteAdapter extends ArrayAdapter<SozlikDbModel> impleme
         notifyDataSetChanged();
     }
 
-    private void populateModel(final SozlikDbModel item, final SuggestionListener listener) {
+    private void populateModel(final SozlikDbModel item, final AutoCompleteListener listener) {
         word.setText(Html.fromHtml(item.getWord().replace(originalWord, String.format("<b>%s</b>", originalWord))));
         if (listener != null) {
             word.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onSuggestionClicked(item.getId());
+                    listener.onAutoCompleteClicked(item);
                 }
             });
         }

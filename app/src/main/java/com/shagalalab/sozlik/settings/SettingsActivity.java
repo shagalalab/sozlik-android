@@ -10,8 +10,7 @@ import com.shagalalab.sozlik.MainActivity;
 import com.shagalalab.sozlik.R;
 
 public class SettingsActivity extends BaseActivity {
-
-    public static final String RECREATE_ACTIVITY = "recreateActivity";
+    public static final String RECREATE_ACTIVITY = "recreate_activity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
