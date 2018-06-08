@@ -75,9 +75,11 @@ public class WordAutoCompleteAdapter extends ArrayAdapter<SozlikDbModel> impleme
     @Override
     public void onChangeWordResults(String originalWord, List<SozlikDbModel> list) {
         this.originalWord = originalWord;
-        wordResults.clear();
-        wordResults.addAll(list);
-        notifyDataSetChanged();
+        if (list != null && !list.isEmpty()) {
+            wordResults.clear();
+            wordResults.addAll(list);
+            notifyDataSetChanged();
+        }
     }
 
     private void populateModel(final SozlikDbModel item, final AutoCompleteListener listener) {
