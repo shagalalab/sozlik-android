@@ -60,6 +60,7 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
         dictionaryPresenter = new DictionaryPresenter(this, sozlikDao, new PackageHelper(getContext()), spellChecker);
         suggestionResultsAdapter = new SuggestionResultsAdapter(this);
         wordAutoCompleteAdapter = new WordAutoCompleteAdapter(getContext(), WordHolder.getInstance().getWordList(), this);
+        setRetainInstance(true);
     }
 
     @Override
