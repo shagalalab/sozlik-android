@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    tools:context="com.shagalalab.sozlik.about.AboutActivity">
+    tools:context=".ui.about.AboutActivity">
     <TextView
         android:id="@+id/text_about"
         android:layout_width="match_parent"
