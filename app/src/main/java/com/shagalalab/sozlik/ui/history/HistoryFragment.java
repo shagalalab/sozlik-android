@@ -22,16 +22,19 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by QAREKEN on 3/12/2018.
  */
 
 public class HistoryFragment extends Fragment implements HistoryListener {
     public static final String TAG = HistoryFragment.class.getName();
-
     private HistoryAdapter historyAdapter;
-    private RecyclerView historyList;
-    private TextView emptyHistory;
+
+    @BindView(R.id.history_list) RecyclerView historyList;
+    @BindView(R.id.empty_history) TextView emptyHistory;
 
     @Inject SozlikDao sozlikDao;
 
@@ -62,12 +65,11 @@ public class HistoryFragment extends Fragment implements HistoryListener {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_history, container, false);
-        historyList = v.findViewById(R.id.history_list);
+        ButterKnife.bind(this, v);
+
         historyList.setAdapter(historyAdapter);
         historyList.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         historyList.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
-
-        emptyHistory = v.findViewById(R.id.empty_history);
         return v;
     }
 

@@ -15,12 +15,15 @@ import com.shagalalab.sozlik.ui.BaseActivity;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class TranslationActivity extends BaseActivity implements TranslationView {
     public static final String TRANSLATION_ID = "translationId";
-
-    private TextView word;
-    private TextView translation;
     private MenuItem menuItem;
+
+    @BindView(R.id.word) TextView word;
+    @BindView(R.id.translation) TextView translation;
 
     @Inject
     TranslationPresenter presenter;
@@ -29,6 +32,7 @@ public class TranslationActivity extends BaseActivity implements TranslationView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_translation);
+        ButterKnife.bind(this);
 
         ((SozlikApp) getApplication()).getComponent().inject(this);
 
@@ -40,9 +44,6 @@ public class TranslationActivity extends BaseActivity implements TranslationView
             actionBar.setHomeButtonEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
-        word = findViewById(R.id.word);
-        translation = findViewById(R.id.translation);
 
         int translationId = getIntent().getIntExtra(TRANSLATION_ID, 1);
 

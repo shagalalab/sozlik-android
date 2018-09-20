@@ -8,7 +8,7 @@
     android:focusableInTouchMode="true"
     android:orientation="vertical">
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/search_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,12 +27,18 @@
             android:imeOptions="actionSearch"
             android:inputType="text"
             android:maxLines="1"
-            android:paddingEnd="@dimen/standard_margin"
+            android:paddingEnd="50dp"
             android:paddingStart="@dimen/standard_margin"
             android:textColor="@android:color/white"
-            android:textColorHint="@android:color/white"
+            android:textColorHint="@android:color/darker_gray"
             android:textSize="@dimen/standard_text_size"/>
-    </LinearLayout>
+
+        <Spinner
+            android:id="@+id/search_dictionary_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"/>
+    </FrameLayout>
 
     <TextView
         android:id="@+id/install_keyboard"

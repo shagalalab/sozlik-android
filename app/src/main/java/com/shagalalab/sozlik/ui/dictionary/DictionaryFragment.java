@@ -33,6 +33,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 /**
  * Created by QAREKEN on 3/6/2018.
  */
@@ -41,16 +45,22 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
     OnFocusChangeListener {
     public static final String TAG = DictionaryFragment.class.getName();
     private static final int THRESHOLD_NUMBER = 3;
-
-    private AutoCompleteTextView searchText;
-    private TextView message;
-    private TextView keyboardText;
-    private RecyclerView suggestionList;
     private SuggestionResultsAdapter suggestionResultsAdapter;
     private WordAutoCompleteAdapter wordAutoCompleteAdapter;
     private InputMethodManager inputMethodManager;
 
     @Inject DictionaryPresenter dictionaryPresenter;
+
+    @BindView(R.id.search_text_edit) AutoCompleteTextView searchText;
+    @BindView(R.id.text_view_result) TextView message;
+    @BindView(R.id.install_keyboard) TextView keyboardText;
+    @BindView(R.id.suggestion_list) RecyclerView suggestionList;
+
+    @OnClick(R.id.install_keyboard)
+    public void installKeyboard() {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.qqkeyboard_address)));
+        startActivity(intent);
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,23 +77,13 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_dictionary, container, false);
+        ButterKnife.bind(this, v);
 
-        searchText = v.findViewById(R.id.search_text_edit);
         searchText.setOnKeyListener(onKeyListener);
         searchText.setThreshold(THRESHOLD_NUMBER);
         searchText.setAdapter(wordAutoCompleteAdapter);
         searchText.setOnFocusChangeListener(this);
 
-        message = v.findViewById(R.id.text_view_result);
-        keyboardText = v.findViewById(R.id.install_keyboard);
-        keyboardText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToQqKeyboardInstallation();
-            }
-        });
-
-        suggestionList = v.findViewById(R.id.suggestion_list);
         suggestionList.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         suggestionList.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         suggestionList.setAdapter(suggestionResultsAdapter);
@@ -137,12 +137,6 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
     @Override
     public void hideKeyboardMessage() {
         keyboardText.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void goToQqKeyboardInstallation() {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.qqkeyboard_address)));
-        startActivity(intent);
     }
 
     @Override

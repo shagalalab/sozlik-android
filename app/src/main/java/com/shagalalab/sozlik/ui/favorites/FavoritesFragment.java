@@ -22,15 +22,18 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class FavoritesFragment extends Fragment implements FavoritesView, FavoritesViewHolder.FavoriteAdapterCallback {
     public static final String TAG = FavoritesFragment.class.getName();
-
     private FavoritesAdapter adapter;
-    private RecyclerView recyclerView;
-    private TextView emptyText;
+
+    @BindView(R.id.recycler_favorites) RecyclerView recyclerView;
+    @BindView(R.id.empty_favorites) TextView emptyText;
 
     @Inject FavoritesPresenter presenter;
     @Inject SozlikDao sozlikDao;
@@ -47,11 +50,10 @@ public class FavoritesFragment extends Fragment implements FavoritesView, Favori
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorites, container, false);
+        ButterKnife.bind(this, view);
 
         adapter = new FavoritesAdapter(sozlikDao.getAllFavorites(), this);
 
-        emptyText = view.findViewById(R.id.empty_favorites);
-        recyclerView = view.findViewById(R.id.recycler_favorites);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(adapter);
