@@ -18,19 +18,28 @@ import dagger.Provides;
 
 @Module
 public class HelperModule {
-    private static final String JSON_FILE_NAME = "json_file_name";
+    private static final String JSON_FILE_NAME_QQ_EN = "json_file_name_qq_en";
+    private static final String JSON_FILE_NAME_RU_QQ = "json_file_name_ru_qq";
 
     @Provides
-    @Named(JSON_FILE_NAME)
+    @Named(JSON_FILE_NAME_QQ_EN)
     @Singleton
-    public String providesJsonFileName() {
+    public String providesJsonFileNameQqEn() {
         return "sozlik.json";
     }
 
     @Provides
+    @Named(JSON_FILE_NAME_RU_QQ)
     @Singleton
-    GsonHelper providesGsonHelper(Context context, @Named(JSON_FILE_NAME) String fileName) {
-        return new GsonHelper(context, fileName);
+    public String providesJsonFileNameRuQq() {
+        return "ruqq.json";
+    }
+
+    @Provides
+    @Singleton
+    GsonHelper providesGsonHelper(Context context, @Named(JSON_FILE_NAME_QQ_EN) String fileNameQqEn,
+                                  @Named(JSON_FILE_NAME_RU_QQ) String fileNameRuQq) {
+        return new GsonHelper(context, fileNameQqEn, fileNameRuQq);
     }
 
     @Provides

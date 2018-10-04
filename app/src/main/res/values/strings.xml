@@ -41,4 +41,7 @@
     <string name="empty_histories_text">Siz ele hesh bir sózdiń awdarmasın kórmedińiz</string>
     <string name="keyboard_not_installed">Sózlerdi tolıq izlew ushın <b>QqKeyboard</b> baǵdarlamasın ornatıwıńızdı másláhát etemiz</string>
     <string name="invalid_input">Sózdi kiritiwde qátelik júz berdi, tek háriplerden paydalanıp qayta kiritip kóriń</string>
+    <string name="dictionary_from">from</string>
+    <string name="dictionary_to">to</string>
+    <string name="arrow">arrow</string>
 </resources>

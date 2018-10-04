@@ -10,6 +10,7 @@
   <issue id="RtlSymmetry" severity="ignore" />
   <issue id="RtlHardcoded" severity="ignore" />
   <issue id="RtlEnabled" severity="ignore" />
+  <issue id="ObsoleteLintCustomCheck" severity="ignore" />
 
   <!-- Lint only flags only missing content descriptions in XML ImageViews but we rarely put content descriptions here -->
   <issue id="ContentDescription" severity="ignore" />

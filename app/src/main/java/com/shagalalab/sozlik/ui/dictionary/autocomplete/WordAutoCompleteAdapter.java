@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.shagalalab.sozlik.R;
@@ -22,10 +23,12 @@ import java.util.List;
  */
 
 public class WordAutoCompleteAdapter extends ArrayAdapter<SozlikDbModel> implements Filterable, OnChangeWordListener {
-
     private final List<SozlikDbModel> models;
     private List<SozlikDbModel> wordResults = new ArrayList<>();
+    private View root;
     private TextView word;
+    private ImageView flagFrom;
+    private ImageView flagTo;
     private AutoCompleteListener listener;
     private LayoutInflater inflater;
     private String originalWord = "";
@@ -56,14 +59,16 @@ public class WordAutoCompleteAdapter extends ArrayAdapter<SozlikDbModel> impleme
     @Override
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         SozlikDbModel dbModel = getItem(position);
-        if (convertView == null) {
-            convertView = inflater.inflate(R.layout.item_suggestion, parent, false);
+        if (convertView == null || root == null) {
+            root = inflater.inflate(R.layout.item_suggestion, parent, false);
         }
-        word = convertView.findViewById(R.id.item_suggestion_word);
+        word = root.findViewById(R.id.item_suggestion_word);
+        flagFrom = root.findViewById(R.id.item_suggestion_flag_from);
+        flagTo = root.findViewById(R.id.item_suggestion_flag_to);
         if (dbModel != null) {
             populateModel(dbModel, listener);
         }
-        return convertView;
+        return root;
     }
 
     @NonNull
@@ -83,9 +88,11 @@ public class WordAutoCompleteAdapter extends ArrayAdapter<SozlikDbModel> impleme
     }
 
     private void populateModel(final SozlikDbModel item, final AutoCompleteListener listener) {
-        word.setText(Html.fromHtml(item.getWord().replace(originalWord, String.format("<b>%s</b>", originalWord))));
-        if (listener != null) {
-            word.setOnClickListener(new View.OnClickListener() {
+        word.setText(Html.fromHtml(item.getNormalizedWord().replace(originalWord, String.format("<b>%s</b>", originalWord))));
+        flagFrom.setImageResource(item.getFromResource());
+        flagTo.setImageResource(item.getToResource());
+        if (listener != null && root != null) {
+            root.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     listener.onAutoCompleteClicked(item);

@@ -149,8 +149,7 @@
     <module name="InterfaceIsType" />
     <module name="VisibilityModifier">
       <!-- Ignore fields injected by Dagger as it requires at least package private visibility -->
-      <property name="ignoreAnnotationCanonicalNames"
-        value="javax.inject.Inject" />
+      <property name="ignoreAnnotationCanonicalNames" value="javax.inject.Inject, BindView" />
     </module>
 
     <!-- Miscellaneous other checks.                   -->

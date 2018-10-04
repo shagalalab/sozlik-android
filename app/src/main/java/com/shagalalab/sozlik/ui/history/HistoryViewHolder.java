@@ -39,7 +39,7 @@ class HistoryViewHolder extends RecyclerView.ViewHolder {
 
     void populateModel(SozlikDbModel model) {
         this.model = model;
-        historyWord.setText(model.getWord());
+        historyWord.setText(model.getNormalizedWord());
         String dateString = new SimpleDateFormat("dd/MM/yyyy, HH:mm", Locale.ROOT).format(new Date(model.getLastAccessed()));
         historyDate.setText(dateString);
     }

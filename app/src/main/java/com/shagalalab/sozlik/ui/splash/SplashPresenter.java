@@ -46,10 +46,15 @@ public class SplashPresenter {
         });
     }
 
-        void initSozlikData() {
+    void initSozlikData() {
         if (prefsManager.isFirstLaunch()) {
-            sozlikDao.insertToDB(gsonHelper.getListFromLocalAssets());
+            sozlikDao.insertToDB(gsonHelper.getQqEnFromLocalAssets());
             prefsManager.setFirstLaunch();
+        }
+        if (!prefsManager.hasRuQq()) {
+            sozlikDao.updateQqEnType();
+            sozlikDao.insertToDB(gsonHelper.getRuQqFromLocalAssets());
+            prefsManager.setRuQq();
         }
         List<SozlikDbModel> models = sozlikDao.getAllWords();
         wordHolder.setWordList(models);
