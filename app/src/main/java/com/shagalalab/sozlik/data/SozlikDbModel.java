@@ -3,16 +3,18 @@ package com.shagalalab.sozlik.data;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 import com.shagalalab.sozlik.R;
 
 import java.util.Locale;
+import java.util.Objects;
 
 /**
  * Created by QAREKEN on 3/4/2018.
  */
 @Entity(tableName = "dictionary")
-public class SozlikDbModel {
+public class SozlikDbModel implements Comparable<SozlikDbModel> {
     private static final int TYPE_QQ_EN = 1;
     private static final int TYPE_RU_QQ = 2;
 
@@ -104,5 +106,33 @@ public class SozlikDbModel {
 
     public String getMessageForShare() {
         return String.format("%s%n%s", word, translation.replaceAll("\\<.*?>", ""));
+    }
+
+    @Override
+    public int compareTo(@NonNull SozlikDbModel o) {
+        return this.getNormalizedWord().compareTo(o.getNormalizedWord());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+
+        if (!(obj instanceof SozlikDbModel)) {
+            return false;
+        }
+
+        SozlikDbModel that = (SozlikDbModel) obj;
+
+        return this.id == that.id
+            && this.type == that.type
+            && this.word.equals(that.word)
+            && this.translation.equals(that.translation);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, type, word, translation);
     }
 }

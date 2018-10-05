@@ -10,12 +10,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.shagalalab.sozlik.R;
 import com.shagalalab.sozlik.data.SozlikDbModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -25,7 +27,7 @@ import java.util.List;
 public class WordAutoCompleteAdapter extends ArrayAdapter<SozlikDbModel> implements Filterable, OnChangeWordListener {
     private final List<SozlikDbModel> models;
     private List<SozlikDbModel> wordResults = new ArrayList<>();
-    private View root;
+    private LinearLayout root;
     private TextView word;
     private ImageView flagFrom;
     private ImageView flagTo;
@@ -59,16 +61,17 @@ public class WordAutoCompleteAdapter extends ArrayAdapter<SozlikDbModel> impleme
     @Override
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         SozlikDbModel dbModel = getItem(position);
-        if (convertView == null || root == null) {
-            root = inflater.inflate(R.layout.item_suggestion, parent, false);
+        if (convertView == null) {
+            convertView = inflater.inflate(R.layout.item_suggestion, parent, false);
         }
-        word = root.findViewById(R.id.item_suggestion_word);
-        flagFrom = root.findViewById(R.id.item_suggestion_flag_from);
-        flagTo = root.findViewById(R.id.item_suggestion_flag_to);
+        root = convertView.findViewById(R.id.item_suggestion_parent);
+        word = convertView.findViewById(R.id.item_suggestion_word);
+        flagFrom = convertView.findViewById(R.id.item_suggestion_flag_from);
+        flagTo = convertView.findViewById(R.id.item_suggestion_flag_to);
         if (dbModel != null) {
             populateModel(dbModel, listener);
         }
-        return root;
+        return convertView;
     }
 
     @NonNull
@@ -81,6 +84,7 @@ public class WordAutoCompleteAdapter extends ArrayAdapter<SozlikDbModel> impleme
     public void onChangeWordResults(String originalWord, List<SozlikDbModel> list) {
         this.originalWord = originalWord;
         if (list != null && !list.isEmpty()) {
+            Collections.sort(list);
             wordResults.clear();
             wordResults.addAll(list);
             notifyDataSetChanged();
