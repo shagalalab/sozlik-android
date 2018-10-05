@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.shagalalab.sozlik.R;
@@ -22,8 +23,11 @@ public class TranslationActivity extends BaseActivity implements TranslationView
     public static final String TRANSLATION_ID = "translationId";
     private MenuItem menuItem;
 
+    @BindView(R.id.translation_toolbar) Toolbar toolbar;
     @BindView(R.id.word) TextView word;
     @BindView(R.id.translation) TextView translation;
+    @BindView(R.id.translation_from) ImageView from;
+    @BindView(R.id.translation_to) ImageView to;
 
     @Inject
     TranslationPresenter presenter;
@@ -36,7 +40,6 @@ public class TranslationActivity extends BaseActivity implements TranslationView
 
         ((SozlikApp) getApplication()).getComponent().inject(this);
 
-        Toolbar toolbar = findViewById(R.id.translation_toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -87,6 +90,16 @@ public class TranslationActivity extends BaseActivity implements TranslationView
     @Override
     public void showTranslation(String translation) {
         this.translation.setText(Html.fromHtml(translation));
+    }
+
+    @Override
+    public void setFromFlags(int resource) {
+        from.setImageResource(resource);
+    }
+
+    @Override
+    public void setToFlags(int resource) {
+        to.setImageResource(resource);
     }
 
     @Override

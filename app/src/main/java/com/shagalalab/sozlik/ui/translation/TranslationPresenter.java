@@ -29,6 +29,8 @@ public class TranslationPresenter {
         if (model != null) {
             translationView.showWord(model.getWord());
             translationView.showTranslation(model.getTranslation());
+            translationView.setFromFlags(model.getFromResource());
+            translationView.setToFlags(model.getToResource());
         }
     }
 
@@ -49,7 +51,7 @@ public class TranslationPresenter {
 
     void shareTranslation() {
         if (model != null) {
-            translationView.goToShare(model.getWord(), model.getMessageForShare());
+            translationView.goToShare(model.getNormalizedWord(), model.getMessageForShare());
         }
     }
 
@@ -60,4 +62,3 @@ public class TranslationPresenter {
         }
     }
 }
-

@@ -45,7 +45,7 @@ public class SplashPresenterTest {
     }
 
     @Test
-    public void testFirstLaunch() {
+    public void whenFirstLaunchedPopulateBothDictionaries() {
         List<SozlikDbModel> list = new ArrayList<>();
         list.add(new SozlikDbModel());
 
@@ -68,7 +68,7 @@ public class SplashPresenterTest {
     }
 
     @Test
-    public void testLaunchWithoutRuQq() {
+    public void whenNotFirstLaunchedPopulateOnlyOneDictionary() {
         List<SozlikDbModel> list = new ArrayList<>();
         list.add(new SozlikDbModel());
 
@@ -90,7 +90,7 @@ public class SplashPresenterTest {
     }
 
     @Test
-    public void testLaunchWithAllDictionariesInstalled() {
+    public void whenAllDictionariesInstalledProceedToNext() {
         List<SozlikDbModel> list = new ArrayList<>();
         list.add(new SozlikDbModel());
 

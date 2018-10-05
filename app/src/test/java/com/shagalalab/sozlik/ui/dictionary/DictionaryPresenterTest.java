@@ -44,16 +44,20 @@ public class DictionaryPresenterTest {
     @Test
     public void whenSearchWordIsEmptyDoNothing() {
         dictionaryPresenter.search("");
+
         verifyNoMoreInteractions(dictionaryViewMock);
     }
 
     @Test
     public void whenSearchWordFoundShowTranslation() {
-        SozlikDbModel result = new SozlikDbModel();
         int id = 1;
+        SozlikDbModel result = new SozlikDbModel();
         result.setId(id);
+
         when(sozlikDaoMock.getTranslation(SOME_WORD)).thenReturn(result);
+
         dictionaryPresenter.search(SOME_WORD);
+
         verify(dictionaryViewMock, times(1)).showTranslation(id);
         verifyNoMoreInteractions(dictionaryViewMock);
     }
@@ -62,9 +66,12 @@ public class DictionaryPresenterTest {
     public void whenSearchWordNotFoundButSuggestionsFoundShowSuggestions() {
         List<SozlikDbModel> list = new ArrayList<>();
         list.add(new SozlikDbModel());
+
         when(sozlikDaoMock.getTranslation(SOME_WORD)).thenReturn(null);
         when(spellCheckerMock.check(SOME_WORD, true)).thenReturn(list);
+
         dictionaryPresenter.search(SOME_WORD);
+
         verify(dictionaryViewMock, times(1)).showMessage(R.string.suggestion_found);
         verify(dictionaryViewMock, times(1)).setMessageVisible();
         verify(dictionaryViewMock, times(1)).showResults(list);
@@ -74,9 +81,12 @@ public class DictionaryPresenterTest {
     @Test
     public void whenSearchWordAndSuggestionsNotFoundShowNoResults() {
         List<SozlikDbModel> list = new ArrayList<>();
+
         when(sozlikDaoMock.getTranslation(SOME_WORD)).thenReturn(null);
         when(sozlikDaoMock.getSuggestions('%' + SOME_WORD + '%')).thenReturn(list);
+
         dictionaryPresenter.search(SOME_WORD);
+
         verify(dictionaryViewMock, times(1)).showMessage(R.string.suggestion_not_found);
         verify(dictionaryViewMock, times(1)).setMessageVisible();
         verify(dictionaryViewMock, times(1)).showResults(list);
@@ -86,6 +96,7 @@ public class DictionaryPresenterTest {
     @Test
     public void whenSearchWordNotFoundAndLessThanMinimalShowNoResults() {
         dictionaryPresenter.search(BELOW_MIN_WIDTH_WORD);
+
         verify(dictionaryViewMock, times(1)).showMessage(R.string.suggestion_not_found);
         verify(dictionaryViewMock, times(1)).setMessageVisible();
         verifyNoMoreInteractions(dictionaryViewMock);
@@ -94,7 +105,9 @@ public class DictionaryPresenterTest {
     @Test
     public void hideKeyboardLinkIfAppInstalled() {
         when(packageHelperMock.isAppInstalled()).thenReturn(true);
+
         dictionaryPresenter.setKeyboardMessageVisibility();
+
         verify(dictionaryViewMock, times(1)).hideKeyboardMessage();
         verifyNoMoreInteractions(dictionaryViewMock);
     }
@@ -102,7 +115,9 @@ public class DictionaryPresenterTest {
     @Test
     public void showKeyboardLinkIfAppNotInstalled() {
         when(packageHelperMock.isAppInstalled()).thenReturn(false);
+
         dictionaryPresenter.setKeyboardMessageVisibility();
+
         verify(dictionaryViewMock, times(1)).showKeyboardMessage();
         verifyNoMoreInteractions(dictionaryViewMock);
     }

@@ -18,6 +18,7 @@ import static org.mockito.Mockito.when;
 public class TranslationPresenterTest {
     private static final String SOME_WORD = "someword";
     private static final String SOME_TRANSLATION = "translation";
+    private static final int SOME_RESOURCE = 1;
     private static final long TIME = 1000000000;
 
     private TranslationView translationViewMock;
@@ -37,19 +38,27 @@ public class TranslationPresenterTest {
     }
 
     @Test
-    public void testGetTranslation() {
+    public void whenTranslationIsFoundShowIt() {
         when(sozlikDbModelMock.getWord()).thenReturn(SOME_WORD);
         when(sozlikDbModelMock.getTranslation()).thenReturn(SOME_TRANSLATION);
+        when(sozlikDbModelMock.getToResource()).thenReturn(SOME_RESOURCE);
+        when(sozlikDbModelMock.getFromResource()).thenReturn(SOME_RESOURCE);
+
         translationPresenter.getTranslation();
-        verify(translationViewMock, times(1)).showWord(SOME_WORD);
-        verify(translationViewMock, times(1)).showTranslation(SOME_TRANSLATION);
+
+        verify(translationViewMock, times(1)).showWord(sozlikDbModelMock.getWord());
+        verify(translationViewMock, times(1)).showTranslation(sozlikDbModelMock.getTranslation());
+        verify(translationViewMock, times(1)).setToFlags(sozlikDbModelMock.getToResource());
+        verify(translationViewMock, times(1)).setFromFlags(sozlikDbModelMock.getFromResource());
         verifyNoMoreInteractions(translationViewMock);
     }
 
     @Test
-    public void testToggleFavoriteTrue() {
+    public void whenWordIsFavoritedToggleRemovesFromFavorites() {
         when(sozlikDbModelMock.isFavourite()).thenReturn(true);
+
         translationPresenter.toggleFavorite();
+
         verify(sozlikDaoMock, times(1)).update(sozlikDbModelMock);
         verify(translationViewMock, times(1)).showFavorite(false);
         verify(sozlikDbModelMock, times(1)).setFavourite(false);
@@ -57,9 +66,11 @@ public class TranslationPresenterTest {
     }
 
     @Test
-    public void testToggleFavoriteFalse() {
+    public void whenWordIsNotFavoritedToggleAddsToFavorites() {
         when(sozlikDbModelMock.isFavourite()).thenReturn(false);
+
         translationPresenter.toggleFavorite();
+
         verify(sozlikDaoMock, times(1)).update(sozlikDbModelMock);
         verify(translationViewMock, times(1)).showFavorite(true);
         verify(sozlikDbModelMock, times(1)).setFavourite(true);
@@ -67,33 +78,40 @@ public class TranslationPresenterTest {
     }
 
     @Test
-    public void testSetFavoriteStatusTrue() {
+    public void whenWordIsFavoritedReturnSetFavoriteStatusAsTrue() {
         when(sozlikDbModelMock.isFavourite()).thenReturn(true);
+
         translationPresenter.setFavoriteStatus();
+
         verify(translationViewMock, times(1)).showFavorite(true);
         verifyNoMoreInteractions(translationViewMock);
     }
 
     @Test
-    public void testSetFavoriteStatusFalse() {
+    public void whenWordIsNotFavoritedReturnSetFavoriteStatusAsFalse() {
         when(sozlikDbModelMock.isFavourite()).thenReturn(false);
+
         translationPresenter.setFavoriteStatus();
+
         verify(translationViewMock, times(1)).showFavorite(false);
         verifyNoMoreInteractions(translationViewMock);
     }
 
     @Test
-    public void testShareTranslation() {
-        when(sozlikDbModelMock.getWord()).thenReturn(SOME_WORD);
+    public void whenShareTranslationShowShareMessage() {
+        when(sozlikDbModelMock.getNormalizedWord()).thenReturn(SOME_WORD);
         when(sozlikDbModelMock.getMessageForShare()).thenReturn(SOME_TRANSLATION);
+
         translationPresenter.shareTranslation();
+
         verify(translationViewMock, times(1)).goToShare(SOME_WORD, SOME_TRANSLATION);
         verifyNoMoreInteractions(translationViewMock);
     }
 
     @Test
-    public void testSetLastAccessed() {
+    public void whenTranslationIsOpenedSetLastAccessTime() {
         translationPresenter.setLastAccessed(TIME);
+
         verify(sozlikDbModelMock, times(1)).setLastAccessed(TIME);
         verify(sozlikDaoMock, times(1)).update(sozlikDbModelMock);
         verifyNoMoreInteractions(sozlikDbModelMock);

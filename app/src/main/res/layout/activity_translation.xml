@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
@@ -25,7 +25,7 @@
             <TextView
                 android:id="@+id/word"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/translation_toolbar"
                 android:layout_marginBottom="@dimen/standard_margin"
                 android:layout_marginTop="@dimen/standard_margin"
@@ -36,6 +36,39 @@
                 android:ellipsize="end"
                 android:textColor="@android:color/white"
                 tools:text="@string/dictionary"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="52dp"
+                android:layout_below="@id/word"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/translation_from"
+                    android:layout_width="@dimen/list_flag_size"
+                    android:layout_height="@dimen/list_flag_size"
+                    android:contentDescription="@string/dictionary_from"
+                    android:src="@drawable/ic_flag_qq"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/arrow"
+                    android:layout_marginStart="@dimen/standard_margin_half"
+                    android:layout_marginEnd="@dimen/standard_margin_half"
+                    android:tint="@android:color/white"
+                    android:src="@drawable/ic_arrow_forward_black_24dp"/>
+
+                <ImageView
+                    android:id="@+id/translation_to"
+                    android:layout_width="@dimen/list_flag_size"
+                    android:layout_height="@dimen/list_flag_size"
+                    android:contentDescription="@string/dictionary_to"
+                    android:src="@drawable/ic_flag_ru"/>
+
+            </LinearLayout>
 
             <ImageView
                 android:layout_width="wrap_content"
