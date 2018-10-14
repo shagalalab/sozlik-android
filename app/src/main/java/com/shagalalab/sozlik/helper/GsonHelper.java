@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by manas on 05.03.18.
@@ -59,6 +60,12 @@ public class GsonHelper {
             return Collections.emptyList();
         }
         Type listType = new TypeToken<List<SozlikDbModel>>() { }.getType();
-        return new GsonBuilder().create().fromJson(json, listType);
+        List<SozlikDbModel> dictionary = new GsonBuilder().create().fromJson(json, listType);
+        for (SozlikDbModel item: dictionary) {
+            String word = item.getWord();
+            item.setWord(item.getWord().toLowerCase(Locale.getDefault()).replace("//", ""));
+            item.setRawWord(word);
+        }
+        return dictionary;
     }
 }

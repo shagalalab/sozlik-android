@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 
 import com.shagalalab.sozlik.R;
 
-import java.util.Locale;
 import java.util.Objects;
 
 /**
@@ -26,6 +25,9 @@ public class SozlikDbModel implements Comparable<SozlikDbModel> {
 
     @ColumnInfo(name = "word")
     private String word;
+
+    @ColumnInfo(name = "raw_word")
+    private String rawWord;
 
     @ColumnInfo(name = "translation")
     private String translation;
@@ -56,8 +58,12 @@ public class SozlikDbModel implements Comparable<SozlikDbModel> {
         return word;
     }
 
-    public String getNormalizedWord() {
-        return word.toLowerCase(Locale.getDefault()).replace("//", "");
+    public String getRawWord() {
+        return rawWord != null ? rawWord : word;
+    }
+
+    public void setRawWord(String rawWord) {
+        this.rawWord = rawWord;
     }
 
     public int getFromResource() {
@@ -110,7 +116,7 @@ public class SozlikDbModel implements Comparable<SozlikDbModel> {
 
     @Override
     public int compareTo(@NonNull SozlikDbModel o) {
-        return this.getNormalizedWord().compareTo(o.getNormalizedWord());
+        return this.getWord().compareTo(o.getWord());
     }
 
     @Override

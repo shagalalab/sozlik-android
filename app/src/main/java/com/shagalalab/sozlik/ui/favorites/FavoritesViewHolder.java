@@ -42,7 +42,7 @@ class FavoritesViewHolder extends RecyclerView.ViewHolder {
 
     void populateModel(SozlikDbModel model) {
         this.model = model;
-        word.setText(model.getNormalizedWord());
+        word.setText(model.getWord());
     }
 
     private void onFavoritesItemClicked() {

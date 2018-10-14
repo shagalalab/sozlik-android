@@ -92,7 +92,7 @@ public class WordAutoCompleteAdapter extends BaseAdapter implements Filterable, 
     }
 
     private void populateModel(final SozlikDbModel item, final AutoCompleteListener listener) {
-        word.setText(Html.fromHtml(item.getNormalizedWord().replace(originalWord, String.format("<b>%s</b>", originalWord))));
+        word.setText(Html.fromHtml(item.getWord().replace(originalWord, String.format("<b>%s</b>", originalWord))));
         flagFrom.setImageResource(item.getFromResource());
         flagTo.setImageResource(item.getToResource());
         if (listener != null && root != null) {

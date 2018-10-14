@@ -46,7 +46,7 @@ public class TranslationPresenterTest {
 
         translationPresenter.getTranslation();
 
-        verify(translationViewMock, times(1)).showWord(sozlikDbModelMock.getWord());
+        verify(translationViewMock, times(1)).showWord(sozlikDbModelMock.getRawWord());
         verify(translationViewMock, times(1)).showTranslation(sozlikDbModelMock.getTranslation());
         verify(translationViewMock, times(1)).setToFlags(sozlikDbModelMock.getToResource());
         verify(translationViewMock, times(1)).setFromFlags(sozlikDbModelMock.getFromResource());
@@ -99,7 +99,7 @@ public class TranslationPresenterTest {
 
     @Test
     public void whenShareTranslationShowShareMessage() {
-        when(sozlikDbModelMock.getNormalizedWord()).thenReturn(SOME_WORD);
+        when(sozlikDbModelMock.getWord()).thenReturn(SOME_WORD);
         when(sozlikDbModelMock.getMessageForShare()).thenReturn(SOME_TRANSLATION);
 
         translationPresenter.shareTranslation();
