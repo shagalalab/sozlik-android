@@ -57,7 +57,6 @@ public class SplashPresenter {
             prefsManager.setRuQq();
         }
         List<SozlikDbModel> models = sozlikDao.getAllWords();
-        wordHolder.setWordList(models);
         wordHolder.setWordMap(models);
     }
 }

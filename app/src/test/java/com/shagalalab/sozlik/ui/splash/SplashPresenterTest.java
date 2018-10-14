@@ -62,7 +62,6 @@ public class SplashPresenterTest {
         verify(sozlikDaoMock, times(1)).getAllWords();
         verify(sozlikDaoMock, times(1)).updateQqEnType();
         verify(prefsManagerMock, times(1)).setRuQq();
-        verify(wordHolderMock, times(1)).setWordList(list);
         verify(wordHolderMock, times(1)).setWordMap(list);
         verifyNoMoreInteractions(sozlikDaoMock);
     }
@@ -84,7 +83,6 @@ public class SplashPresenterTest {
         verify(sozlikDaoMock, times(1)).insertToDB(gsonHelperMock.getRuQqFromLocalAssets());
         verify(prefsManagerMock, times(1)).setRuQq();
         verify(sozlikDaoMock, times(1)).getAllWords();
-        verify(wordHolderMock, times(1)).setWordList(list);
         verify(wordHolderMock, times(1)).setWordMap(list);
         verifyNoMoreInteractions(sozlikDaoMock);
     }
@@ -101,7 +99,6 @@ public class SplashPresenterTest {
         splashPresenter.initSozlikData();
 
         verify(sozlikDaoMock, times(1)).getAllWords();
-        verify(wordHolderMock, times(1)).setWordList(list);
         verify(wordHolderMock, times(1)).setWordMap(list);
         verifyNoMoreInteractions(sozlikDaoMock);
     }

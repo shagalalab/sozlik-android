@@ -2,6 +2,7 @@ package com.shagalalab.sozlik.ui.dictionary.autocomplete;
 
 import android.widget.Filter;
 
+import com.shagalalab.sozlik.data.SozlikDao;
 import com.shagalalab.sozlik.data.SozlikDbModel;
 
 import java.util.ArrayList;
@@ -15,13 +16,13 @@ import java.util.Locale;
 public class WordFilter extends Filter {
 
     private OnChangeWordListener listener;
-    private List<SozlikDbModel> originalList;
+    private SozlikDao sozlikDao;
     private List<SozlikDbModel> filteredList;
 
-    WordFilter(OnChangeWordListener listener, List<SozlikDbModel> originalList) {
+    WordFilter(OnChangeWordListener listener, SozlikDao sozlikDao) {
         super();
         this.listener = listener;
-        this.originalList = originalList;
+        this.sozlikDao = sozlikDao;
         this.filteredList = new ArrayList<>();
     }
 
@@ -30,14 +31,11 @@ public class WordFilter extends Filter {
         filteredList.clear();
         final FilterResults results = new FilterResults();
 
-        if (constraint == null || constraint.length() == 0) {
-            filteredList.addAll(originalList);
-        } else {
+        if (constraint != null && constraint.length() > 0) {
             final String filterPattern = constraint.toString().toLowerCase(Locale.ROOT).trim();
-            for (final SozlikDbModel dbModel : originalList) {
-                if (dbModel.getWord().toLowerCase(Locale.ROOT).startsWith(filterPattern)) {
-                    filteredList.add(dbModel);
-                }
+            List<SozlikDbModel> suggestions = sozlikDao.getSuggestions(filterPattern + "%");
+            if (!suggestions.isEmpty()) {
+                filteredList.addAll(suggestions);
             }
         }
         results.values = filteredList;

@@ -13,7 +13,6 @@ import java.util.Map;
 public final class WordHolder {
 
     private static WordHolder instance;
-    private List<SozlikDbModel> wordList;
     private HashMap<String, Integer> wordHashMap = null;
 
     private WordHolder() {
@@ -24,14 +23,6 @@ public final class WordHolder {
             instance = new WordHolder();
         }
         return instance;
-    }
-
-    public List<SozlikDbModel> getWordList() {
-        return wordList;
-    }
-
-    public void setWordList(List<SozlikDbModel> wordList) {
-        this.wordList = wordList;
     }
 
     public Map<String, Integer> getWordMap() {

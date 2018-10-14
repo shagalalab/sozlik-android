@@ -21,10 +21,10 @@ import android.widget.TextView;
 
 import com.shagalalab.sozlik.R;
 import com.shagalalab.sozlik.SozlikApp;
+import com.shagalalab.sozlik.data.SozlikDao;
 import com.shagalalab.sozlik.data.SozlikDbModel;
 import com.shagalalab.sozlik.ui.dictionary.autocomplete.AutoCompleteListener;
 import com.shagalalab.sozlik.ui.dictionary.autocomplete.WordAutoCompleteAdapter;
-import com.shagalalab.sozlik.ui.dictionary.autocomplete.WordHolder;
 import com.shagalalab.sozlik.ui.dictionary.suggestion.SuggestionListener;
 import com.shagalalab.sozlik.ui.dictionary.suggestion.SuggestionResultsAdapter;
 import com.shagalalab.sozlik.ui.translation.TranslationActivity;
@@ -50,6 +50,7 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
     private InputMethodManager inputMethodManager;
 
     @Inject DictionaryPresenter dictionaryPresenter;
+    @Inject SozlikDao sozlikDao;
 
     @BindView(R.id.search_text_edit) AutoCompleteTextView searchText;
     @BindView(R.id.text_view_result) TextView message;
@@ -70,7 +71,7 @@ public class DictionaryFragment extends Fragment implements DictionaryView, Sugg
 
         dictionaryPresenter.setView(this);
         suggestionResultsAdapter = new SuggestionResultsAdapter(this);
-        wordAutoCompleteAdapter = new WordAutoCompleteAdapter(getContext(), WordHolder.getInstance().getWordList(), this);
+        wordAutoCompleteAdapter = new WordAutoCompleteAdapter(getContext(), sozlikDao, this);
         setRetainInstance(true);
     }
 

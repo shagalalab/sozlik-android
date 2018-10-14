@@ -6,7 +6,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.shagalalab.sozlik.R;
+import com.shagalalab.sozlik.data.SozlikDao;
 import com.shagalalab.sozlik.data.SozlikDbModel;
 
 import java.util.ArrayList;
@@ -24,8 +25,8 @@ import java.util.List;
  * Created by manas on 16.03.18.
  */
 
-public class WordAutoCompleteAdapter extends ArrayAdapter<SozlikDbModel> implements Filterable, OnChangeWordListener {
-    private final List<SozlikDbModel> models;
+public class WordAutoCompleteAdapter extends BaseAdapter implements Filterable, OnChangeWordListener {
+    private SozlikDao sozlikDao;
     private List<SozlikDbModel> wordResults = new ArrayList<>();
     private LinearLayout root;
     private TextView word;
@@ -35,11 +36,10 @@ public class WordAutoCompleteAdapter extends ArrayAdapter<SozlikDbModel> impleme
     private LayoutInflater inflater;
     private String originalWord = "";
 
-    public WordAutoCompleteAdapter(Context context, List<SozlikDbModel> models, AutoCompleteListener listener) {
-        super(context, 0, models);
-        this.models = models;
+    public WordAutoCompleteAdapter(Context context, SozlikDao sozlikDao, AutoCompleteListener listener) {
+        this.sozlikDao = sozlikDao;
         this.listener = listener;
-        this.inflater = LayoutInflater.from(getContext());
+        this.inflater = LayoutInflater.from(context);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class WordAutoCompleteAdapter extends ArrayAdapter<SozlikDbModel> impleme
     @NonNull
     @Override
     public Filter getFilter() {
-        return new WordFilter(this, models);
+        return new WordFilter(this, sozlikDao);
     }
 
     @Override

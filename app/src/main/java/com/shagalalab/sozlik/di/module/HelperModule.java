@@ -24,14 +24,14 @@ public class HelperModule {
     @Provides
     @Named(JSON_FILE_NAME_QQ_EN)
     @Singleton
-    public String providesJsonFileNameQqEn() {
+    String providesJsonFileNameQqEn() {
         return "sozlik.json";
     }
 
     @Provides
     @Named(JSON_FILE_NAME_RU_QQ)
     @Singleton
-    public String providesJsonFileNameRuQq() {
+    String providesJsonFileNameRuQq() {
         return "ruqq.json";
     }
 
@@ -56,19 +56,19 @@ public class HelperModule {
 
     @Provides
     @Singleton
-    public AppExecutors providesThreadHelper() {
+    AppExecutors providesThreadHelper() {
         return new AppExecutors();
     }
 
     @Provides
     @Singleton
-    public WordHolder providesWordHolder() {
+    WordHolder providesWordHolder() {
         return WordHolder.getInstance();
     }
 
     @Provides
     @Singleton
-    public SpellChecker providesSpellChecker(WordHolder wordHolder, SozlikDao sozlikDao) {
+    SpellChecker providesSpellChecker(WordHolder wordHolder, SozlikDao sozlikDao) {
         return new SpellChecker(wordHolder.getWordMap(), sozlikDao);
     }
 }
