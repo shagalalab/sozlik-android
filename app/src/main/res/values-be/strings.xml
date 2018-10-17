@@ -17,8 +17,10 @@
         <a href="http://www.shagalalab.com" rel="nofollow">www.shagalalab.com</a> сайтында "байланыс" бетинде жайласқан форманы
         толтырың.\n\n<b>Shaǵala Lab</b> - Қарақалпақ тилиндеги бағдарламалар лабораториясы\n\nБизлердиң жумысларымыз бенен
         <a href="https://play.google.com/store/apps/developer?id=Shag%27ala+Lab" rel="nofollow">Google Play</a> яки
-        <a href="http://www.shagalalab.com/" rel="nofollow">сайтымызда</a> танысыў имкәниятына ийесиз.\n\nБағдарлама 1970-жылы
-        В.Д.Аракин редакторлығында "Қарақалпақстан" баспасынан шыққан "қарақалпақша-англичанша сөзлик" китабына тийкарланған</string>
+        <a href="http://www.shagalalab.com/" rel="nofollow">сайтымызда</a> танысыў имкәниятына ийесиз.\n\nБағдарлама: \n- 1970-жылы
+        В.Д.Аракин редакторлығында \"Қарақалпақстан\" баспасынан шыққан \"қарақалпақша-англичанша сөзлик\"
+        \n- 1967-жылы Н.А.Баскаков редакторлығында \"Советская Энциклопедия\" баспасынан шыққан \"русша-қарақалпақша сөзлик\"
+        \nкиталарына тийкарланған</string>
     <string name="pref_alphabet_label">Әлипбени сайлаң</string>
     <string name="empty_favorites_text">Сайландылар бос</string>
     <string name="empty_histories_text">Сиз еле ҳеш бир сөздиң аўдармасын көрмедиңиз</string>
