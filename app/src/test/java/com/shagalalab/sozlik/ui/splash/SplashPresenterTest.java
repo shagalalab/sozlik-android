@@ -45,30 +45,60 @@ public class SplashPresenterTest {
     }
 
     @Test
-    public void testLoaderFirstLaunch() {
+    public void whenFirstLaunchedPopulateBothDictionaries() {
         List<SozlikDbModel> list = new ArrayList<>();
         list.add(new SozlikDbModel());
+
         when(prefsManagerMock.isFirstLaunch()).thenReturn(true);
+        when(prefsManagerMock.hasRuQq()).thenReturn(false);
         when(sozlikDaoMock.getAllWords()).thenReturn(list);
-        when(gsonHelperMock.getListFromLocalAssets()).thenReturn(list);
+        when(gsonHelperMock.getQqEnFromLocalAssets()).thenReturn(list);
+        when(gsonHelperMock.getRuQqFromLocalAssets()).thenReturn(list);
+
         splashPresenter.initSozlikData();
-        verify(sozlikDaoMock, times(1)).insertToDB(list);
+
+        verify(sozlikDaoMock, times(2)).insertToDB(gsonHelperMock.getQqEnFromLocalAssets());
         verify(prefsManagerMock, times(1)).setFirstLaunch();
         verify(sozlikDaoMock, times(1)).getAllWords();
-        verify(wordHolderMock, times(1)).setWordList(list);
+        verify(sozlikDaoMock, times(1)).updateQqEnType();
+        verify(prefsManagerMock, times(1)).setRuQq();
         verify(wordHolderMock, times(1)).setWordMap(list);
         verifyNoMoreInteractions(sozlikDaoMock);
     }
 
     @Test
-    public void testLoaderNotFirstLaunch() {
+    public void whenNotFirstLaunchedPopulateOnlyOneDictionary() {
         List<SozlikDbModel> list = new ArrayList<>();
         list.add(new SozlikDbModel());
+
         when(prefsManagerMock.isFirstLaunch()).thenReturn(false);
+        when(prefsManagerMock.hasRuQq()).thenReturn(false);
         when(sozlikDaoMock.getAllWords()).thenReturn(list);
+        when(gsonHelperMock.getQqEnFromLocalAssets()).thenReturn(list);
+        when(gsonHelperMock.getRuQqFromLocalAssets()).thenReturn(list);
+
         splashPresenter.initSozlikData();
+
+        verify(sozlikDaoMock, times(1)).updateQqEnType();
+        verify(sozlikDaoMock, times(1)).insertToDB(gsonHelperMock.getRuQqFromLocalAssets());
+        verify(prefsManagerMock, times(1)).setRuQq();
         verify(sozlikDaoMock, times(1)).getAllWords();
-        verify(wordHolderMock, times(1)).setWordList(list);
+        verify(wordHolderMock, times(1)).setWordMap(list);
+        verifyNoMoreInteractions(sozlikDaoMock);
+    }
+
+    @Test
+    public void whenAllDictionariesInstalledProceedToNext() {
+        List<SozlikDbModel> list = new ArrayList<>();
+        list.add(new SozlikDbModel());
+
+        when(prefsManagerMock.isFirstLaunch()).thenReturn(false);
+        when(prefsManagerMock.hasRuQq()).thenReturn(true);
+        when(sozlikDaoMock.getAllWords()).thenReturn(list);
+
+        splashPresenter.initSozlikData();
+
+        verify(sozlikDaoMock, times(1)).getAllWords();
         verify(wordHolderMock, times(1)).setWordMap(list);
         verifyNoMoreInteractions(sozlikDaoMock);
     }

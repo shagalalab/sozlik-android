@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by manas on 05.03.18.
@@ -19,14 +20,16 @@ import java.util.List;
 public class GsonHelper {
 
     private final Context context;
-    private final String fileName;
+    private final String fileNameQqEn;
+    private final String fileNameRuQq;
 
-    public GsonHelper(Context context, String fileName) {
+    public GsonHelper(Context context, String fileNameQqEn, String fileNameRuQq) {
         this.context = context;
-        this.fileName = fileName;
+        this.fileNameQqEn = fileNameQqEn;
+        this.fileNameRuQq = fileNameRuQq;
     }
 
-    private String loadJsonFromAsset() {
+    private String loadJsonFromAsset(String fileName) {
         String json;
         try {
             InputStream is = context.getAssets().open(fileName);
@@ -42,12 +45,27 @@ public class GsonHelper {
         return json;
     }
 
-    public List<SozlikDbModel> getListFromLocalAssets() {
-        String json = loadJsonFromAsset();
+    public List<SozlikDbModel> getQqEnFromLocalAssets() {
+        String json = loadJsonFromAsset(fileNameQqEn);
         if (json == null) {
             return Collections.emptyList();
         }
         Type listType = new TypeToken<List<SozlikDbModel>>() { }.getType();
         return new GsonBuilder().create().fromJson(json, listType);
+    }
+
+    public List<SozlikDbModel> getRuQqFromLocalAssets() {
+        String json = loadJsonFromAsset(fileNameRuQq);
+        if (json == null) {
+            return Collections.emptyList();
+        }
+        Type listType = new TypeToken<List<SozlikDbModel>>() { }.getType();
+        List<SozlikDbModel> dictionary = new GsonBuilder().create().fromJson(json, listType);
+        for (SozlikDbModel item: dictionary) {
+            String word = item.getWord();
+            item.setWord(item.getWord().toLowerCase(Locale.getDefault()).replace("//", ""));
+            item.setRawWord(word);
+        }
+        return dictionary;
     }
 }

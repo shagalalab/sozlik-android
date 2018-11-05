@@ -13,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_primary"
-        android:orientation="horizontal"
         android:padding="@dimen/standard_margin_half">
 
         <AutoCompleteTextView
@@ -27,17 +26,12 @@
             android:imeOptions="actionSearch"
             android:inputType="text"
             android:maxLines="1"
-            android:paddingEnd="50dp"
+            android:paddingEnd="@dimen/standard_margin"
             android:paddingStart="@dimen/standard_margin"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/darker_gray"
             android:textSize="@dimen/standard_text_size"/>
 
-        <Spinner
-            android:id="@+id/search_dictionary_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="end"/>
     </FrameLayout>
 
     <TextView

@@ -8,4 +8,5 @@
     <dimen name="standard_text_size">16sp</dimen>
     <dimen name="keyboard_info_text_size">14sp</dimen>
     <dimen name="translation_toolbar_height">186dp</dimen>
+    <dimen name="list_flag_size">36dp</dimen>
 </resources>

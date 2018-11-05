@@ -35,28 +35,36 @@ public class FavoritesPresenterTest {
     }
 
     @Test
-    public void testShowFavoriteListWhenListIsNull() {
+    public void whenFavoritesListIsNullDoNothing() {
         when(sozlikDaoMock.getAllFavorites()).thenReturn(null);
+
         favoritesPresenter.showFavoritesList();
+
         verifyNoMoreInteractions(favoritesViewMock);
     }
 
     @Test
-    public void testShowFavoritesListWhenListIsEmpty() {
+    public void whenFavoritesListIsEmptyShowEmptyScreenMessage() {
         List<SozlikDbModel> list = new ArrayList<>();
+
         when(sozlikDaoMock.getAllFavorites()).thenReturn(list);
+
         favoritesPresenter.showFavoritesList();
+
         verify(favoritesViewMock, times(1)).hideList();
         verify(favoritesViewMock, times(1)).showEmptyScreen();
         verifyNoMoreInteractions(favoritesViewMock);
     }
 
     @Test
-    public void testShowFavoriteListWhenListIsNotEmpty() {
+    public void whenFavoritesListIsNotEmptyShowList() {
         List<SozlikDbModel> list = new ArrayList<>();
         list.add(new SozlikDbModel());
+
         when(sozlikDaoMock.getAllFavorites()).thenReturn(list);
+
         favoritesPresenter.showFavoritesList();
+
         verify(favoritesViewMock, times(1)).hideEmptyScreen();
         verify(favoritesViewMock, times(1)).showList();
         verify(favoritesViewMock, times(1)).showFavorites(list);
@@ -64,8 +72,9 @@ public class FavoritesPresenterTest {
     }
 
     @Test
-    public void testDeleteFavoriteWhenModelIsNotNull() {
+    public void whenModelIsNotNullDeleteFavorite() {
         favoritesPresenter.deleteFavorite(sozlikDbModelMock);
+
         verify(sozlikDbModelMock, times(1)).setFavourite(false);
         verify(sozlikDaoMock, times(1)).update(sozlikDbModelMock);
         verifyNoMoreInteractions(sozlikDaoMock);
@@ -73,8 +82,9 @@ public class FavoritesPresenterTest {
     }
 
     @Test
-    public void testDeleteFavoriteWhenModelIsNull() {
+    public void whenModelIsNullDoNothing() {
         favoritesPresenter.deleteFavorite(null);
+
         verifyNoMoreInteractions(sozlikDbModelMock);
         verifyNoMoreInteractions(sozlikDaoMock);
     }

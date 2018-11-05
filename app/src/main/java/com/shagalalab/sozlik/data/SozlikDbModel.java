@@ -3,18 +3,31 @@ package com.shagalalab.sozlik.data;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
+import com.shagalalab.sozlik.R;
+
+import java.util.Objects;
 
 /**
  * Created by QAREKEN on 3/4/2018.
  */
 @Entity(tableName = "dictionary")
-public class SozlikDbModel {
+public class SozlikDbModel implements Comparable<SozlikDbModel> {
+    private static final int TYPE_QQ_EN = 1;
+    private static final int TYPE_RU_QQ = 2;
 
     @PrimaryKey(autoGenerate = true)
     private int id;
 
+    @ColumnInfo(name = "type")
+    private int type;
+
     @ColumnInfo(name = "word")
     private String word;
+
+    @ColumnInfo(name = "raw_word")
+    private String rawWord;
 
     @ColumnInfo(name = "translation")
     private String translation;
@@ -33,8 +46,40 @@ public class SozlikDbModel {
         this.id = id;
     }
 
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
     public String getWord() {
         return word;
+    }
+
+    public String getRawWord() {
+        return rawWord != null ? rawWord : word;
+    }
+
+    public void setRawWord(String rawWord) {
+        this.rawWord = rawWord;
+    }
+
+    public int getFromResource() {
+        if (type == TYPE_QQ_EN) {
+            return R.drawable.ic_flag_qq;
+        } else {
+            return R.drawable.ic_flag_ru;
+        }
+    }
+
+    public int getToResource() {
+        if (type == TYPE_RU_QQ) {
+            return R.drawable.ic_flag_qq;
+        } else {
+            return R.drawable.ic_flag_uk;
+        }
     }
 
     public void setWord(String word) {
@@ -67,5 +112,33 @@ public class SozlikDbModel {
 
     public String getMessageForShare() {
         return String.format("%s%n%s", word, translation.replaceAll("\\<.*?>", ""));
+    }
+
+    @Override
+    public int compareTo(@NonNull SozlikDbModel o) {
+        return this.getWord().compareTo(o.getWord());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+
+        if (!(obj instanceof SozlikDbModel)) {
+            return false;
+        }
+
+        SozlikDbModel that = (SozlikDbModel) obj;
+
+        return this.id == that.id
+            && this.type == that.type
+            && this.word.equals(that.word)
+            && this.translation.equals(that.translation);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, type, word, translation);
     }
 }

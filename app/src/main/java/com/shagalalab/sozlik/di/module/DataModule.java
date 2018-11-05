@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 
 import com.shagalalab.sozlik.data.SozlikDao;
 import com.shagalalab.sozlik.data.SozlikDatabase;
+import com.shagalalab.sozlik.data.SozlikMigration;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -21,28 +22,29 @@ public class DataModule {
     @Provides
     @Named(DB_NAME)
     @Singleton
-    public String providesDatabaseName() {
+    String providesDatabaseName() {
         return "sozlik-database";
     }
 
     @Provides
     @Singleton
-    public SozlikDatabase providesDatabase(Context context, @Named(DB_NAME) String dbName) {
+    SozlikDatabase providesDatabase(Context context, @Named(DB_NAME) String dbName) {
         return Room
             .databaseBuilder(context, SozlikDatabase.class, dbName)
+            .addMigrations(SozlikMigration.MIGRATE_1_2)
             .allowMainThreadQueries()
             .build();
     }
 
     @Provides
     @Singleton
-    public SozlikDao providesSozlikDao(SozlikDatabase database) {
+    SozlikDao providesSozlikDao(SozlikDatabase database) {
         return database.sozlikDao();
     }
 
     @Provides
     @Singleton
-    public SharedPreferences providesSharedPreferences(Context context) {
+    SharedPreferences providesSharedPreferences(Context context) {
         return context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
     }
 

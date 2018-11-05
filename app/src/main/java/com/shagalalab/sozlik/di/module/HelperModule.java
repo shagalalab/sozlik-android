@@ -18,19 +18,28 @@ import dagger.Provides;
 
 @Module
 public class HelperModule {
-    private static final String JSON_FILE_NAME = "json_file_name";
+    private static final String JSON_FILE_NAME_QQ_EN = "json_file_name_qq_en";
+    private static final String JSON_FILE_NAME_RU_QQ = "json_file_name_ru_qq";
 
     @Provides
-    @Named(JSON_FILE_NAME)
+    @Named(JSON_FILE_NAME_QQ_EN)
     @Singleton
-    public String providesJsonFileName() {
+    String providesJsonFileNameQqEn() {
         return "sozlik.json";
     }
 
     @Provides
+    @Named(JSON_FILE_NAME_RU_QQ)
     @Singleton
-    GsonHelper providesGsonHelper(Context context, @Named(JSON_FILE_NAME) String fileName) {
-        return new GsonHelper(context, fileName);
+    String providesJsonFileNameRuQq() {
+        return "ruqq.json";
+    }
+
+    @Provides
+    @Singleton
+    GsonHelper providesGsonHelper(Context context, @Named(JSON_FILE_NAME_QQ_EN) String fileNameQqEn,
+                                  @Named(JSON_FILE_NAME_RU_QQ) String fileNameRuQq) {
+        return new GsonHelper(context, fileNameQqEn, fileNameRuQq);
     }
 
     @Provides
@@ -47,19 +56,19 @@ public class HelperModule {
 
     @Provides
     @Singleton
-    public AppExecutors providesThreadHelper() {
+    AppExecutors providesThreadHelper() {
         return new AppExecutors();
     }
 
     @Provides
     @Singleton
-    public WordHolder providesWordHolder() {
+    WordHolder providesWordHolder() {
         return WordHolder.getInstance();
     }
 
     @Provides
     @Singleton
-    public SpellChecker providesSpellChecker(WordHolder wordHolder, SozlikDao sozlikDao) {
+    SpellChecker providesSpellChecker(WordHolder wordHolder, SozlikDao sozlikDao) {
         return new SpellChecker(wordHolder.getWordMap(), sozlikDao);
     }
 }

@@ -27,8 +27,10 @@ public class TranslationPresenter {
 
     void getTranslation() {
         if (model != null) {
-            translationView.showWord(model.getWord());
+            translationView.showWord(model.getRawWord());
             translationView.showTranslation(model.getTranslation());
+            translationView.setFromFlags(model.getFromResource());
+            translationView.setToFlags(model.getToResource());
         }
     }
 
@@ -60,4 +62,3 @@ public class TranslationPresenter {
         }
     }
 }
-

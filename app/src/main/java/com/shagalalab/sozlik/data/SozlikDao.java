@@ -32,6 +32,9 @@ public interface SozlikDao {
     @Query("SELECT * FROM dictionary WHERE last_accessed > 0 ORDER BY last_accessed DESC LIMIT 20")
     List<SozlikDbModel> getHistoryList20();
 
+    @Query("UPDATE dictionary SET type = 1")
+    void updateQqEnType();
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertToDB(List<SozlikDbModel> models);
 

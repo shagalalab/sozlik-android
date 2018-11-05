@@ -1,13 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView android:id="@+id/item_suggestion_word"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_suggestion_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="horizontal"
     android:clickable="true"
-    android:drawableEnd="@drawable/ic_keyboard_arrow_right_black_24dp"
     android:focusable="true"
-    android:padding="@dimen/list_item_horizontal_padding"
-    android:textSize="@dimen/standard_text_size"
-    android:textColor="@color/color_primary_dark"
-    tools:text="Adam"/>
+    android:paddingStart="@dimen/list_item_horizontal_padding"
+    android:paddingEnd="@dimen/list_item_horizontal_padding"
+    android:paddingTop="@dimen/standard_margin_half"
+    android:paddingBottom="@dimen/standard_margin_half"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/item_suggestion_word"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textColor="@color/color_primary_dark"
+        android:textSize="@dimen/standard_text_size"
+        android:layout_marginEnd="@dimen/standard_margin_half"
+        tools:text="Adam"/>
+
+    <ImageView
+        android:id="@+id/item_suggestion_flag_from"
+        android:layout_width="@dimen/list_flag_size"
+        android:layout_height="@dimen/list_flag_size"
+        android:contentDescription="@string/dictionary_from"
+        android:src="@drawable/ic_flag_qq"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/arrow"
+        android:src="@drawable/ic_arrow_forward_black_24dp"/>
+
+    <ImageView
+        android:id="@+id/item_suggestion_flag_to"
+        android:layout_width="@dimen/list_flag_size"
+        android:layout_height="@dimen/list_flag_size"
+        android:contentDescription="@string/dictionary_to"
+        android:src="@drawable/ic_flag_ru"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/standard_margin_half"
+        android:contentDescription="@string/arrow"
+        android:src="@drawable/ic_keyboard_arrow_right_black_24dp"/>
+
+</LinearLayout>
