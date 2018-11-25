@@ -31,7 +31,7 @@ public class DataModule {
     SozlikDatabase providesDatabase(Context context, @Named(DB_NAME) String dbName) {
         return Room
             .databaseBuilder(context, SozlikDatabase.class, dbName)
-            .addMigrations(SozlikMigration.MIGRATE_1_2)
+            .addMigrations(SozlikMigration.MIGRATE_1_2, SozlikMigration.MIGRATE_2_3)
             .allowMainThreadQueries()
             .build();
     }

@@ -16,4 +16,11 @@ public final class SozlikMigration {
             database.execSQL("ALTER TABLE dictionary ADD COLUMN type INTEGER NOT NULL DEFAULT 0");
         }
     };
+
+    public static final Migration MIGRATE_2_3 = new Migration(2, 3) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE dictionary ADD COLUMN raw_word TEXT");
+        }
+    };
 }
